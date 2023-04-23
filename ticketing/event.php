@@ -1,26 +1,7 @@
 <?php 
 session_start();
 
-$moteur = "mysql";
-// Hôte : localhost
-$hote = "localhost";
-// Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
-$port = 3306;
-// Nom de la BDD (facultatif) : sakila
-$nomBdd = "billeterie";
-// Nom d'utilisateur : root
-$nomUtilisateur = "root";
-// Mot de passe : 
-$motDePasse = "";
-
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
-
-$pdo = new PDO(
-    "$moteur:host=$hote:$port;dbname=$nomBdd", 
-    $nomUtilisateur,
-    $motDePasse
-);
-
 
 if (!isset($_SESSION["loggedin"])){
     header('Location: dashboard.php');

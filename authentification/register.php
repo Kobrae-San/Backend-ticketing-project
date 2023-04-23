@@ -1,30 +1,15 @@
 <?php
-// Ces six informations sont nécessaires pour vous connecter à une BDD :
-// Type de moteur de BDD : mysql
-$moteur = "mysql";
-// Hôte : localhost
-$hote = "localhost";
-// Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
-$port = 3306;
-// Nom de la BDD (facultatif) : sakila
-$nomBdd = "authentification";
-// Nom d'utilisateur : root
-$nomUtilisateur = "root";
-// Mot de passe : 
-$motDePasse = "";
+
+require '../inc/pdo.php';
 $existing_user = "";
+
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
-$pdo = new PDO(
-    "$moteur:host=$hote:$port;dbname=$nomBdd", 
-    $nomUtilisateur,
-    $motDePasse
-);
 
 if($method == 'POST'){
     $username = filter_input(INPUT_POST, 'username');
     $password = filter_input(INPUT_POST, 'password');
-    $first_requete = $pdo->prepare("
+    $first_requete = $auth_pdo->prepare("
     SELECT * FROM users WHERE login = :login;
     ");
     $first_requete->execute([
@@ -33,14 +18,14 @@ if($method == 'POST'){
 
     $verif_user = $first_requete->fetch(PDO::FETCH_ASSOC);
     if(!$verif_user){
-        $requete = $pdo->prepare("
+        $requete = $auth_pdo->prepare("
         INSERT INTO users (login, password) VALUES (:login, :password)
         ");
         $requete->execute([
             ":login" => $username,
             ":password" => password_hash($password, PASSWORD_DEFAULT),
         ]);
-        $requete_token = $pdo->prepare("
+        $requete_token = $auth_pdo->prepare("
         INSERT INTO token (token, user_id) VALUES (:token, LAST_INSERT_ID())
         ");
         $requete_token->execute([
