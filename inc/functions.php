@@ -1,6 +1,6 @@
 <?php 
-    
-    
+
+
     function token()
     {
         $token = [];
@@ -13,7 +13,7 @@
         return $token;
     }
 
-    
+
     function public_code()
     {
         $public_code = [];
@@ -46,21 +46,10 @@
         $private_id = implode($private_id);
         return $private_id;
     }
-    
-    $private_id = private_id();
 
-    function token_check($token) {
-        $moteur = "mysql";
-        $hote = "localhost";
-        $port = 3306;
-        $nomBdd = "authentification";
-        $nomUtilisateur = "root";
-        $motDePasse = "";
-        $pdo = new PDO(
-            "$moteur:host=$hote:$port;dbname=$nomBdd", 
-            $nomUtilisateur, 
-            $motDePasse
-        );
+    
+    function token_check($token, $pdo)
+    {
         $requete = $pdo->prepare("
         SELECT token FROM token WHERE token = :token;
         ");
