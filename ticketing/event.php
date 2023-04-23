@@ -15,8 +15,8 @@ if($method == 'POST'){
     $event_name = filter_input(INPUT_POST,'event_name');
     $event_place = filter_input(INPUT_POST,'event_place');
     $event_date = filter_input(INPUT_POST,'event_date');
-    $requete = $pdo->prepare("
-        INSERT INTO event (event_name,event_place,event_date) VALUES (:event_name,:event_place,:event_date)
+    $requete = $ticket_pdo->prepare("
+        INSERT INTO events (event_name,event_place,event_date) VALUES (:event_name,:event_place,:event_date)
         ");
         $requete->execute([
             ":event_name" => $event_name,
@@ -24,7 +24,7 @@ if($method == 'POST'){
             ":event_date" => $event_date
         ]);
         $requete2 = $ticket_pdo->prepare("
-        INSERT INTO visitor (last_name,first_name,event_id) VALUES (:last_name,:first_name,LAST_INSERT_ID())
+        INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,LAST_INSERT_ID())
         ");
         $requete2->execute([
             ":last_name" => $nom,
@@ -59,4 +59,4 @@ if($method == 'POST'){
     <input type="submit">
     </form>
 </body>
-</html>
+<html>
