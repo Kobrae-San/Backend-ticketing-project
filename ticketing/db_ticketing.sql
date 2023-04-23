@@ -1,3 +1,6 @@
+CREATE DATABASE billeterie; 
+USE billeterie;
+
 CREATE TABLE `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_name` varchar(120) NOT NULL,
@@ -24,8 +27,6 @@ CREATE TABLE `visitors` (
   PRIMARY KEY (id),
   FOREIGN KEY (event_id) REFERENCES events(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-  FOREIGN KEY (visitor_id) REFERENCES visitors(id),
 
   ALTER TABLE `tickets`
   ADD FOREIGN KEY (visitor_id) REFERENCES visitors(id);
