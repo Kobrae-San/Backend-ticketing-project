@@ -1,6 +1,7 @@
 <?php
 session_start();
 // Si la personne est deja connecté alors on l'a redirige
+require '../inc/pdo.php';
 $dashboard_path = "../ticketing/dashboard.php";
 if(isset($_SESSION["username"])){
     header("Location: {$dasboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
@@ -9,29 +10,13 @@ if(isset($_SESSION["username"])){
 
 require '../inc/functions.php';
 $token = null;
-$method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
-
-// Ces six informations sont nécessaires pour vous connecter à une BDD :
-// Type de moteur de BDD : mysql
-$moteur = "mysql";
-// Hôte : localhost
-$hote = "localhost";
-// Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
-$port = 3306;
-// Nom de la BDD (facultatif) : sakila
-$nomBdd = "authentification";
-// Nom d'utilisateur : root
-$nomUtilisateur = "root";
-// Mot de passe : 
-$motDePasse = "";
 $erreur = null;
-$dsn = "$moteur:host=$hote:$port;dbname=$nomBdd";
-$pdo = new PDO($dsn, $nomUtilisateur, $motDePasse);
+$method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
 if($method == 'POST'){
     $username = filter_input(INPUT_POST, 'username');
     $password = filter_input(INPUT_POST, 'password');
-    $requete = $pdo->prepare("
+    $requete = $auth_pdo->prepare("
     SELECT * FROM users WHERE login = :login
     ");
     $requete->execute([
@@ -44,7 +29,7 @@ if($method == 'POST'){
             $_SESSION["loggedin"] = true;
             $_SESSION['username'] = $username;
             $_SESSION['token'] = $hashed;
-            $requete_token = $pdo->prepare("
+            $requete_token = $auth_pdo->prepare("
             UPDATE token SET token = :token WHERE token.user_id = (SELECT id FROM users WHERE login = :login) ;
             ");
             $requete_token->execute([

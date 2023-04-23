@@ -1,13 +1,8 @@
 <?php
 require '../inc/functions.php';
+require '../inc/pdo.php';
 session_start();
 $website_part = "Billeterie";
-$moteur = "mysql";
-$hote = "localhost";
-$port = 3306;
-$nomBdd = "authentification";
-$nomUtilisateur = "root";
-$motDePasse = "";
 $erreur = null;
 
 if (isset($_GET["your_token"])){
@@ -28,7 +23,7 @@ if (isset($_GET["your_token"])){
             <h1>EasyTickets</h1>
             <nav>
                 <ul>
-                    <?php if (isset($_GET["your_token"]) && token_check($hashed)): ?>
+                    <?php if (isset($_GET["your_token"]) && token_check($hashed, $auth_pdo)): ?>
                         <a href="./ticket.php"><li>Afficher un billet</li></a>
                         <a href="./ticket.php"><li>Valider un billet</li></a>
                         <a href="../authentification/logout.php?username=<?= $_SESSION['username'] ?>"><li>Deconnexion</li></a>
