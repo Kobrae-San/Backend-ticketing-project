@@ -4,16 +4,17 @@ USE authentification;
 
 
 CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     login VARCHAR(32) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    CONSTRAINT pk_user PRIMARY KEY (`user`)
-) ENGINE=InnoDB;
+    password VARCHAR(64) NOT NULL,
+    PRIMARY KEY (id)
+);
 
 
 CREATE TABLE token (
-    user_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
     token VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fk_user FOREIGN KEY (`id`)
-) ENGINE=InnoDB;    
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
