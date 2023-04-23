@@ -8,8 +8,7 @@
     Lucas Rimbault
     Imène Toudeft
     Williams Wandji
-    Shayna Raymond
+    Shaynna Raymond
     Mohamed Salamatao
     Yassine Hamil
-    Clément Asensio
     Djédjé Gboble

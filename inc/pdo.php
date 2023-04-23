@@ -9,6 +9,7 @@
     $mamp_auth_port = 8888; // port MAMP
     // Nom de la BDD (facultatif) : sakila
     $auth_bdd = "authentification";
+    $ticket_bdd = "billeterie";
     // Nom d'utilisateur : root
     $user = "root";
     // Mot de passe : 
@@ -16,3 +17,6 @@
 
     $auth_dsn = "$auth_engine:host=$host:$auth_port;dbname=$auth_bdd";
     $auth_pdo = new PDO($auth_dsn, $user, $password_bdd);
+
+    $ticket_dsn = "$auth_engine:host=$host:$auth_port;dbname=$ticket_bdd";
+    $ticket_pdo = new PDO($ticket_dsn, $user, $password_bdd);

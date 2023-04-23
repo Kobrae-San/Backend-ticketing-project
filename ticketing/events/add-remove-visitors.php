@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require '../inc/pdo.php';
+require '../../inc/pdo.php';
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
@@ -15,7 +15,7 @@ if($method == 'POST'){
     $event_name = filter_input(INPUT_POST,'event_name');
     $event_place = filter_input(INPUT_POST,'event_place');
     $event_date = filter_input(INPUT_POST,'event_date');
-    $requete = $auth_pdo->prepare("
+    $requete = $ticket_pdo->prepare("
         INSERT INTO events (event_name,event_place,event_date) VALUES (:event_name,:event_place,:event_date)
         ");
         $requete->execute([
@@ -23,14 +23,14 @@ if($method == 'POST'){
             ":event_place" => $event_place,
             ":event_date" => $event_date
         ]);
-        $requete2 = $pdo->prepare("
+        $requete2 = $ticket_pdo->prepare("
         INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,LAST_INSERT_ID())
         ");
         $requete2->execute([
             ":last_name" => $nom,
             ":first_name"=> $prenom
         ]);
-        header('Location: event.php');
+        header('Location: login.php');
         exit();
 }
 
@@ -59,4 +59,4 @@ if($method == 'POST'){
     <input type="submit">
     </form>
 </body>
-</html>
+<html>

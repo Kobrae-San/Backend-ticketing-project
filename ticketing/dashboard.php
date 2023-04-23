@@ -24,15 +24,15 @@ if (isset($_GET["your_token"])){
             <nav>
                 <ul>
                     <?php if (isset($_GET["your_token"]) && token_check($hashed, $auth_pdo)): ?>
-                        <a href="./ticket.php"><li>Afficher un billet</li></a>
-                        <a href="./ticket.php"><li>Valider un billet</li></a>
+                        <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
+                        <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
                         <a href="../authentification/logout.php?username=<?= $_SESSION['username'] ?>"><li>Deconnexion</li></a>
-                        <a href="./event.php"><li>Créer/Modifier/Annuler un événement</li></a>
-                        <a href="./event.php"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
-                        <a href=""><li>Visualiser les événements et leurs inscrits</li></a>
+                        <a href="./events/create-modify-delete-events.php"><li>Créer/Modifier/Annuler un événement</li></a>
+                        <a href="./events/add-remove-visitors.php"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
+                        <a href="./events/show-event&visitors.php"><li>Visualiser les événements et leurs inscrits</li></a>
                     <?php else: ?>
-                        <a href="./ticket.php"><li>Afficher un billet</li></a>
-                        <a href=""><li>Valider un billet</li></a>
+                        <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
+                        <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
                         <a href="../authentification/login.php"><li>Connexion</li></a>
                     <?php endif; ?>
                 </ul>
