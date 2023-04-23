@@ -4,7 +4,7 @@
 # About
     School project for a PHP backend that involves creating an event ticketing system managed by administrators.
 
-# Credit
+# Credits
     Lucas Rimbault
     Imène Toudeft
     Williams Wandji
