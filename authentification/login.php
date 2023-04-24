@@ -6,7 +6,7 @@ require '../inc/pdo.php';
 $dashboard_path = "../ticketing/dashboard.php";
 if(isset($_SESSION["username"])){
     
-    header("Location: {$dasboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
+    header("Location: {$dashboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     exit();
 }
 else{
@@ -59,7 +59,7 @@ if($method == 'POST'){
 </head>
 <body>
     <div id="login-form">
-        <h1>Login - Admin</h1>
+        <h2>Login - Admin</h2>
         <?php if($erreur !== null) : ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>
@@ -72,11 +72,11 @@ if($method == 'POST'){
             </form>
             <p>Pas encore de compte ? <a href="./register.php">Cliquez ici.</a></p>
     </div>
-    <script type="text/javascript">
-  history.pushState(null, null, document.URL);
-  window.addEventListener('popstate', function () {
-      history.pushState(null, null, document.URL);
-  });
+<script type="text/javascript">
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
 </script>
 
 </body>

@@ -2,13 +2,14 @@
 require '../inc/functions.php';
 require '../inc/pdo.php';
 session_start();
-$website_part = "Billeterie";
+
 $erreur = null;
 
 if (isset($_GET["your_token"])){
     $hashed = $_GET["your_token"];
 }
 
+$website_part = "Billeterie";
 ?><!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -20,9 +21,9 @@ if (isset($_GET["your_token"])){
     </head>
 
     <body>
-        <header>
-            <h1>EasyTickets</h1>
+        <header> 
             <nav>
+                <h1>EasyTickets</h1>
                 <ul>
                     <?php if (isset($_GET["your_token"]) && token_check($hashed, $auth_pdo)): ?>
                         <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>

@@ -27,6 +27,41 @@
         exit();
     }
 
+    $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+
+    if ($method == 'POST') {
+        $event_name = filter_input(INPUT_POST, 'event-name');
+        $event_place = filter_input(INPUT_POST, 'event-place');
+        $event_date = filter_input(INPUT_POST, 'event-date');
+        $event_description = filter_input(INPUT_POST, 'event-description');
+        $verify_existing_event_request = $ticket_pdo->prepare("
+            SELECT event_name, event_place, event_date FROM events 
+            WHERE event_name = :event_name 
+            AND event_place = :event_place 
+            AND event_date = :event_date;
+        ");
+        $verify_existing_event_request->execute([
+            ":event_name" => $event_name,
+            ":event_place" => $event_place,
+            ":event_date" => $event_date
+        ]);
+        
+        $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
+        if (!$verify_existing_event) {
+            $create_event_request = $ticket_pdo->prepare("
+            INSERT INTO events (event_name, event_place, event_date, event_description)
+			VALUES (:event_name, :event_place, :event_date, :event_description)
+            ");
+            $create_event_request->execute([
+                ":event_name" => $event_name,
+                ":event_place" => $event_place,
+                ":event_date" => $event_date,
+                ":event_description" => $event_description
+            ]);
+        } else {
+            echo 'Cette évènement éxiste déjà';
+        }
+    }
     
 ?><!DOCTYPE html>
 <html lang="en">
@@ -37,7 +72,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Créer-Modifier-Annuler un événement</h1>
+    <h2>Créer-Modifier-Annuler un événement</h2>
 
     <form method="POST">
         <label for="event-name">Nom de l'événement: </label>
@@ -57,7 +92,8 @@
 
         <label for="event-description">Description de l'évènement: </label>
         <textarea name="event-description" id="event-description" cols="30" rows="5" required></textarea>
-
+        <br>
+        <input type="submit" value="Créer un évenement">
     </form>
 </body>
 </html>

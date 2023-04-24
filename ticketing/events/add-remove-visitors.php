@@ -44,7 +44,7 @@ if($method == 'POST'){
     <title>Document</title>
 </head>
 <body>
-    <h1>Système d'ajout de visiteurs à un événement</h1>
+    <h2>Système d'ajout de visiteurs à un événement</h2>
     <form method = "POST">
     <label>Nom: </label>
     <input type="text" placeholder="nom" name="last_name">
