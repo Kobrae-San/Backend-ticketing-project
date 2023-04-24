@@ -16,6 +16,7 @@ if (isset($_GET["your_token"])){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Homepage - Billeterie </title>
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
@@ -26,7 +27,7 @@ if (isset($_GET["your_token"])){
                     <?php if (isset($_GET["your_token"]) && token_check($hashed, $auth_pdo)): ?>
                         <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
                         <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
-                        <a href="../authentification/logout.php?username=<?= $_SESSION['username'] ?>"><li>Deconnexion</li></a>
+                        <a href="../authentification/logout.php?username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
                         <a href="./events/create-modify-delete-events.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
                         <a href="./events/add-remove-visitors.php"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
                         <a href="./events/show-event&visitors.php"><li>Visualiser les événements et leurs inscrits</li></a>
