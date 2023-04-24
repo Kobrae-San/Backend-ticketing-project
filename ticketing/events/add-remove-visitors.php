@@ -1,11 +1,12 @@
 <?php 
 session_start();
 require '../../inc/pdo.php';
+require '../../inc/functions.php';
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
-if (!isset($_SESSION["loggedin"])){
-    header('Location: dashboard.php');
+if (!isset($_GET['your_token'])) {
+    header('Location: ../dashboard.php');
     exit();
 }
 
@@ -44,19 +45,44 @@ if($method == 'POST'){
     <title>Document</title>
 </head>
 <body>
+    <header> 
+        <nav>
+            <h1>EasyTickets</h1>
+            <ul>
+                <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
+                    <a href="../tickets/show-tickets.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
+                    <a href="../tickets/submit-ticket.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
+                    <a href="../../authentification/logout.php?username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
+                    <a href="../events/create-modify-delete-events.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
+                    <a href="./add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
+                    <a href="../events/show-event&visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Visualiser les événements et leurs inscrits</li></a>
+                <?php else: ?>
+                    <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
+                    <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
+                    <a href="../authentification/login.php"><li>Connexion</li></a>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
+
     <h2>Système d'ajout de visiteurs à un événement</h2>
+
     <form method = "POST">
-    <label>Nom: </label>
-    <input type="text" placeholder="nom" name="last_name">
-    <label>Prénom: </label>
-    <input type="text" placeholder="prenom" name="first_name">
-    <label>Nom évènement: </label>
-    <input type="text" placeholder="Nom de l'évènement" name="event_name">
-    <label>Lieu de l'évènement:</label>
-    <input type="text" placeholder="Lieu de l'évènement" name="event_place">
-    <label>Date de l'évènement</label>
-    <input type="date" name="event_date">
-    <input type="submit">
+        <label>Nom: </label>
+        <input type="text" placeholder="nom" name="last_name">
+        <br>
+        <label>Prénom: </label>
+        <input type="text" placeholder="prenom" name="first_name">
+        <label>Nom évènement: </label>
+        <br>
+        <input type="text" placeholder="Nom de l'évènement" name="event_name">
+        <label>Lieu de l'évènement:</label>
+        <br>
+        <input type="text" placeholder="Lieu de l'évènement" name="event_place">
+        <label>Date de l'évènement</label>
+        <br>
+        <input type="date" name="event_date">
+        <input type="submit">
     </form>
 </body>
 <html>
