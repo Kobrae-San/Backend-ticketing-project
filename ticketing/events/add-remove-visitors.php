@@ -2,7 +2,15 @@
 session_start();
 require '../../inc/pdo.php';
 require '../../inc/functions.php';
-
+$title = "Ajoutez/Supprimez des visiteurs";
+$website_part = "Billeterie";
+$show_tickets_path = "../tickets/show-tickets.php";
+$submit_path = "../tickets/submit-ticket.php";
+$login_path = "../../authentification/login.php";
+$logout_path = "../../authentification/logout.php";
+$creation_path = "./create-modify-delete-events.php";
+$visitor_path = "add-remove-visitors.php";
+$show_visitor_path = "../events/show-event&visitors.php";
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
 if (!isset($_GET['your_token'])) {
@@ -36,6 +44,7 @@ if($method == 'POST'){
 }
 
 ?>
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +73,9 @@ if($method == 'POST'){
             </ul>
         </nav>
     </header>
+=======
+    <?php include '../../inc/tpl/header.php'; ?>
+>>>>>>> Stashed changes
 
     <h2>Système d'ajout de visiteurs à un événement</h2>
 

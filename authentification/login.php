@@ -3,7 +3,17 @@ session_start();
 
 // Si la personne est deja connecté alors on l'a redirige
 require '../inc/pdo.php';
+require '../inc/functions.php';
+
 $dashboard_path = "../ticketing/dashboard.php";
+$show_tickets_path = "../ticketing/tickets/show-tickets.php";
+$submit_path = "../ticketing/tickets/submit-ticket.php";
+$login_path = "./login.php";
+$logout_path = "./logout.php";
+$creation_path = "../events/create-modify-delete-events.php";
+$visitor_path = "../events/add-remove-visitors.php";
+$show_visitor_path = "../events/show-event&visitors.php";
+
 if(isset($_SESSION["username"])){
     
     header("Location: {$dashboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
@@ -11,10 +21,8 @@ if(isset($_SESSION["username"])){
 }
 else{
     session_destroy();
-   
 }
 
-require '../inc/functions.php';
 $token = null;
 $erreur = null;
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
@@ -58,6 +66,15 @@ if($method == 'POST'){
     <link href="./styles/style.css" rel="stylesheet"></link>
 </head>
 <body>
+    <header>
+    <nav>
+        <h1>EasyTickets</h1>
+        <ul>
+            <a href="<?= $show_tickets_path ?>"><li>Afficher un billet</li></a>
+            <a href="<?= $submit_path ?>"><li>Valider un billet</li></a>    
+        </ul>
+    </nav>
+    </header>
     <div id="login-form">
         <h2>Login - Admin</h2>
         <?php if($erreur !== null) : ?>
@@ -78,6 +95,5 @@ if($method == 'POST'){
         history.pushState(null, null, document.URL);
     });
 </script>
-
 </body>
 </html>

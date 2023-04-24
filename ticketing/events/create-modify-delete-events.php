@@ -2,6 +2,15 @@
     session_start();
     require '../../inc/pdo.php';
     require '../../inc/functions.php';
+    $title = "Ajoutez/Supprimez des évènements";
+    $website_part = "Billeterie";
+    $show_tickets_path = "../tickets/show-tickets.php";
+    $submit_path = "../tickets/submit-ticket.php";
+    $login_path = "../../authentification/login.php";
+    $logout_path = "../../authentification/logout.php";
+    $creation_path = "../create-modify-delete-events.php";
+    $visitor_path = "add-remove-visitors.php";
+    $show_visitor_path = "../show-event&visitors.php";
     if (!isset($_GET["your_token"])) {
         header('Location: ../dashboard.php');
         exit();
