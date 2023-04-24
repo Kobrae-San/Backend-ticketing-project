@@ -3,17 +3,31 @@
     require '../../inc/pdo.php';
     if (!isset($_GET["your_token"])) {
         header('Location: ../dashboard.php');
+        exit();
     }
     $username = $_GET['username'];
-    $verify_token = $auth_pdo->prepare("
-        SELECT * FROM users
-        WHERE login :login
+    $verify_token_request = $auth_pdo->prepare("
+        SELECT login, token FROM users
+        INNER JOIN token ON users.id = token.user_id
+        WHERE login = :login
     ");
     
-    $verify_token->execute([
+    $verify_token_request->execute([
         ":login" => $username
     ]);
 
+    $verify_token =  $verify_token_request->fetch(PDO::FETCH_ASSOC);
+    if ($verify_token) {
+        if ($_GET['your_token'] != $verify_token['token'] || $verify_token['token'] == null) {
+            header('Location: ../dashboard.php');
+            exit();
+        }
+    } else {
+        header('Location: ../dashboard.php');
+        exit();
+    }
+
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
