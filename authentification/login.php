@@ -1,11 +1,17 @@
 <?php
 session_start();
+
 // Si la personne est deja connecté alors on l'a redirige
 require '../inc/pdo.php';
 $dashboard_path = "../ticketing/dashboard.php";
 if(isset($_SESSION["username"])){
+    
     header("Location: {$dasboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     exit();
+}
+else{
+    session_destroy();
+   
 }
 
 require '../inc/functions.php';
@@ -66,5 +72,12 @@ if($method == 'POST'){
             </form>
             <p>Pas encore de compte ? <a href="./register.php">Cliquez ici.</a></p>
     </div>
+    <script type="text/javascript">
+  history.pushState(null, null, document.URL);
+  window.addEventListener('popstate', function () {
+      history.pushState(null, null, document.URL);
+  });
+</script>
+
 </body>
 </html>
