@@ -30,3 +30,5 @@ CREATE TABLE `visitors` (
 
   ALTER TABLE `tickets`
   ADD FOREIGN KEY (visitor_id) REFERENCES visitors(id);
+
+ALTER TABLE `events` ADD COLUMN `event_description` TEXT;
