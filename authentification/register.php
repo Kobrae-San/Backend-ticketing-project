@@ -47,7 +47,7 @@ if($method == 'POST'){
     <title>Inscription - Admin</title>
 </head>
 <body>
-    <h2>Créer un compte</h2>
+    <h1>Créer un compte</h1>
     <?php if ($existing_user): ?>
         <p style="color: red;"><?= $existing_user ?></p>
     <?php endif; ?>

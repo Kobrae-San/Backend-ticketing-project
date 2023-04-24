@@ -3,8 +3,6 @@ require '../inc/functions.php';
 require '../inc/pdo.php';
 session_start();
 
-$erreur = null;
-
 if (isset($_GET["your_token"])){
     $hashed = $_GET["your_token"];
 }
@@ -30,7 +28,7 @@ $website_part = "Billeterie";
                         <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
                         <a href="../authentification/logout.php?username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
                         <a href="./events/create-modify-delete-events.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
-                        <a href="./events/add-remove-visitors.php"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
+                        <a href="./events/add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
                         <a href="./events/show-event&visitors.php"><li>Visualiser les événements et leurs inscrits</li></a>
                     <?php else: ?>
                         <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
