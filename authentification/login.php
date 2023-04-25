@@ -62,8 +62,13 @@ if($method == 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Document</title>
     <link href="../ticketing/styles/login.css" rel="stylesheet"></link>
+=======
+    <title>EasyTickets</title>
+    <link href="./styles/style.css" rel="stylesheet"></link>
+>>>>>>> 61167b9b22c7ae0c2ea8ec9951bda80c6183a795
 </head>
 <body>
     <header>
@@ -75,19 +80,23 @@ if($method == 'POST'){
     </nav>
     </header>
     <div id="login-form">
+<<<<<<< HEAD
     <h1>EasyTickets</h1>
         <h2>Login - Admin</h2>
+=======
+        <h2>Espace Administrateur - Connexion</h2>
+>>>>>>> 61167b9b22c7ae0c2ea8ec9951bda80c6183a795
         <?php if($erreur !== null) : ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>
             <form method='POST'>
-                <label for='username'>Username: </label>
-                <input type='text' id='username' name='username'>
-                <label for='password'>Password: </label>
-                <input type='password' id='passsword' name='password'>
-                <input type="submit">
+                <label for='username'>Nom d'utilisateur :</label>
+                <input type='text' id='username' placeholder="lucas" name='username'>
+                <label for='password'>Mot de passe :</label>
+                <input type='password' id='passsword' placeholder="123" name='password'>
+                <input type="submit" value="Se connecter">
             </form>
-            <p>Pas encore de compte ? <a href="./register.php">Cliquez ici.</a></p>
+            <p>Pas encore inscrit? <a href="./register.php">S'inscrire ici</a></p>
     </div>
 <script type="text/javascript">
     history.pushState(null, null, document.URL);

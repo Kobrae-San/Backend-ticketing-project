@@ -35,7 +35,7 @@ if($method == 'POST'){
         exit();
     }
     else {
-        $existing_user = "Ce nom d'utilisateur est déjà pris.";
+        $existing_user = "Ce nom d'utilisateur est déjà utilisé.";
     }
 }
 ?><!DOCTYPE html>
@@ -44,21 +44,21 @@ if($method == 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Admin</title>
+    <title>Espace Administrateur - Inscription</title>
 </head>
 <body>
-    <h1>Créer un compte</h1>
+    <h1>Espace Administrateur - Inscription</h1>
     <?php if ($existing_user): ?>
         <p style="color: red;"><?= $existing_user ?></p>
     <?php endif; ?>
 
     <form method='POST'>
-        <label for='username' placeholder="lucas">Nom d'utilisateur</label>
-        <input type='text' id='username' name='username'>
-        <label for='password' placeholder="123">Mot de passe</label>
-        <input type='password' id='passsword' name='password'>
-        <input type="submit">
+        <label for='username'>Nom d'utilisateur :</label>
+        <input type='text' id='username' placeholder="lucas" name='username'>
+        <label for='password'>Mot de passe :</label>
+        <input type='password' id='passsword' placeholder="123" name='password'>
+        <input type="submit" value="S'inscrire">
     </form>
-    <p>Déjà inscrit ?<a href="./login.php">Cliquez ici.</a></p>
+    <p>Déjà inscrit?<a href="./login.php">Se connecter ici</a></p>
 </body>
 </html>
