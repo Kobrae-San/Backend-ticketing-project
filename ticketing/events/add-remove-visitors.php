@@ -13,7 +13,7 @@ $visitor_path = "add-remove-visitors.php";
 $show_visitor_path = "../events/show-event&visitors.php";
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
-if (!isset($_GET['your_token'])) {
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
     header('Location: ../dashboard.php');
     exit();
 }
