@@ -71,6 +71,8 @@ if($method == 'POST'){
 
 </head>
 <body>
+
+
         <?php if($erreur !== null) : ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>
