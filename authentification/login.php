@@ -62,13 +62,8 @@ if($method == 'POST'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Document</title>
-    <link href="../ticketing/styles/login.css" rel="stylesheet"></link>
-=======
     <title>EasyTickets</title>
     <link href="./styles/style.css" rel="stylesheet"></link>
->>>>>>> 61167b9b22c7ae0c2ea8ec9951bda80c6183a795
 </head>
 <body>
     <header>
@@ -80,12 +75,7 @@ if($method == 'POST'){
     </nav>
     </header>
     <div id="login-form">
-<<<<<<< HEAD
-    <h1>EasyTickets</h1>
-        <h2>Login - Admin</h2>
-=======
         <h2>Espace Administrateur - Connexion</h2>
->>>>>>> 61167b9b22c7ae0c2ea8ec9951bda80c6183a795
         <?php if($erreur !== null) : ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>

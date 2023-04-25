@@ -30,10 +30,13 @@
                 ":last_name" => $last_name,
                 ":first_name" => $first_name
             ]);
-            if ($check_ticket_request) {
-                echo 'Ticket validez';
+            $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
+            if ($tickets_validate) {
+                header("HTTP/1.1 200 OK");
+                echo "Ticket valide.";
             } else {
-                echo 'Ce ticket ne fonctionne pas';
+                header("HTTP/1.1 404 Not Found");
+                echo "Ce ticket n'existe pas.";
             }
         } else {
             $erreur = "Veuillez remplir tout les champs.";
@@ -52,7 +55,7 @@
         <?php if ($erreur != null): ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>
-        <form method="POST">
+        <form method="GET">
             <label for="last-name">Nom: </label>
             <input type="text" id="last-name" name="last-name"  placeholder="Gboble" required>
             <br>
