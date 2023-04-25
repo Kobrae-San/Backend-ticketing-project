@@ -1,36 +1,19 @@
 <?php
     require '../../inc/functions.php';
     require '../../inc/pdo.php';
+    $show_tickets_path = "./show-tickets.php";
+    $submit_path = "./submit-ticket.php";
+    $login_path = "../../authentification/login.php";
+    $logout_path = "../../authentification/logout.php";
+    $creation_path = "../events/create-modify-delete-events.php";
+    $visitor_path = "../events/add-remove-visitors.php";
+    $show_visitor_path = "../events/show-event&visitors.php";
+    $title = "Validez un billet";
+    $website_part = "Billeterie";
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     if(!isset($_SESSION["loggedin"]) && $method != "POST"): ?>
-    <!DOCTYPE html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valider un billet - Billetterie</title>
-</head>
-<body>
-    <header> 
-        <nav>
-            <h1>EasyTickets</h1>
-            <ul>
-                <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
-                    <a href="./show-tickets.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
-                    <a href="./submit-ticket.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
-                    <a href="../../authentification/logout.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
-                    <a href="../events/create-modify-delete-events.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
-                    <a href="../events/add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
-                    <a href="../events/show-event&visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Visualiser les événements et leurs inscrits</li></a>
-                <?php else: ?>
-                    <a href="./show-tickets.php"><li>Afficher un billet</li></a>
-                    <a href="./submit-ticket.php"><li>Valider un billet</li></a>
-                    <a href="../../authentification/login.php"><li>Connexion</li></a>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </header>
+    
+    <?php include '../../inc/tpl/header.php'; ?>
     <h1>Billetterie</h1>
     <div>
         <h2>Valider un billet</h2>
