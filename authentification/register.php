@@ -45,20 +45,23 @@ if($method == 'POST'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Administrateur - Inscription</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>Espace Administrateur - Inscription</h1>
+   
     <?php if ($existing_user): ?>
         <p style="color: red;"><?= $existing_user ?></p>
     <?php endif; ?>
 
     <form method='POST'>
-        <label for='username'>Nom d'utilisateur :</label>
-        <input type='text' id='username' placeholder="lucas" name='username'>
-        <label for='password'>Mot de passe :</label>
-        <input type='password' id='passsword' placeholder="123" name='password'>
-        <input type="submit" value="S'inscrire">
+        <h1>Espace Administrateur - Inscription</h1>
+       
+        <input type='text' id='username' placeholder="username" name='username'>
+
+        <input type='password' id='passsword' placeholder="mots de passe" name='password'>
+        <input class="submit" type="submit" value="S'inscrire">
+        <p>Déjà inscrit?<a href="./login.php">Se connecter ici</a></p>
     </form>
-    <p>Déjà inscrit?<a href="./login.php">Se connecter ici</a></p>
+    
 </body>
 </html>
