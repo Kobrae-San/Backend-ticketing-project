@@ -40,14 +40,21 @@ if (!$check_event && $method == 'POST') {
     
     if ($method == 'POST' && $add == 'true') {
         if ($check_visitor) {
-            echo "L'utilisateur est déjà inscrit à cette évènement";
+            echo "L'utilisateur est déjà inscrit à cet évènement";
         } else {
             $requete = $ticket_pdo->prepare("INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,:id)");
             $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
+            $visitor_id = $ticket_pdo->lastInsertId();
+            $public_code = public_code();
+            $private_key = private_id();
+            $requete = $ticket_pdo->prepare("INSERT INTO tickets (visitor_id,event_id,public_code,private_key) VALUES (:visitor_id,:event_id,:public_code,:private_key)");
+            $requete->execute([":visitor_id" => $visitor_id, ":event_id" => $check_event, ":public_code" => $public_code, ":private_key" => $private_key]);
             echo "Inscription réussite";
         }
     } else {
         if ($check_visitor) {
+            $requete = $ticket_pdo->prepare("DELETE FROM tickets WHERE event_id = :event_id AND visitor_id = (SELECT id FROM visitors WHERE last_name = :last_name AND first_name = :first_name AND event_id = :event_id)");
+            $requete->execute([":event_id" => $check_event, ":last_name"  => $nom, "first_name" => $prenom]);
             $requete = $ticket_pdo->prepare("DELETE FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
             $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
             echo "Visiteur supprimé";

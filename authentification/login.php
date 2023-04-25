@@ -63,12 +63,11 @@ if($method == 'POST'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="./styles/style.css" rel="stylesheet"></link>
+    <link href="../ticketing/styles/login.css" rel="stylesheet"></link>
 </head>
 <body>
     <header>
     <nav>
-        <h1>EasyTickets</h1>
         <ul>
             <a href="<?= $show_tickets_path ?>"><li>Afficher un billet</li></a>
             <a href="<?= $submit_path ?>"><li>Valider un billet</li></a>    
@@ -76,6 +75,7 @@ if($method == 'POST'){
     </nav>
     </header>
     <div id="login-form">
+    <h1>EasyTickets</h1>
         <h2>Login - Admin</h2>
         <?php if($erreur !== null) : ?>
             <p><?= $erreur ?></p>
