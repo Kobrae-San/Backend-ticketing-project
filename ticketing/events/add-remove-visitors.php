@@ -18,66 +18,51 @@ if (!isset($_GET['your_token'])) {
     exit();
 }
 
-if($method == 'POST'){
-    $nom = filter_input(INPUT_POST, 'last_name');
-    $prenom = filter_input(INPUT_POST, 'first_name');
-    $event_name = filter_input(INPUT_POST,'event_name');
-    $event_place = filter_input(INPUT_POST,'event_place');
-    $event_date = filter_input(INPUT_POST,'event_date');
-    $requete = $ticket_pdo->prepare("
-        INSERT INTO events (event_name,event_place,event_date) VALUES (:event_name,:event_place,:event_date)
-        ");
-        $requete->execute([
-            ":event_name" => $event_name,
-            ":event_place" => $event_place,
-            ":event_date" => $event_date
-        ]);
-        $requete2 = $ticket_pdo->prepare("
-        INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,LAST_INSERT_ID())
-        ");
-        $requete2->execute([
-            ":last_name" => $nom,
-            ":first_name"=> $prenom
-        ]);
-        header('Location: login.php');
-        exit();
+$add = $_GET['add'];
+
+$nom = filter_input(INPUT_POST, 'last_name');
+$prenom = filter_input(INPUT_POST, 'first_name');
+$event_name = filter_input(INPUT_POST,'event_name');
+$event_place = filter_input(INPUT_POST,'event_place');
+$event_date = filter_input(INPUT_POST,'event_date');
+
+$requete = $ticket_pdo->prepare("SELECT id FROM events WHERE event_name = :name AND event_place = :place AND event_date = :date");
+$requete->execute([":name" => $event_name, ":place" => $event_place, ":date" => $event_date]);
+$check_event = $requete->fetch(PDO::FETCH_ASSOC);
+
+if (!$check_event && $method == 'POST') {
+    echo "L'événement que vous souhaitez rentrer n'existe pas !";
+} elseif ($check_event && $method == 'POST') {
+    $check_event = $check_event["id"];
+    $requete = $ticket_pdo->prepare("SELECT * FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
+    $requete->execute([":id" => $check_event, ":last_name" => $nom, ":first_name" => $prenom]);
+    $check_visitor = $requete->fetch(PDO::FETCH_ASSOC);
+    
+    if ($method == 'POST' && $add == 'true') {
+        if ($check_visitor) {
+            echo "L'utilisateur est déjà inscrit à cette évènement";
+        } else {
+            $requete = $ticket_pdo->prepare("INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,:id)");
+            $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
+            echo "Inscription réussite";
+        }
+    } else {
+        if ($check_visitor) {
+            $requete = $ticket_pdo->prepare("DELETE FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
+            $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
+            echo "Visiteur supprimé";
+        } else {
+            echo "L'utilisateur n'est pas inscrit à cette évenement";
+        }
+    }
 }
 
-?>
-<<<<<<< Updated upstream
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <header> 
-        <nav>
-            <h1>EasyTickets</h1>
-            <ul>
-                <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
-                    <a href="../tickets/show-tickets.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
-                    <a href="../tickets/submit-ticket.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
-                    <a href="../../authentification/logout.php?username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
-                    <a href="../events/create-modify-delete-events.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
-                    <a href="./add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
-                    <a href="../events/show-event_visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Visualiser les événements et leurs inscrits</li></a>
-                <?php else: ?>
-                    <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
-                    <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
-                    <a href="../authentification/login.php"><li>Connexion</li></a>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </header>
-=======
-    <?php include '../../inc/tpl/header.php'; ?>
->>>>>>> Stashed changes
 
-    <h2>Système d'ajout de visiteurs à un événement</h2>
+
+
+?>
+    <?php include '../../inc/tpl/header.php'; ?>
+    <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
 
     <form method = "POST">
         <label>Nom: </label>
@@ -96,5 +81,6 @@ if($method == 'POST'){
         <input type="date" name="event_date">
         <input type="submit">
     </form>
+    <a href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
 </body>
-<html>
+</html>

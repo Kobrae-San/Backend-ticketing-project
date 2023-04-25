@@ -1,0 +1,30 @@
+        if (selectedValue != '0'){
+            <?php
+            $requete = $ticket_pdo->prepare("
+            SELECT event_place, event_date from events WHERE events.id = :value;
+            ");
+            $requete->execute([
+                ":value" => ""
+            ]);
+            $place_value = $requete -> fetch(PDO::FETCH_ASSOC);
+            $place = $place_value["event_place"];
+            $date = $place_value["event_date"];
+            ?>
+            place.value = '<?php echo $place ?>';
+            date.value = '<?php echo $date ?>';
+        }
+
+        <?php
+            $requete = $ticket_pdo->prepare("
+            SELECT event_place, event_date from events WHERE events.id = :value;
+            ");
+            $requete->execute([
+                ":value" => $value
+            ]); 
+            $place_value = $requete->fetch(PDO::FETCH_ASSOC);
+           
+            $place = $place_value["event_place"];
+            $date = $place_value["event_date"];
+            $json_data= json_encode($place_value);
+
+            ?>
