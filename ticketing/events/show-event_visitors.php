@@ -44,7 +44,7 @@ session_start();
     
         <?php 
         foreach($events as $event){
-            echo "<div class='event'>
+            echo "<div class='event' data-tooltype='description'>
             
             <h2 id='event_name'>Nom:  <span>{$event['event_name']}</span></h2>
             <h2>lieu:  <span>{$event['event_place']}</span></h2>
