@@ -25,7 +25,7 @@ form{
     justify-content: center;
     width: 500px;
     height: 100vh;
-    gap: 10px;
+    gap: 24px;
 
 }
 input:active{
@@ -57,6 +57,7 @@ input{
 .submit:hover{
     background-color: #a9dba0;
     cursor: pointer;
+    border: solid 1px #34d87e;
     transform: scale(0.97);
 }
 
