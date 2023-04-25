@@ -18,35 +18,51 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
     exit();
 }
 
-if($method == 'POST'){
-    $nom = filter_input(INPUT_POST, 'last_name');
-    $prenom = filter_input(INPUT_POST, 'first_name');
-    $event_name = filter_input(INPUT_POST,'event_name');
-    $event_place = filter_input(INPUT_POST,'event_place');
-    $event_date = filter_input(INPUT_POST,'event_date');
-    $requete = $ticket_pdo->prepare("
-        INSERT INTO events (event_name,event_place,event_date) VALUES (:event_name,:event_place,:event_date)
-        ");
-        $requete->execute([
-            ":event_name" => $event_name,
-            ":event_place" => $event_place,
-            ":event_date" => $event_date
-        ]);
-        $requete2 = $ticket_pdo->prepare("
-        INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,LAST_INSERT_ID())
-        ");
-        $requete2->execute([
-            ":last_name" => $nom,
-            ":first_name"=> $prenom
-        ]);
-        header('Location: login.php');
-        exit();
+$add = $_GET['add'];
+
+$nom = filter_input(INPUT_POST, 'last_name');
+$prenom = filter_input(INPUT_POST, 'first_name');
+$event_name = filter_input(INPUT_POST,'event_name');
+$event_place = filter_input(INPUT_POST,'event_place');
+$event_date = filter_input(INPUT_POST,'event_date');
+
+$requete = $ticket_pdo->prepare("SELECT id FROM events WHERE event_name = :name AND event_place = :place AND event_date = :date");
+$requete->execute([":name" => $event_name, ":place" => $event_place, ":date" => $event_date]);
+$check_event = $requete->fetch(PDO::FETCH_ASSOC);
+
+if (!$check_event && $method == 'POST') {
+    echo "L'événement que vous souhaitez rentrer n'existe pas !";
+} elseif ($check_event && $method == 'POST') {
+    $check_event = $check_event["id"];
+    $requete = $ticket_pdo->prepare("SELECT * FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
+    $requete->execute([":id" => $check_event, ":last_name" => $nom, ":first_name" => $prenom]);
+    $check_visitor = $requete->fetch(PDO::FETCH_ASSOC);
+    
+    if ($method == 'POST' && $add == 'true') {
+        if ($check_visitor) {
+            echo "L'utilisateur est déjà inscrit à cette évènement";
+        } else {
+            $requete = $ticket_pdo->prepare("INSERT INTO visitors (last_name,first_name,event_id) VALUES (:last_name,:first_name,:id)");
+            $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
+            echo "Inscription réussite";
+        }
+    } else {
+        if ($check_visitor) {
+            $requete = $ticket_pdo->prepare("DELETE FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
+            $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
+            echo "Visiteur supprimé";
+        } else {
+            echo "L'utilisateur n'est pas inscrit à cette évenement";
+        }
+    }
 }
+
+
+
 
 ?>
     <?php include '../../inc/tpl/header.php'; ?>
-
-    <h2>Système d'ajout de visiteurs à un événement</h2>
+    <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
 
     <form method = "POST">
         <label>Nom: </label>
@@ -65,5 +81,6 @@ if($method == 'POST'){
         <input type="date" name="event_date">
         <input type="submit">
     </form>
+    <a href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
 </body>
-<html>
+</html>
