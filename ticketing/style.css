@@ -18,6 +18,57 @@ body{
     
 
 }
+.join-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 40vw;
+    padding: 40px;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba(202, 202, 202, 0.541);
+    background-color: rgba(58, 58, 58, 0.336);
+    border-radius: 15px;
+   
+  }
+input:user-valid{
+    border-bottom: solid 1px var(--lightgreen);
+   
+  }
+ input{
+    display: flex;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    font-style: normal;
+    color: aliceblue;
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 0.1em;
+    justify-content: center;
+    border: solid 1px var(--lightgreen);
+    height: 55px;
+    outline: none;
+    border-radius: 0px;
+    width: 100%;
+    transition: all 0.3s;
+    background-color: rgba(58, 58, 58, 0.315);
+  }
+    input:focus{
+        border-bottom: solid 10px var(--lightgreen);
+     
+    }
+  input:user-valid:focus{
+    border-bottom: solid 10px var(--lightgreen);
+   
+  }
+ input:user-invalid:focus{
+    border-bottom: solid 10px var(--darkgreen);
+   
+  }
+  
 .event{
     display: flex;
     flex-direction: row;
@@ -37,6 +88,17 @@ body{
     color: black;
     transform: scale(0.998);
 }
+.event:hover::before{
+    content: attr(data-tooltype);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 1rem;
+    color: black;
+    font-weight: 100;
+    transition: all 0.2s ease-in-out;
+}
 .liste_event{
     display: flex;
     flex-direction: column;
@@ -52,14 +114,16 @@ body{
 a{
     background: var(--verylightgrenn);
     border: 1px solid black;
-    width: 60%;    
+    width: 60%;  
+    
+    display: flex;
     color: black;
     padding: 15px 32px;
     text-align: center;
-  
-    border-radius: 10px;
+   justify-content: center;
+
     text-decoration: none;
-    display: inline-block;
+ 
     font-size: 16px;
     margin: 4px 2px;
     transition: 0.2s;
