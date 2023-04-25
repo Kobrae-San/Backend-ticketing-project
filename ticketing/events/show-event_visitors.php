@@ -31,9 +31,7 @@ session_start();
 
   
  
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -51,9 +49,6 @@ session_start();
             </div>";
         }
         ?>
-
-
-    
 </body>
 </html>
 

@@ -11,68 +11,59 @@
     $title = "Validez un billet";
     $website_part = "Billeterie";
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
-    if(!isset($_SESSION["loggedin"]) && $method != "POST"): ?>
-    
-    <?php include '../../inc/tpl/header.php'; ?>
-    <h1>Billetterie</h1>
-    <div>
-        <h2>Valider un billet</h2>
-        <form method="POST">
-            <label for="lastname">Nom : </label>
-            <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
-            
-            <label for="lastname">Prénom : </label>
-            <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
+    $erreur = "";
 
-            <label for="public-ticket-code">Code public du Billet :</label>
-            <input type="text" id="public-ticket-code" name="public-ticket" placeholder="Renseignez le code public"
-             required>
-
-            <input type="submit" value="Générer le lien du Billet">
-        </form>
-    </div>
-</body>
-</html>
-<?php  
-elseif ($method == "POST"):
-    $last_name = filter_input(INPUT_POST, "lastname");
-    $first_name = filter_input(INPUT_POST, "firstname");
-    $ticket_code = filter_input(INPUT_POST, "public-ticket-code")
-    ?>
-<!DOCTYPE html>
-<html lang="fr">
+    if ($method == "GET") {
+        $last_name = trim(filter_input(INPUT_GET, 'last-name'));
+        $first_name = trim(filter_input(INPUT_GET, 'first-name'));
+        $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));
+        if ($last_name && $first_name && $public_code) {
+            $check_ticket_request = $ticket_pdo->prepare('
+                SELECT public_code, last_name, first_name FROM tickets
+                INNER JOIN visitors on tickets.visitor_id = visitors.id
+                WHERE public_code = :public_code
+                AND last_name = :last_name
+                AND first_name = :first_name
+            ');
+            $check_ticket_request->execute([
+                ":public_code" => $public_code,
+                ":last_name" => $last_name,
+                ":first_name" => $first_name
+            ]);
+            if ($check_ticket_request) {
+                echo 'Ticket validez';
+            } else {
+                echo 'Ce ticket ne fonctionne pas';
+            }
+        } else {
+            $erreur = "Veuillez remplir tout les champs.";
+        }
+    }
+?><!DOCTYPE html>
+<html lang="">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générer le lien du Billet</title>
+    <title><?= $title ?> - <?= $website_part ?></title>
 </head>
 <body>
-    <header> 
-        <nav>
-            <h1>EasyTickets</h1>
-            <ul>
-                <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
-                    <a href="./tickets/show-tickets.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
-                    <a href="./tickets/submit-ticket.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
-                    <a href="../../authentification/logout.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Deconnexion</li></a>
-                    <a href="./events/create-modify-delete-events.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
-                    <a href="./events/add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
-                    <a href="./events/show-event&visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Visualiser les événements et leurs inscrits</li></a>
-                <?php else: ?>
-                    <a href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
-                    <a href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
-                    <a href="../authentification/login.php"><li>Connexion</li></a>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </header>
-    <h1>Valider un billet</h1>
     <div>
-        <p><?= $last_name ?></p>
-        <p><?= $first_name ?></p>
-            
+        <?php if ($erreur != null): ?>
+            <p><?= $erreur ?></p>
+        <?php endif; ?>
+        <form method="POST">
+            <label for="last-name">Nom: </label>
+            <input type="text" id="last-name" name="last-name"  placeholder="Gboble" required>
+            <br>
+            <label for="first-name">Prenom: </label>
+            <input type="text" id="first-name" name="first-name"  placeholder="Djédjé" required>
+            <br>
+            <label for="ticket-public-code">Code public du billet: </label>
+            <input type="text" id="ticket-public-code" name="ticket-public-code" required>
+            <br>
+            <input type="submit" value="Validez votre billet" id="submit" name="submit">
+        </form>
     </div>
 </body>
 </html>
-<?php endif;
