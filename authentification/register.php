@@ -35,7 +35,7 @@ if($method == 'POST'){
         exit();
     }
     else {
-        $existing_user = "Ce nom d'utilisateur est déja utilisé.";
+        $existing_user = "Ce nom d'utilisateur est déjà utilisé.";
     }
 }
 ?><!DOCTYPE html>
