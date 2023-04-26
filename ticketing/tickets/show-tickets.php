@@ -11,14 +11,14 @@
     $show_visitor_path = "../events/show-event&visitors.php";
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     $title = "Afficher un billet";
-    $website_part = "Billeterie";
+    $website_part = "Billetterie";
     if ($method == "POST") {
-        $title = "Imprimez mon billet";
+        $title = "Imprimez un billet";
     }
 
 ?>
         <?php include '../../inc/tpl/header.php'; ?>
-        <h2>Billeterie</h2>
+        <h2>Billetterie</h2>
         <?php if ($method == "POST"):
             $last_name = filter_input(INPUT_POST, "lastname");
             $first_name = filter_input(INPUT_POST, "firstname");
@@ -31,7 +31,7 @@
         </div>
         <?php else: ?>
         <div>
-            <h2>Afficher mon billet</h2>
+            <h2>Afficher un billet</h2>
             <form method="POST">
                 <label for="lastname">Nom: </label>
                 <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
@@ -40,9 +40,10 @@
                 <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
 
                 <label for="private-ticket-id">ID privé du Billet</label>
-                <input type="text" id="private-ticket-id" name="private-ticket" required>
+                <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
+                 required>
 
-                <input type="submit" value="Afficher mon billet">
+                <input type="submit" value="Afficher le billet">
             </form>
         </div>
         <?php endif; ?>
