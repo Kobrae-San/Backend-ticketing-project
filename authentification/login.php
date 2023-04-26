@@ -83,11 +83,11 @@ if($method == 'POST'){
             </form>
            
     </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL);
     });
-</script>
+</script> -->
 </body>
 </html>
