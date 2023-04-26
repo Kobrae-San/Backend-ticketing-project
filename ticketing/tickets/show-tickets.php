@@ -93,16 +93,17 @@
         <?php if($ticket != true): ?>
             <h2>Afficher un billet</h2>
             <form method="POST">
-                <label for="last-name">Nom : </label>
-                <input type="text" id="last-name" name="last-name" placeholder="Indiquez le nom de famille" required>
-                <br>
-                <label for="first-name">Prénom : </label>
-                <input type="text" id="first-name" name="first-name" placeholder="Indiquez le prénom" required>
-                <br>
-                <label for="private-ticket-id">Identifiant privé du billet :</label>
-                <input type="text" id="private-ticket-id" name="private-key" placeholder="Chaîne de 6 à 10 caractères alphanumériques" required>
-                <br>
-                <input class="submit" type="submit" value="Afficher" id="submit" name="submit">
+                <label for="lastname">Nom: </label>
+                <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
+                
+                <label for="lastname">Prénom: </label>
+                <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
+
+                <label for="private-ticket-id">ID privé du Billet</label>
+                <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
+                 required>
+
+                <input class="submit" type="submit" value="Afficher le billet">
             </form>
         
         <!-- Affichage du billet si les données sont valides -->
