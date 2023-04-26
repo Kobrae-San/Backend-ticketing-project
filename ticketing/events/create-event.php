@@ -72,31 +72,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crée un évènement</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <h1>Créerun événement</h1>
+    
 
     <form method="POST">
+    <h1>Créer un événement</h1>
         <label for="event-name">Nom de l'événement: </label>
-        <input type="text" id="event-name" name="event-name" required>
+        <input type="text" id="event-name" name="event-name" placeholder="Nom de l'évènement" required>
 
         <br>
 
         <label for="event-place">Lieux de l'évènement: </label>
-        <input type="text" id="event-place" name="event-place" required>
+        <input type="text" id="event-place" name="event-place" placeholder="Date de l'évènement" required>
 
         <br>
 
         <label for="event-date">Date de l'évènement: </label>
-        <input type="date" id="event-date" name="event-date" required>
+        <input type="date" id="event-date" name="event-date"  required >
 
         <br>
 
         <label for="event-description">Description de l'évènement: </label>
         <textarea name="event-description" id="event-description" cols="30" rows="5" required></textarea>
         <br>
-        <input type="submit" value="Créer un évenement">
+        <input class="submit" type="submit" value="Créer un évenement">
+        <a href="create-modify-delete-events.php?your_token=<?= $_GET["your_token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
     </form>
-    <a href="create-modify-delete-events.php?your_token=<?= $_GET["your_token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
+   
 </body>
 </html>

@@ -18,6 +18,16 @@
 
 ?>
         <?php include '../../inc/tpl/header.php'; ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier évènement</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
         <h2>Billetterie</h2>
         <?php if ($method == "POST"):
             $last_name = filter_input(INPUT_POST, "lastname");

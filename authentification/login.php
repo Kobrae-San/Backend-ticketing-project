@@ -13,14 +13,12 @@ $logout_path = "./logout.php";
 $creation_path = "../events/create-modify-delete-events.php";
 $visitor_path = "../events/add-remove-visitors.php";
 $show_visitor_path = "../events/show-event&visitors.php";
-
+$erreur = NULL;
 if(isset($_SESSION["username"])){
     header("Location: {$dashboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     exit();
 }
 
-$token = null;
-$erreur = null;
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
 if($method == 'POST'){
@@ -67,9 +65,7 @@ if($method == 'POST'){
 
 </head>
 <body>
-
-
-        <?php if($erreur !== null) : ?>
+        <?php if($erreur !== null): ?>
             <p><?= $erreur ?></p>
         <?php endif; ?>
             <form method='POST'>

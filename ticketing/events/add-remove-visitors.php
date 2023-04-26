@@ -78,110 +78,7 @@ if (!$check_event && $method == 'POST') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="../style.css">
-        <style>
-        body{
-    --lightgreen: #91C788;
-    --darkgreen: #52734D;
-    --lightyellow: #FCF8E8;
-    --darkyellow: #F2E8CF;
-    --verylightgrenn:#DDFFBC;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    
    
-    height: 100vh;
-    background: var(--lightyellow);
-    font-family: 'Poppins', sans-serif;
-    }
-    a{
-    background: var(--verylightgrenn);
-    border: 1px solid black;
-    width: 60%;  
-    
-    display: flex;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-   justify-content: center;
-
-    text-decoration: none;
- 
-    font-size: 16px;
-    margin: 4px 2px;
-    transition: 0.2s;
-    cursor: pointer;
-}
-a:hover{
-    background-color: var(--darkgreen);
-    color: white;
-    transform: scale(0.988);
-}
- 
-    
-
-
-            input:user-valid{
-    border-bottom: solid 1px var(--lightgreen);
-   
-  }
- input{
-    display: flex;
-    font-size: 16px;
-    text-align: center;
-    font-weight: 400;
-    font-style: normal;
-    color: black;
-    flex-direction: column;
-    align-items: center;
-    letter-spacing: 0.1em;
-    justify-content: center;
-    border: solid 1px var(--lightgreen);
-    height: 30px;
-    outline: none;
-    border-radius: 0px;
-    width: 200px;
-    transition: all 0.3s;
-    background-color: white;
-  }
-    input:focus{
-        border-bottom: solid 5px var(--lightgreen);
-     
-    }
-  input:user-valid:focus{
-    border-bottom: solid 5px var(--lightgreen);
-   
-  }
- input:user-invalid:focus{
-    border-bottom: solid 5px var(--darkgreen);
-   
-  }
-  .envoyer{
-  padding: 10px;
-  height: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: var(--darkgreen);
-  color: aliceblue;
-  font-size: 16px;
-  border:solid 1px var(--blue);
-  transition: all 0.3s;
-  border-radius: 10px;
-}
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 10px;
-}
-
-  
-        </style>
     </head>
     <body>
        
@@ -202,7 +99,7 @@ form{
             <label>Date de l'évènement</label>
             <br>
             <input type="date" name="event_date">
-            <input class="envoyer" type="submit">
+            <input  class="submit" type="submit">
             <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
     </body>
         </form>
