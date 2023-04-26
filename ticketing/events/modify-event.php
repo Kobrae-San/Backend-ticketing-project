@@ -86,5 +86,6 @@
 
         <input type="submit" value="Modifier l'évènement">
     </form>
+    <a href="create-modify-delete-events.php?your_token=<?= $_GET["your_token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
 </body>
 </html>

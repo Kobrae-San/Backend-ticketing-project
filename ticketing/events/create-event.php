@@ -1,10 +1,12 @@
-<?php 
+<?php
     session_start();
     require '../../inc/pdo.php';
-    if (!isset($_GET["your_token"])) {
+    
+    if(!isset($_GET["your_token"])){
         header('Location: ../dashboard.php');
         exit();
     }
+
     $username = $_GET['username'];
     $verify_token_request = $auth_pdo->prepare("
         SELECT login, token FROM users
@@ -30,61 +32,71 @@
     $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 
     if ($method == 'POST') {
-        $event_name = filter_input(INPUT_POST,'event_name');
-        $new_event_place = filter_input(INPUT_POST,'new_event_place');
-        $new_event_date = filter_input(INPUT_POST,'new_event_date');
-        
+        $event_name = filter_input(INPUT_POST, 'event-name');
+        $event_place = filter_input(INPUT_POST, 'event-place');
+        $event_date = filter_input(INPUT_POST, 'event-date');
+        $event_description = filter_input(INPUT_POST, 'event-description');
         $verify_existing_event_request = $ticket_pdo->prepare("
-        SELECT event_name FROM events 
-        WHERE event_name = :event_name;
-    ");
+            SELECT event_name, event_place, event_date FROM events 
+            WHERE event_name = :event_name 
+            AND event_place = :event_place 
+            AND event_date = :event_date;
+        ");
         $verify_existing_event_request->execute([
-            ":event_name" => $event_name
-    ]);
-    $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
-    if ($verify_existing_event_request){
-        $event_modify_request = $ticket_pdo -> prepare(
-            "UPDATE events 
-             SET event_place = :new_event_place, event_date = :new_event_date 
-             WHERE event_name = :event_name"
-        );
-        $event_modify_request -> execute([
             ":event_name" => $event_name,
-            ":new_event_place" => $new_event_place,
-            ":new_event_date" => $new_event_date
+            ":event_place" => $event_place,
+            ":event_date" => $event_date
         ]);
-    }else{
-        echo 'Cette évènement existe pas';
+        
+        $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
+        if (!$verify_existing_event) {
+            $create_event_request = $ticket_pdo->prepare("
+            INSERT INTO events (event_name, event_place, event_date, event_description)
+            VALUES (:event_name, :event_place, :event_date, :event_description)
+            ");
+            $create_event_request->execute([
+                ":event_name" => $event_name,
+                ":event_place" => $event_place,
+                ":event_date" => $event_date,
+                ":event_description" => $event_description
+            ]);
+        } else {
+            echo 'Cette évènement éxiste déjà';
+        }
     }
-}
-?>
-
-<!DOCTYPE html>
+    
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier évènement</title>
+    <title>Crée un évènement</title>
 </head>
 <body>
-<form method = "POST">
-    <label for="event_name">Nom de l'événement à modifier: </label>
-        <input type="text" id="event_name" name="event_name" required>
+    <h1>Créerun événement</h1>
+
+    <form method="POST">
+        <label for="event-name">Nom de l'événement: </label>
+        <input type="text" id="event-name" name="event-name" required>
 
         <br>
 
-        <label for="new_event_place">Nouveau lieu de l'évènement: </label>
-        <input type="text" id="new_event_place" name="new_event_place" required>
+        <label for="event-place">Lieux de l'évènement: </label>
+        <input type="text" id="event-place" name="event-place" required>
 
         <br>
 
-        <label for="new_event_date">Nouvelle date de l'évènement: </label>
-        <input type="date" id="new_event_date" name="new_event_date" required>
+        <label for="event-date">Date de l'évènement: </label>
+        <input type="date" id="event-date" name="event-date" required>
 
         <br>
 
-        <input type="submit" value="Modifier l'évènement">
+        <label for="event-description">Description de l'évènement: </label>
+        <textarea name="event-description" id="event-description" cols="30" rows="5" required></textarea>
+        <br>
+        <input type="submit" value="Créer un évenement">
     </form>
+    <a href="create-modify-delete-events.php?your_token=<?= $_GET["your_token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
 </body>
 </html>
