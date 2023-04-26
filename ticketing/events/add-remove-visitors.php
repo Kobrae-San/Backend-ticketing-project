@@ -78,7 +78,6 @@ if (!$check_event && $method == 'POST') {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="../style.css">
-   
     </head>
     <body>
        
@@ -102,6 +101,5 @@ if (!$check_event && $method == 'POST') {
             <input  class="submit" type="submit">
             <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
     </body>
-        </form>
-       
+        </form>     
 </html>
