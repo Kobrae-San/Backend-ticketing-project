@@ -1,7 +1,7 @@
 <?php 
     session_start();
     require '../../inc/pdo.php';
-    if (!isset($_GET["your_token"])) {
+    if(!isset($_GET["your_token"])){
         header('Location: ../dashboard.php');
         exit();
     }
@@ -70,26 +70,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supprimer évènement</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
     <form method = "POST">
-    <label for="event-name">Nom de l'événement: </label>
-        <input type="text" id="event-name" name="event-name" required>
+        <h1>Modifier l'évènement</h1>    
+        <label for="event-name">Nom de l'événement: </label>
+        <input type="text" id="event-name" placeholder="Nom de l'évènement" name="event-name" required>
 
         <br>
 
         <label for="event-place">Lieux de l'évènement: </label>
-        <input type="text" id="event-place" name="event-place" required>
+        <input type="text" id="event-place" placeholder="Lieu de l'évènement" name="event-place" required>
 
         <br>
 
         <label for="event-date">Date de l'évènement: </label>
-        <input type="date" id="event-date" name="event-date" required>
+        <input type="date" id="event-date"  name="event-date" required>
 
         <br>
 
-        <input type="submit" value="Supprimer un évenement">
+        <input class="submit" type="submit" value="Supprimer un évenement">
+        <a href="create-modify-delete-events.php?your_token=<?= $_GET["your_token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
     </form>
-</head>
-<body>
-    
+   
 </body>
 </html>
+

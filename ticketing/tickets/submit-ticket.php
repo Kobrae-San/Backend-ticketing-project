@@ -8,12 +8,14 @@
     $creation_path = "../events/create-modify-delete-events.php";
     $visitor_path = "../events/add-remove-visitors.php";
     $show_visitor_path = "../events/show-event&visitors.php";
-    $title = "Validez un billet";
-    $website_part = "Billeterie";
+    $title = "Valider un billet";
+    $website_part = "Billetterie";
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     $erreur = "";
 
-    if ($method == "GET") {
+    $submit = filter_input(INPUT_GET, "submit");
+
+    if ($method == "GET" && $submit == "Valider un billet") {
         $last_name = trim(filter_input(INPUT_GET, 'last-name'));
         $first_name = trim(filter_input(INPUT_GET, 'first-name'));
         $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));
@@ -39,16 +41,18 @@
                 echo "Ce ticket n'existe pas.";
             }
         } else {
-            $erreur = "Veuillez remplir tout les champs.";
+            $erreur = "Veuillez remplir tous les champs.";
         }
     }
 ?><!DOCTYPE html>
-<html lang="">
+
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?> - <?= $website_part ?></title>
+    <title>Modifier évènement</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div>
@@ -57,15 +61,16 @@
         <?php endif; ?>
         <form method="GET">
             <label for="last-name">Nom: </label>
-            <input type="text" id="last-name" name="last-name"  placeholder="Gboble" required>
+            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
             <br>
             <label for="first-name">Prenom: </label>
-            <input type="text" id="first-name" name="first-name"  placeholder="Djédjé" required>
+            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" required>
             <br>
             <label for="ticket-public-code">Code public du billet: </label>
-            <input type="text" id="ticket-public-code" name="ticket-public-code" required>
+            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
+             required>
             <br>
-            <input type="submit" value="Validez votre billet" id="submit" name="submit">
+            <input type="submit" value="Valider le billet" id="submit" name="submit">
         </form>
     </div>
 </body>

@@ -66,16 +66,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier évènement</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <form method = "POST">
-    <label for="event_name">Nom de l'événement à modifier: </label>
-        <input type="text" id="event_name" name="event_name" required>
+    <h1>Modifier l'évènement</h1>
+        <label for="event_name">Nom de l'événement à modifier: </label>
+        <input type="text" id="event_name" placeholder="Nom de l'évènement" name="event_name" required>
 
         <br>
 
         <label for="new_event_place">Nouveau lieu de l'évènement: </label>
-        <input type="text" id="new_event_place" name="new_event_place" required>
+        <input type="text" id="new_event_place" placeholder="Nouveau lieu de l'évènement" name="new_event_place" required>
 
         <br>
 
@@ -84,7 +86,9 @@
 
         <br>
 
-        <input type="submit" value="Modifier l'évènement">
+        <input class="submit" type="submit" value="Modifier l'évènement">
+        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
     </form>
+   
 </body>
 </html>
