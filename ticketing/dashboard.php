@@ -18,7 +18,7 @@ $website_part = "Billeterie";
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
+    <body> 
         <header> 
             <nav>
                 <h1>EasyTickets</h1>
