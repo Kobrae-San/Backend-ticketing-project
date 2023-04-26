@@ -13,7 +13,9 @@
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     $erreur = "";
 
-    if ($method == "GET") {
+    $submit = filter_input(INPUT_GET, "submit");
+
+    if ($method == "GET" && $submit == "Validez votre billet") {
         $last_name = trim(filter_input(INPUT_GET, 'last-name'));
         $first_name = trim(filter_input(INPUT_GET, 'first-name'));
         $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));

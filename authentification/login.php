@@ -15,12 +15,8 @@ $visitor_path = "../events/add-remove-visitors.php";
 $show_visitor_path = "../events/show-event&visitors.php";
 
 if(isset($_SESSION["username"])){
-    
     header("Location: {$dashboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     exit();
-}
-else{
-    session_destroy();
 }
 
 $token = null;
@@ -39,15 +35,15 @@ if($method == 'POST'){
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
         if(password_verify($password, $utilisateur["password"])){
             $token = token();
-            $hashed=password_hash($token, PASSWORD_DEFAULT);
             $_SESSION["loggedin"] = true;
             $_SESSION['username'] = $username;
-            $_SESSION['token'] = $hashed;
+            $_SESSION['token'] = $token;
+            //var_dump($_SESSION); exit();
             $requete_token = $auth_pdo->prepare("
             UPDATE token SET token = :token WHERE token.user_id = (SELECT id FROM users WHERE login = :login) ;
             ");
             $requete_token->execute([
-                ":token" => $hashed,
+                ":token" => $token,
                 ":login" => $username
             ]);
             header("Location: {$dashboard_path}?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
