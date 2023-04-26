@@ -60,7 +60,7 @@ if($method == 'POST'){
 
         <input type='password' id='passsword' placeholder="mots de passe" name='password'>
         <input class="submit" type="submit" value="S'inscrire">
-        <p>Déjà inscrit?<a href="./login.php">Se connecter ici</a></p>
+        <p>Déjà inscrit?<a href="./login.php">Connectez-vous ici</a></p>
     </form>
     
 </body>
