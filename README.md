@@ -8,7 +8,7 @@
 
     Lucas Rimbault
     Imène Toudeft
-    Williams
+    Williams Wandji
     Shaynna Raymond
     Mohamed Salamatao
     Yassine Hamil
