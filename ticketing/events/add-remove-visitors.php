@@ -181,7 +181,7 @@ form{
 }
 
   
-        </style>
+</style>
     </head>
     <body>
        
@@ -205,6 +205,5 @@ form{
             <input class="envoyer" type="submit">
             <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
     </body>
-        </form>
-       
+        </form>     
 </html>
