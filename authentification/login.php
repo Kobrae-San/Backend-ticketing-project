@@ -59,7 +59,7 @@ if($method == 'POST'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
+    <title>Connexion</title>
     <link href="../ticketing/styles/login.css" rel="stylesheet"></link>
 
     <title>EasyTickets</title>
@@ -79,7 +79,7 @@ if($method == 'POST'){
                 <input type='password' id='passsword' placeholder="Mot de passe" name='password'>
                 
                 <input class="submit"type="submit" value="Connexion">
-                <p>Pas encore inscrit? <a href="./register.php">S'inscrire ici</a></p>
+                <p>Pas encore inscrit? <a href="./register.php">Inscrivez-vous ici</a></p>
             </form>
            
     </div>
