@@ -53,7 +53,7 @@
                 <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
                  required>
 
-                <input type="submit" value="Afficher le billet">
+                <input class="submit" type="submit" value="Afficher le billet">
             </form>
         </div>
         <?php endif; ?>
