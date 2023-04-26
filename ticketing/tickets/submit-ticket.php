@@ -38,7 +38,6 @@
                 echo "Ticket valide.";
             } else {
                 header("HTTP/1.1 404 Not Found");
-                echo "Ce ticket n'existe pas.";
             }
         } else {
             $erreur = "Veuillez remplir tous les champs.";
