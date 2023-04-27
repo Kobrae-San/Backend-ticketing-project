@@ -71,7 +71,7 @@
             <label for="last-name">Nom: </label>
             <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" >
             <br>
-            <label for="first-name">Prenom: </label>
+            <label for="first-name">Prénom: </label>
             <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" >
             <br>
             <label for="ticket-public-code">Code public du billet: </label>
