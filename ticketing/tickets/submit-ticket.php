@@ -35,10 +35,10 @@
             $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
             if ($tickets_validate) {
                 header("HTTP/1.1 200 OK");
-                echo "Ticket valide.";
+                echo "Le billet est valide.";
             } else {
                 header("HTTP/1.1 401 Unauthorized");
-                echo "Ce ticket n'existe pas.";
+                echo "Le billet n'existe pas.";
             }
         } else {
             $erreur = "Veuillez remplir tous les champs.";
