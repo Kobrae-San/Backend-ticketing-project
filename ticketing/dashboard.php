@@ -18,7 +18,7 @@ $website_part = "Billeterie";
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>git push --force-with-lease origin williams 
+    <body>
         <header> 
             <nav>
                 <h1>EasyTickets</h1>

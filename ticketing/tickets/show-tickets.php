@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="../style.css">
 </head>
         <h2>Billetterie</h2>
-        <?php if ($method == "POST"):
+        <?php if ($method == "POST"){
             $last_name = filter_input(INPUT_POST, "lastname");
             $first_name = filter_input(INPUT_POST, "firstname");
             $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
@@ -52,7 +52,10 @@
             <p><?= $first_name ?></p>
              
         </div>
-        <?php else: ?>
+
+        <?php
+        }
+        else { ?>
         <div>
             <h2>Afficher un billet</h2>
             <form method="POST">
