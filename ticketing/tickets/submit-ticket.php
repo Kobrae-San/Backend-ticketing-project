@@ -37,7 +37,7 @@
                 header("HTTP/1.1 200 OK");
                 echo "Ticket valide.";
             } else {
-                header("HTTP/1.1 404 Not Found");
+                header("HTTP/1.1 401 Unauthorized");
                 echo "Ce ticket n'existe pas.";
             }
         } else {
@@ -51,7 +51,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier évènement</title>
+    <title>Modifier événement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -63,7 +63,7 @@
             <label for="last-name">Nom: </label>
             <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
             <br>
-            <label for="first-name">Prenom: </label>
+            <label for="first-name">Prénom: </label>
             <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" required>
             <br>
             <label for="ticket-public-code">Code public du billet: </label>
