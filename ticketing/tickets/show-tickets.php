@@ -66,7 +66,7 @@
             <label for="lastname">Prénom: </label>
             <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
 
-            <label for="private-ticket-id">ID privé du Billet</label>
+            <label for="private-ticket-id">ID public du Billet</label>
             <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
                 required>
 
