@@ -1,7 +1,7 @@
 <?php 
     session_start();
     require '../../inc/pdo.php';
-    if (!isset($_GET["your_token"])) {
+    if (!isset($_SESSION["token"])) {
         header('Location: ../dashboard.php');
         exit();
     }
@@ -87,7 +87,7 @@
         <br>
 
         <input class="submit" type="submit" value="Modifier l'évènement">
-        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_GET['username'] ?>">Retour au menu modification</a>
+        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour au menu modification</a>
     </form>
    
 </body>

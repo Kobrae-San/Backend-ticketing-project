@@ -16,6 +16,20 @@ body{
    
     
 
+
+  height: 100vh;
+
+  font-family: "Poppins", sans-serif;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+  width: 500px;
+  gap: 8px;
+
 }
 form{
     display: flex;
@@ -83,6 +97,7 @@ input:user-invalid:focus {
   gap: 10px;
   background-color: #fcf8e8;
 }
+<<<<<<< HEAD
 a{
     background: var(--verylightgrenn);
     border: 1px solid black;
@@ -100,6 +115,27 @@ a{
     margin: 4px 2px;
     transition: 0.2s;
     cursor: pointer;
+=======
+a {
+
+  background: var(--verylightgrenn);
+  border: 0.5px solid black;
+  width: 60%;
+
+  display: flex;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  margin: 4px 2px;
+
+  transition: 0.2s;
+  cursor: pointer;
+>>>>>>> 34a4ad1d85725ee77a8574dc38cc351e70aca944
 }
 input.submit{
     background-color: #34d87e;
@@ -121,8 +157,10 @@ input.submit{
     transform: scale(0.97);
 }
 a:hover {
+    box-shadow: 0px 0px 10px 0px #363c3575;
   background-color: var(--darkgreen);
   color: white;
+  border: none;
   transform: scale(1.1);
 }
 span {
