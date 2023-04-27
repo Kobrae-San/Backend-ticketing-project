@@ -14,7 +14,8 @@ body {
   margin: 0;
   padding: 24px;
   display: flex;
- 
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 
   font-family: "Poppins", sans-serif;
@@ -150,8 +151,8 @@ a {
 }
 
 .boutton:hover::after{
-  color: #000000;
-  background:  #000000;
+  color: #ffffff;
+  background:  #ffffff;
   border: 0.5px solid black;
   border: 0.5px solid black;
   width: 100%;
