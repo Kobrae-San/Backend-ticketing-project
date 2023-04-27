@@ -86,29 +86,28 @@
         $last_name = filter_input(INPUT_POST, "lastname");
         $first_name = filter_input(INPUT_POST, "firstname");
         $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
-        
-        $writer = new PngWriter();
+   
+        // Inclure le fichier qrlib.php
+        require_once('../phpqrcode/qrlib.php');
 
-        // Create QR code
-        $qrCode = QrCode::create('lastname :' . $last_name . ' firstname:' . $first_name . 'private-ticket-id: ' . $ticket_id)
-            ->setEncoding(new Encoding('UTF-8'))
-            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
-            ->setSize(300)
-            ->setMargin(10)
-            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->setForegroundColor(new Color(0, 0, 0))
-            ->setBackgroundColor(new Color(255, 255, 255));
+        // Texte à encoder en code QR
+        $texte = 'http://localhost/Backend-ticketing-project/ticketing/tickets/afficher.php?lastname='.$last_name.'&firstname='.$first_name.'&private-ticket-id='.$ticket_id.'';
+
+        // Options pour la génération du code QR
+        $options = array('version' => 5, 'ecc' => QR_ECLEVEL_H);
+
+        // Générer le code QR
+        QRcode::png($texte, 'code_qr.png', QR_ECLEVEL_H, 5);
+
+        // Afficher le code QR généré
+        //html d'une carte devenement avec qr code
+      
+        echo '<img src="code_qr.png" />'
+
+       ;
+
+
         
-        // Create generic logo
-        //$logo = Logo::create(__DIR__.'/hetic.png')
-        //    ->setResizeToWidth(50);
-        
-        // Create generic label
-        //$label = Label::create('Label')
-        //    ->setTextColor(new Color(255, 0, 0));
-        
-        $result = $writer->write($qrCode, null, null);
-        echo "<img src='" . $result->getDataUri() . "'>";
     }
  else{ ?>
     <div>
@@ -124,28 +123,9 @@
             <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
                 required>
 
-                <input class="submit" type="submit" value="Afficher le billet">
-            </form>
-        
-        <!-- Affichage du billet si les données sont valides -->
-        <?php elseif($ticket == true): ?>
-            <h2>Billet</h2>
-            <p>Nom : <?= $ticket_info['last_name'] ?></p>
-            <br>
-            <p>Prénom : <?= $ticket_info['first_name'] ?></p>
-            <br>
-            <p>Evènement : <?= $ticket_info['event_name'] ?></p>
-            <br>
-            <p>Lieu : <?= $ticket_info['event_place'] ?></p>
-            <br>
-            <p>Date : <?= $ticket_info['event_date'] ?></p>
-            <br>
-            <p>Description : <?= $ticket_info['event_description'] ?></p>
-            <br>
-            <p>Date de génération du billet : <?= $ticket_info['current_date'] ?></p>
-            <br>
-            <p>Code QR :</p>
-        <?php endif; ?>
+            <input class="submit" type="submit" value="Afficher le billet">
+        </form>
     </div>
+    <?php }?>
 </body>
 </html>
