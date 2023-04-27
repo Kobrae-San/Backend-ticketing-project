@@ -17,12 +17,14 @@ if (isset($_GET["your_token"])){
 </head>
 <body>
     <header>
+    <h1>Menu évènement</h1>
+    <br>
         <nav>
             <ul>
                 <a href="create-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
                 <a href="modify-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
                 <a href="delete-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
-                <a href=".././dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>">Retour au menu principal</a>
+                <a href=".././dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Retour au menu principal</li></a>
             </ul>
         </nav>
     </header>
