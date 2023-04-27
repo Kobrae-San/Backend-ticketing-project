@@ -41,44 +41,26 @@
     <title>Modifier évènement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-    <h2>Billetterie</h2>
-    <?php if ($method == "POST"){
-        $last_name = filter_input(INPUT_POST, "lastname");
-        $first_name = filter_input(INPUT_POST, "firstname");
-        $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
-        
-        $writer = new PngWriter();
-
-        // Create QR code
-        $qrCode = QrCode::create('lastname :' . $last_name . ' firstname:' . $first_name . 'private-ticket-id: ' . $ticket_id)
-            ->setEncoding(new Encoding('UTF-8'))
-            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
-            ->setSize(300)
-            ->setMargin(10)
-            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->setForegroundColor(new Color(0, 0, 0))
-            ->setBackgroundColor(new Color(255, 255, 255));
-        
-        // Create generic logo
-        //$logo = Logo::create(__DIR__.'/hetic.png')
-        //    ->setResizeToWidth(50);
-        
-        // Create generic label
-        //$label = Label::create('Label')
-        //    ->setTextColor(new Color(255, 0, 0));
-        
-        $result = $writer->write($qrCode, null, null);
-        echo "<img src='" . $result->getDataUri() . "'>";
-    }
- else{ ?>
-    <div>
-        <h2>Afficher un billet</h2>
-        <form method="POST">
-            <label for="lastname">Nom: </label>
-            <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
-            
-            <label for="lastname">Prénom: </label>
-            <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
+        <h2>Billetterie</h2>
+        <?php if ($method == "POST"):
+            $last_name = filter_input(INPUT_POST, "lastname");
+            $first_name = filter_input(INPUT_POST, "firstname");
+            $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
+        ?>
+        <div>
+            <p><?= $last_name ?></p>
+            <p><?= $first_name ?></p>
+             
+        </div>
+        <?php else: ?>
+        <div>
+            <h2>Afficher un billet</h2>
+            <form method="POST">
+                <label for="lastname">Nom: </label>
+                <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
+                
+                <label for="lastname">Prénom: </label>
+                <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
 
             <label for="private-ticket-id">ID privé du Billet</label>
             <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
