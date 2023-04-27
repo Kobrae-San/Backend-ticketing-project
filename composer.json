@@ -1,6 +1,7 @@
 {
     "require": {
         "endroid/qr-code": "^4.8",
-        "bacon/bacon-qr-code": "^2.0"
+        "bacon/bacon-qr-code": "^2.0",
+        "khanamiryan/qrcode-detector-decoder": "^2.0"
     }
 }
