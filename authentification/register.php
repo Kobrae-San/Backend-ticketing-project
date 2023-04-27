@@ -4,10 +4,11 @@
     require '../inc/pdo.php';
     $existing_user = "";
     
-    $data = json_decode($_SESSION['data']);
+    $json_data = file_get_contents('php://input');
+    $data = json_decode($json_data, true);
     if ($data) {
-        $username = $data->login;
-        $password = $data->password;
+        $username = $data['login'];
+        $password = $data['password'];
 
         $first_requete = $auth_pdo->prepare("
         SELECT * FROM users WHERE login = :login;
@@ -31,13 +32,14 @@
             $requete_token->execute([
                 ":token" => "",
             ]);
-            header('HTTP/1.1 200 OK');
-            header('Location: ../ticketing/connection/login.php');
-            exit();
-        } elseif ($data == null) {
-            header('HTTP/1.1 400 Bad Request');
-            header('Location: ../connection/register.php');
-            exit();
+            $response = array('statut' => 'Succès', 'message' => "Ajout d'utilisateur réussi.");
+            echo json_encode($response);
+        } else {
+            $response = array('statut' => 'Erreur', 'message' => "Utilisateur déja existant.");
+            echo json_encode($response);
         }
+    } else {
+        $response = array('statut' => 'Erreur', 'message' => "JSON incorrect");
+        echo json_encode($response);
     }
 ?>
