@@ -55,7 +55,7 @@ if($method == "POST"){
                <?php }
                 ?>
                 <input class="submit" type="submit" value="Connexion" name="submit">
-                <p>Pas encore inscrit? <a href="./register.php">S'inscrire ici</a></p>
+                <p>Pas encore inscrit? <a href="../../authentification/register.php">S'inscrire ici</a></p>
             </form>
            
     </div>
