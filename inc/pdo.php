@@ -7,10 +7,7 @@
 
     // Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
     $auth_port = 3306; // port MAMP
-
-  //(par défaut pour MySQL, avec MAMP macOS c'est 8889)
-  // port MAMP
-
+    // Nom de la BDD (facultatif) : sakila
     $auth_bdd = "authentification";
     $ticket_bdd = "billeterie";
     // Nom d'utilisateur : root
