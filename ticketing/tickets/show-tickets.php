@@ -102,7 +102,7 @@
                 <label for="private-ticket-id">Identifiant privé du billet :</label>
                 <input type="text" id="private-ticket-id" name="private-key" placeholder="Chaîne de 6 à 10 caractères alphanumériques" required>
                 <br>
-                <input type="submit" value="Afficher">
+                <input class="submit" type="submit" value="Afficher" id="submit" name="submit">
             </form>
         
         <!-- Affichage du billet si les données sont valides -->
