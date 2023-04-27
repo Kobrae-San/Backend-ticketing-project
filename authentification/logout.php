@@ -15,13 +15,13 @@ UPDATE token SET token = :null WHERE token.user_id = (SELECT id FROM users WHERE
 
 $requete->execute([
     ":login" => $username,
-    ":null"=> Null
+    ":null"=> null
 ]);
 
 // Etape 2 : On supprime tout le contenu de la session
 session_destroy();
 // Etape 3 : On redirige la personne vers le login (par exemple)
-header('Location: login.php');
+header('Location: ../ticketing/connection/login.php');
 // C'est fini !
 
 
