@@ -10,19 +10,6 @@ require '../../inc/pdo.php';
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
-<<<<<<< HEAD
-=======
-if(isset($_SESSION['send'])){
-    $json = $_SESSION['data'];
-    $data = json_decode($json, true);
-    if($data['statut'] == 'Succès'){
-        $token=$_SESSION['token'];
-        header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
-    }elseif($data['statut'] == 'Erreur'){
-        $erreur = true;
-    } 
-}
->>>>>>> 9e19904 (cd)
 
 if($method == "POST"){
     $client = new \GuzzleHttp\Client();
