@@ -54,7 +54,7 @@ if($method == 'POST'){
     <?php endif; ?>
 
     <form method='POST'>
-        <h1>Espace Administrateur - Inscription</h1>
+        <h2>Espace Administrateur - Inscription</h2>
        
         <input type='text' id='username' placeholder="username" name='username'>
 
