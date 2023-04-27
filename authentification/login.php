@@ -33,6 +33,7 @@ $requete = $auth_pdo->prepare("
         );
         $json = json_encode($data);
         $_SESSION['data'] = $json;
+        header("HTTP/1.1 200 OK");
     }elseif (!password_verify($password, $result['password'])){
         $data = array(
             'statut' => "Erreur",
@@ -40,6 +41,7 @@ $requete = $auth_pdo->prepare("
         );
         $json = json_encode($data);
         $_SESSION['data'] = $json;
+        
     }
 
 
