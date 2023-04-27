@@ -28,34 +28,51 @@
     <title>Modifier évènement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-        <h2>Billetterie</h2>
-        <?php if ($method == "POST"):
-            $last_name = filter_input(INPUT_POST, "lastname");
-            $first_name = filter_input(INPUT_POST, "firstname");
-            $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
-        ?>
-        <div>
-            <p><?= $last_name ?></p>
-            <p><?= $first_name ?></p>
-             
-        </div>
-        <?php else: ?>
-        <div>
-            <h2>Afficher un billet</h2>
-            <form method="POST">
-                <label for="lastname">Nom: </label>
-                <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
-                
-                <label for="lastname">Prénom: </label>
-                <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
+    <h2>Billetterie</h2>
+    <?php if ($method == "POST"){
+        $last_name = filter_input(INPUT_POST, "lastname");
+        $first_name = filter_input(INPUT_POST, "firstname");
+        $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
+   
+        // Inclure le fichier qrlib.php
+        require_once('../phpqrcode/qrlib.php');
 
-                <label for="private-ticket-id">ID privé du Billet</label>
-                <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
-                 required>
+        // Texte à encoder en code QR
+        $texte = 'http://localhost/Backend-ticketing-project/ticketing/tickets/afficher.php?lastname='.$last_name.'&firstname='.$first_name.'&private-ticket-id='.$ticket_id.'';
 
-                <input class="submit" type="submit" value="Afficher le billet">
-            </form>
-        </div>
-        <?php endif; ?>
-    </body>
-    </html>
+        // Options pour la génération du code QR
+        $options = array('version' => 5, 'ecc' => QR_ECLEVEL_H);
+
+        // Générer le code QR
+        QRcode::png($texte, 'code_qr.png', QR_ECLEVEL_H, 5);
+
+        // Afficher le code QR généré
+        //html d'une carte devenement avec qr code
+      
+        echo '<img src="code_qr.png" />'
+
+       ;
+
+
+        
+    }
+ else{ ?>
+    <div>
+        <h2>Afficher un billet</h2>
+        <form method="POST">
+            <label for="lastname">Nom: </label>
+            <input type="text" id="lastname" name="lastname" placeholder="Indiquez votre nom de famille" required>
+            
+            <label for="lastname">Prénom: </label>
+            <input type="text" id="firstname" name="firstname" placeholder="Indiquez votre prénom" required>
+
+            <label for="private-ticket-id">ID privé du Billet</label>
+            <input type="text" id="private-ticket-id" name="private-ticket" placeholder="Renseignez l'identifiant privé"
+                required>
+
+            <input class="submit" type="submit" value="Afficher le billet">
+        </form>
+    </div>
+    <?php }?>
+</body>
+</html>
