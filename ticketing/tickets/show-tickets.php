@@ -13,7 +13,7 @@
     $title = "Afficher un billet";
     $website_part = "Billetterie";
     if ($method == "POST") {
-        $title = "Imprimez un billet";
+        $title = "Imprimer un billet";
     }
 
 ?>
@@ -25,7 +25,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier évènement</title>
+    <title>Modifier événement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
     <h2>Billetterie</h2>
@@ -47,7 +47,7 @@
         QRcode::png($texte, 'code_qr.png', QR_ECLEVEL_H, 5);
 
         // Afficher le code QR généré
-        //html d'une carte devenement avec qr code
+        // Html d'une carte d'événement avec qr code
       
         echo '<img src="code_qr.png" />'
 
