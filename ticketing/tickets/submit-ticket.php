@@ -15,7 +15,7 @@
 
     $submit = filter_input(INPUT_GET, "submit");
 
-    if ($method == "GET" && $submit == "Valider un billet") {
+    if ($method == "GET" && $submit == "Valider le billet") {
         $last_name = trim(filter_input(INPUT_GET, 'last-name'));
         $first_name = trim(filter_input(INPUT_GET, 'first-name'));
         $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));
@@ -41,6 +41,7 @@
                 echo "Le billet n'existe pas.";
             }
         } else {
+            header("HTTP/1.1 404 Not Found");
             $erreur = "Veuillez remplir tous les champs.";
         }
     }
@@ -51,9 +52,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier événement</title>
+    <title>Valider un billet</title>
     <link rel="stylesheet" href="../style.css">
 </head>
+<?php if (($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && $tickets_validate)): ?>
+    <body style="background-color: green;">    
+    </body>
+<?php elseif (($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && !$tickets_validate)): ?>
+    <body style="background-color: red;">
+    </body>
+<?php else: ?>
 <body>
     <div>
         <?php if ($erreur != null): ?>
@@ -61,17 +69,18 @@
         <?php endif; ?>
         <form method="GET">
             <label for="last-name">Nom: </label>
-            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
+            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" >
             <br>
-            <label for="first-name">Prénom: </label>
-            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" required>
+            <label for="first-name">Prenom: </label>
+            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" >
             <br>
             <label for="ticket-public-code">Code public du billet: </label>
             <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
-             required>
+             >
             <br>
             <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">
         </form>
     </div>
 </body>
 </html>
+<?php endif; ?>
