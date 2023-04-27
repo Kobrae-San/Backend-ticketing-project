@@ -34,8 +34,10 @@
             ]);
             $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
             if ($tickets_validate) {
+                http_response_code(200);
                 header("HTTP/1.1 200 OK");
             } else {
+                http_response_code(404);
                 header("HTTP/1.1 404 Not Found");
             }
         } else {
@@ -52,10 +54,10 @@
     <title>Valider un billet</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<?php if (($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && $tickets_validate)): ?>
+<?php if ((isset($_GET['last-name']) && isset($_GET['first-name']) && isset($_GET['ticket-public-code'])) && ($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && $tickets_validate)): ?>
     <body style="background-color: green;">    
     </body>
-<?php elseif (($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && !$tickets_validate)): ?>
+<?php elseif ((isset($_GET['last-name']) && isset($_GET['first-name']) && isset($_GET['ticket-public-code'])) && ($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && !$tickets_validate)): ?>
     <body style="background-color: red;">
     </body>
 <?php else: ?>
