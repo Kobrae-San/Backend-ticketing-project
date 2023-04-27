@@ -70,7 +70,7 @@
             <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
              required>
             <br>
-            <input type="submit" value="Valider le billet" id="submit" name="submit">
+            <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">
         </form>
     </div>
 </body>
