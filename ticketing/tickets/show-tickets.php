@@ -87,26 +87,28 @@
         $first_name = filter_input(INPUT_POST, "firstname");
         $ticket_id = filter_input(INPUT_POST, "private-ticket-id");
         
-        require 'vendor/autoload.php'; // Inclure l'autoloader de Composer
+        $writer = new PngWriter();
 
-        // Importer les classes nécessaires du package bacon/bacon-qr-code avec des alias
-        $pngRendererClass = 'BaconQrCode\Renderer\Image\Png';
-        $writerClass = 'BaconQrCode\Writer';
+        // Create QR code
+        $qrCode = QrCode::create('lastname :' . $last_name . ' firstname:' . $first_name . 'private-ticket-id: ' . $ticket_id)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(300)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
         
-        // Créer une nouvelle instance du rendu PNG
-        $pngRenderer = new $pngRendererClass();
+        // Create generic logo
+        //$logo = Logo::create(__DIR__.'/hetic.png')
+        //    ->setResizeToWidth(50);
         
-        // Créer une nouvelle instance de l'écrivain de QR code
-        $writer = new $writerClass($pngRenderer);
+        // Create generic label
+        //$label = Label::create('Label')
+        //    ->setTextColor(new Color(255, 0, 0));
         
-        // Générer le QR code
-        $text = 'lastname, firstname, private-ticket-id ';
-        $qrCode = $writer->writeString($text);
-        
-        // Afficher l'image du QR code
-        header('Content-Type: image/png');
-        echo $qrCode;
-        
+        $result = $writer->write($qrCode, null, null);
+        echo "<img src='" . $result->getDataUri() . "'>";
     }
  else{ ?>
     <div>
