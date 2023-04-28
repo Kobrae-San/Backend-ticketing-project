@@ -3,14 +3,12 @@ require '../../inc/pdo.php';
 require '../../inc/functions.php';
 session_start();
 
-    $requete = $auth_pdo->prepare("
+    $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
-<<<<<<< HEAD
 
-=======
 
    
     
