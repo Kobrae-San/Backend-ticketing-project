@@ -11,7 +11,7 @@ if(isset($_SESSION['send'])){
     $json = $_SESSION['data'];
     $data = json_decode($json, true);
     if($data['statut'] == 'Succès'){
-        $_SESSION['token'] = $token;
+        $token= $_SESSION['token']  ;
         header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     }elseif($data['statut'] == 'Erreur'){
         $erreur = true;
@@ -59,6 +59,6 @@ if($method == "POST"){
             </form>
            
     </div>
-</script>
+   
 </body>
 </html>

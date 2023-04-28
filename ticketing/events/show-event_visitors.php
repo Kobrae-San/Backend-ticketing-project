@@ -27,6 +27,7 @@ session_start();
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
+   
     
 
   
@@ -42,13 +43,24 @@ session_start();
     
         <?php 
         foreach($events as $event){
-            echo "<div class='event' data-tooltype='description'>
+            echo "<div class='event' data-tooltype=Description:{$event['event_description']}>
             
             <h2 id='event_name'>Nom:  <span>{$event['event_name']}</span></h2>
             <h2>lieu:  <span>{$event['event_place']}</span></h2>
             </div>";
         }
         ?>
+
+       <script>
+        const events = document.querySelectorAll('.event');
+        events.forEach(event => {
+            event.addEventListener('click', () => {
+                event.classList.add('active');
+            })
+        })
+        
+
+       </script>
 </body>
 </html>
 
