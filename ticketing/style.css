@@ -100,7 +100,7 @@ ul{
   gap: 10px;
   background-color: #fcf8e8;
 }
-a {
+.boutton {
   color: #ffffff;
   background:  #3d9c68;
   border: 0.5px solid black;
@@ -169,7 +169,7 @@ a {
 
   cursor: pointer;
 }
-a:hover {
+.boutton:hover {
   background-color: #a9dba0;
   color: rgb(0, 0, 0);
   border: solid 1px #34d87e;
@@ -178,14 +178,8 @@ a:hover {
 span {
   font-weight: 50;
 }
-=======
-* {
-  box-sizing: border-box;
-  margin: 0;
 
-  font-family: "Poppins", sans-serif;
-  list-style: none;
-}
+
 body {
   --lightgreen: #91c788;
   --darkgreen: #52734d;
