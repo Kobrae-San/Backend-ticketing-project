@@ -20,6 +20,7 @@ body {
 
   font-family: "Poppins", sans-serif;
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -85,7 +86,8 @@ input:user-invalid:focus {
 ul{
   display: flex;
   flex-direction: column;
- 
+  height: 100vh;
+  background-color: #738570;
   gap: 16px;
 }
 .liste_event {
@@ -257,12 +259,7 @@ input:user-invalid:focus {
   transition: all 0.2s ease-in-out;
 }
 
-ul{
-  display: flex;
-  flex-direction: column;
- 
-  gap: 16px;
-}
+
 .liste_event {
   display: flex;
   flex-direction: column;

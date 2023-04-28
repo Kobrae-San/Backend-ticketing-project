@@ -27,17 +27,16 @@ session_start();
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
-<<<<<<<<< Temporary merge branch 1
+
 ?>
-<!DOCTYPE html>
-=========
+
    
     
 
   
  
 ?><!DOCTYPE html>
->>>>>>>>> Temporary merge branch 2
+
 <html>
 <head>
     <meta charset="utf-8">
