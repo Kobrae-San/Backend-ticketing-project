@@ -64,7 +64,7 @@
 
             // Affichage de l'erreur si les données fournies sont invalides
             } else {
-                $erreur = "Billet indisponible. Veuillez vérifier les informations fournies puis réessayer.";
+                $erreur = "Billet indisponible. Veuillez vérifier les informations fournies puis réessayer";
             }
         }
     }
