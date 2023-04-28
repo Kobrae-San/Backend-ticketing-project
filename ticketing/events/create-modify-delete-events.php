@@ -2,8 +2,8 @@
 require '../../inc/functions.php';
 require '../../inc/pdo.php';
 session_start();
-if (isset($_GET["your_token"])){
-    $hashed = $_GET["your_token"];
+if (isset($_SESSION["token"])){
+    $hashed = $_SESSION["token"];
 }
 ?>
 <!DOCTYPE html>
@@ -21,10 +21,10 @@ if (isset($_GET["your_token"])){
     <br>
         <nav>
             <ul>
-                <a href="create-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
-                <a href="modify-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
-                <a href="delete-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
-                <a href=".././dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Retour au menu principal</li></a>
+                <a href="create-event.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Créer un évènement</li></a>
+                <a href="modify-event.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Modifier évènement</li></a>
+                <a href="delete-event.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Supprimer un évènement</li></a>
+                <a href=".././dashboard.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Retour au menu principal</li></a>
             </ul>
         </nav>
     </header>

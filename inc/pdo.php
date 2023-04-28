@@ -4,9 +4,9 @@
     $auth_engine = "mysql";
     // Hôte : localhost
     $host = "localhost";
-
     // Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
-    $auth_port = 8889; // port ou MAMP XAMP
+    $auth_port = 3306; // port XAMP
+    $mamp_auth_port = 8888; // port MAMP
     // Nom de la BDD (facultatif) : sakila
     $auth_bdd = "authentification";
     $ticket_bdd = "billeterie";

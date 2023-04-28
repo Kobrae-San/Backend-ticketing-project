@@ -32,3 +32,5 @@ CREATE TABLE `visitors` (
   ADD FOREIGN KEY (visitor_id) REFERENCES visitors(id);
 
 ALTER TABLE `events` ADD COLUMN `event_description` TEXT;
+
+ALTER TABLE `tickets` ADD COLUMN `current_date` DATE;
