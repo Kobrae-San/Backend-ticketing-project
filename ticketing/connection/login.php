@@ -8,18 +8,8 @@ require '../../vendor/autoload.php';
 require '../../inc/pdo.php';
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
-$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-if(isset($_SESSION['send'])){
-    $json = $_SESSION['data'];
-    $data = json_decode($json, true);
-    if($data['statut'] == 'Succès'){
-        $token = $_SESSION['token'];
-        header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
-    }elseif($data['statut'] == 'Erreur'){
-        $erreur = true;
-    } 
-}
+$username = filter_input(INPUT_POST, 'username');
+$password = filter_input(INPUT_POST, 'password');
 
 if($method == "POST"){
     $client = new \GuzzleHttp\Client();
@@ -31,12 +21,12 @@ if($method == "POST"){
 
     $json = json_encode($data);
 
-    $response = $client->post('http://localhost/php/Backend-ticketing-project/authentification/login.php', [
+    $response = $client->post('http://localhost/Backend-ticketing-project/authentification/login.php', [
         'body' => $json
     ]);
     $data = json_decode($response->getBody(), true);
     $_SESSION['username'] = $username;
-    if ($data['statut'] == 'Succès'){
+    if ($data['statut'] == 'SuccÃ¨s'){
         $_SESSION['token'] = $data['message'];
         header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
         exit();

@@ -56,10 +56,14 @@
             AND first_name = :first_name
             ');
 
-            $check_ticket_request->bindParam(':private_key', $private_key, PDO::PARAM_STR);
-            $check_ticket_request->bindParam(':last_name', $last_name, PDO::PARAM_STR);
-            $check_ticket_request->bindParam(':first_name', $first_name, PDO::PARAM_STR);
-            $check_ticket_request -> execute();
+            // $check_ticket_request->bindParam(':private_key', $private_key, PDO::PARAM_STR);
+            // $check_ticket_request->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+            // $check_ticket_request->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+            $check_ticket_request -> execute([
+                ':private_key', $private_key,
+                ':last_name', $last_name,
+                ':first_name', $first_name
+            ]);
 
             $ticket_info = $check_ticket_request -> fetch(PDO::FETCH_ASSOC);
 

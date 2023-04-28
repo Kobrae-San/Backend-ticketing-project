@@ -43,10 +43,14 @@
         AND event_place = :event_place 
         AND event_date = :event_date;
     ");
-        $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-        $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-        $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-        $verify_existing_event_request->execute();
+        // $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
+        // $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
+        // $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
+        $verify_existing_event_request->execute([
+            ':event_name' => $event_name,
+            ':event_place'=> $event_name,
+            ':event_date' => $event_date
+        ]);
         if ($verify_existing_event_request){
             $event_remove_request = $ticket_pdo -> prepare(
                 "   DELETE from events 
@@ -54,10 +58,14 @@
                     event_date = :event_date AND
                     event_place = :event_place; "
             );
-            $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-            $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-            $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-            $event_remove_request -> execute();
+            // $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
+            // $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
+            // $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
+            $event_remove_request -> execute([
+                ':event_name' => $event_name,
+                ':event_place'=> $event_name,
+                ':event_date' => $event_date
+            ]);
         }else {
             echo 'Cette évènement existe pas';
         }
