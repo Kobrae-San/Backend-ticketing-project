@@ -12,8 +12,9 @@ $password = $data['password'];
 $requete = $auth_pdo->prepare("
     SELECT * FROM users WHERE login = :login
     ");
-    $requete->bindParam(':login', $username, PDO::PARAM_STR);
-    $requete->execute();
+    $requete->execute([
+        ":login" => $username
+    ]);
     $result = $requete->fetch(PDO::FETCH_ASSOC);
     if(password_verify($password, $result["password"])){
         $token = token();
@@ -22,9 +23,10 @@ $requete = $auth_pdo->prepare("
         $requete_token = $auth_pdo->prepare("
         UPDATE token SET token = :token WHERE token.user_id = (SELECT id FROM users WHERE login = :login);
         ");
-        $requete_token->bindParam(":token", $token, PDO::PARAM_STR);
-        $requete_token->bindParam(":login", $login, PDO::PARAM_STR);
-        $requete_token->execute();
+        $requete_token->execute([
+            ":token" => $token,
+            ":login" => $username
+        ]);
         $data = array(
             'statut' => "Succès",
             'message' => $token

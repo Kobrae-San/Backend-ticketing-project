@@ -4,8 +4,8 @@
     $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
     $erreur = null;
     if($method == 'POST') {
-        $username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $username = trim(filter_input(INPUT_POST, 'username'));
+        $password = trim(filter_input(INPUT_POST, 'password'));
         if ($username && $password) {
             $data = array(
                 "login" => $username,
@@ -14,7 +14,7 @@
             $erreur = 'je suis passé ici';
             $json_data = json_encode($data);
             // Attention, c'est une URL, pas un chemin
-            $ch = curl_init('http://localhost:8888/Backend-ticketing-project/authentification/register.php');
+            $ch = curl_init('http://localhost/Back-End/backend-project/authentification/register.php');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));

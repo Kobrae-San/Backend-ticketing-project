@@ -1,5 +1,24 @@
 <?php
-require '../../inc/pdo.php';
+// Type de moteur de BDD : mysql
+$auth_engine = "mysql";
+// Hôte : localhost
+$host = "localhost";
+// Port : 3306 (par défaut pour MySQL, avec MAMP macOS c'est 8889)
+$auth_port = 3306; // port XAMP
+$mamp_auth_port = 8888; // port MAMP
+// Nom de la BDD (facultatif) : sakila
+$auth_bdd = "billeterie";
+$ticket_bdd = "billeterie";
+// Nom d'utilisateur : root
+$user = "root";
+// Mot de passe : 
+$password_bdd = "";
+
+$auth_dsn = "$auth_engine:host=$host:$auth_port;dbname=$auth_bdd";
+$auth_pdo = new PDO($auth_dsn, $user, $password_bdd);
+
+$ticket_dsn = "$auth_engine:host=$host:$auth_port;dbname=$ticket_bdd";
+$ticket_pdo = new PDO($ticket_dsn, $user, $password_bdd);
 require '../../inc/functions.php';
 session_start();
 
@@ -8,8 +27,12 @@ session_start();
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
-?>
-<!DOCTYPE html>
+   
+    
+
+  
+ 
+?><!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,13 +43,24 @@ session_start();
     
         <?php 
         foreach($events as $event){
-            echo "<div class='event' data-tooltype='description'>
+            echo "<div class='event' data-tooltype=Description:{$event['event_description']}>
             
             <h2 id='event_name'>Nom:  <span>{$event['event_name']}</span></h2>
             <h2>lieu:  <span>{$event['event_place']}</span></h2>
             </div>";
         }
         ?>
+
+       <script>
+        const events = document.querySelectorAll('.event');
+        events.forEach(event => {
+            event.addEventListener('click', () => {
+                event.classList.add('active');
+            })
+        })
+        
+
+       </script>
 </body>
 </html>
 
