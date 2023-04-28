@@ -86,7 +86,7 @@ tbody tr:hover {
   width: 60%;
   overflow: hidden;
   display: flex;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+
   padding: 15px 32px;
   text-align: center;
   justify-content: center;
@@ -101,6 +101,7 @@ tbody tr:hover {
 }
 
 .boutton:hover {
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
   background-color: #a9dba0;
   color: rgb(0, 0, 0);
   border: solid 1px #34d87e;
