@@ -4,13 +4,13 @@
     require '../../inc/pdo.php';
     
     // Création des chemins vers les autres pages
-    // $show_tickets_path = "./show-tickets.php";
-    // $submit_path = "./submit-ticket.php";
-    // $login_path = "../../authentification/login.php";
-    // $logout_path = "../../authentification/logout.php";
-    // $creation_path = "../events/create-modify-delete-events.php";
-    // $visitor_path = "../events/add-remove-visitors.php";
-    // $show_visitor_path = "../events/show-event&visitors.php";
+    $show_tickets_path = "./show-tickets.php";
+    $submit_path = "./submit-ticket.php";
+    $login_path = "../../authentification/login.php";
+    $logout_path = "../../authentification/logout.php";
+    $creation_path = "../events/create-modify-delete-events.php";
+    $visitor_path = "../events/add-remove-visitors.php";
+    $show_visitor_path = "../events/show-event&visitors.php";
 
     // Récupération de la méthode
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
