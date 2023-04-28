@@ -8,6 +8,7 @@ session_start();
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
+<<<<<<< HEAD
 
  
     
@@ -18,6 +19,10 @@ session_start();
 
 <!DOCTYPE html>
 
+=======
+?>
+<!DOCTYPE html>
+>>>>>>> c8ce8b6e31d2fca7963f19c4cd436744b576699c
 <html>
 <head>
     <meta charset="utf-8">
