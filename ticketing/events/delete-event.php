@@ -7,7 +7,7 @@
         header('Location: ../dashboard.php');
         exit();
     }
-    $username = $_SESSION['username'];
+    $username = $_GET['username'];
     $verify_token_request = $auth_pdo->prepare("
         SELECT login, token FROM users
         INNER JOIN token ON users.id = token.user_id
@@ -20,7 +20,7 @@
 
     $verify_token =  $verify_token_request->fetch(PDO::FETCH_ASSOC);
     if ($verify_token) {
-        if ($_SESSION['token'] != $verify_token['token'] || $verify_token['token'] == null) {
+        if ($_GET['your_token'] != $verify_token['token'] || $verify_token['token'] == null) {
             header('Location: ../dashboard.php');
             exit();
         }
@@ -43,10 +43,11 @@
         AND event_place = :event_place 
         AND event_date = :event_date;
     ");
-        $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-        $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-        $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-        $verify_existing_event_request->execute();
+        $verify_existing_event_request->execute([
+            ":event_name" => $event_name,
+            ":event_place" => $event_place,
+            ":event_date" => $event_date
+    ]);
         if ($verify_existing_event_request){
             $event_remove_request = $ticket_pdo -> prepare(
                 "   DELETE from events 
@@ -54,11 +55,12 @@
                     event_date = :event_date AND
                     event_place = :event_place; "
             );
-            $event_remove_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-            $event_remove_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-            $event_remove_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-            $event_remove_request -> execute();
-        }else {
+            $event_remove_request -> execute([
+                ":event_name" => $event_name,
+                ":event_place" => $event_place,
+                ":event_date" => $event_date
+            ]);
+        }else{
             echo 'Cette évènement existe pas';
         }
     }
@@ -69,7 +71,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer un un évènement</title>
+    <title>Supprimer évènement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>

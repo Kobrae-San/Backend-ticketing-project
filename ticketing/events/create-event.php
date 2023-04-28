@@ -42,10 +42,11 @@
             AND event_place = :event_place 
             AND event_date = :event_date;
         ");
-        $create_event_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-        $create_event_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-        $create_event_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-        $verify_existing_event_request->execute();
+        $verify_existing_event_request->execute([
+            ":event_name" => $event_name,
+            ":event_place" => $event_place,
+            ":event_date" => $event_date
+        ]);
         
         $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
         if (!$verify_existing_event) {
@@ -53,11 +54,12 @@
             INSERT INTO events (event_name, event_place, event_date, event_description)
             VALUES (:event_name, :event_place, :event_date, :event_description)
             ");
-            $create_event_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-            $create_event_request->bindParam(':event_place', $event_name, PDO::PARAM_STR);
-            $create_event_request->bindParam(':event_date', $event_date, PDO::PARAM_STR);
-            $create_event_request->bindParam(':event_description', $event_description, PDO::PARAM_STR);
-            $create_event_request->execute();
+            $create_event_request->execute([
+                ":event_name" => $event_name,
+                ":event_place" => $event_place,
+                ":event_date" => $event_date,
+                ":event_description" => $event_description
+            ]);
         } else {
             echo 'Cette évènement éxiste déjà';
         }
@@ -83,7 +85,7 @@
         <br>
 
         <label for="event-place">Lieux de l'évènement: </label>
-        <input type="text" id="event-place" name="event-place" placeholder="Lieu de l'évènement" required>
+        <input type="text" id="event-place" name="event-place" placeholder="Date de l'évènement" required>
 
         <br>
 
