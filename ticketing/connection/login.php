@@ -14,11 +14,7 @@ if(isset($_SESSION['send'])){
     $json = $_SESSION['data'];
     $data = json_decode($json, true);
     if($data['statut'] == 'Succès'){
-<<<<<<< HEAD
         $token= $_SESSION['token']  ;
-=======
-        $token = $_SESSION['token'];
->>>>>>> c8ce8b6e31d2fca7963f19c4cd436744b576699c
         header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
     }elseif($data['statut'] == 'Erreur'){
         $erreur = true;

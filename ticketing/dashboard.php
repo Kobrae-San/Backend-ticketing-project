@@ -23,7 +23,6 @@ $website_part = "Billeterie";
            
                
                 <ul>
-<<<<<<< HEAD
                     <li><h2>EasyTickets</h2></li>
                     <?php if (isset($_GET["your_token"]) && token_check($hashed, $auth_pdo)): ?>
                         <a class="boutton" style="background=red" href="../authentification/logout.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Déconnexion</li></a>
@@ -32,15 +31,6 @@ $website_part = "Billeterie";
                         <a class="boutton" href="./events/create-modify-delete-events.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
                         <a class="boutton" href="./events/add-remove-visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username']?>&add=true"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
                         <a class="boutton" href="./events/show-event_visitors.php?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Visualiser les événements et leurs inscrits</li></a>
-=======
-                    <?php if (isset($_SESSION["token"]) && token_check($hashed, $auth_pdo)): ?>
-                        <a href="../authentification/logout.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username'] ?>"><li>Déconnexion</li></a>
-                        <a href="./tickets/show-tickets.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username'] ?>"><li>Afficher un billet</li></a>
-                        <a href="./tickets/submit-ticket.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username'] ?>"><li>Valider un billet</li></a>
-                        <a href="./events/create-modify-delete-events.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username'] ?>"><li>Créer/Modifier/Annuler un événement</li></a>
-                        <a href="./events/add-remove-visitors.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username']?>"><li>Ajouter/Annuler un visiteur à l'événement</li></a>
-                        <a href="./events/show-event_visitors.php?your_token=<?= $_SESSION['token'] ?>&username=<?= $_SESSION['username'] ?>"><li>Visualiser les événements et leurs inscrits</li></a>
->>>>>>> c8ce8b6e31d2fca7963f19c4cd436744b576699c
                     <?php else: ?>
                         <a class="boutton" href="./tickets/show-tickets.php"><li>Afficher un billet</li></a>
                         <a class="boutton" href="./tickets/submit-ticket.php"><li>Valider un billet</li></a>
