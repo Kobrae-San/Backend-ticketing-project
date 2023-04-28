@@ -51,7 +51,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier évènement</title>
+    <title>Valider un billet</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -60,6 +60,7 @@
             <p><?= $erreur ?></p>
         <?php endif; ?>
         <form method="GET">
+            <h1>Valider un billet</h1>
             <label for="last-name">Nom: </label>
             <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
             <br>
@@ -71,6 +72,7 @@
              required>
             <br>
             <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">
+            <a href=".././dashboard.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Retour au menu principal</li></a>
         </form>
     </div>
 </body>
