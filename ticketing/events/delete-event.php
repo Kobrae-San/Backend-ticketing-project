@@ -94,7 +94,7 @@
         <br>
 
         <input class="submit" type="submit" value="Supprimer un évenement">
-        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour au menu modification</a>
+        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour au menu</a>
     </form>
    
 </body>
