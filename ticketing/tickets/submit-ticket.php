@@ -15,9 +15,9 @@
     $submit = filter_input(INPUT_GET, "submit");
 
     if ($method == "GET" && $submit == "Valider le billet") {
-        $last_name = trim(filter_input(INPUT_GET, 'last-name'));
-        $first_name = trim(filter_input(INPUT_GET, 'first-name'));
-        $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));
+        $last_name = trim(filter_input(INPUT_GET, 'last-name', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $first_name = trim(filter_input(INPUT_GET, 'first-name', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($last_name && $first_name && $public_code) {
             $check_ticket_request = $ticket_pdo->prepare('
                 SELECT public_code, last_name, first_name FROM tickets

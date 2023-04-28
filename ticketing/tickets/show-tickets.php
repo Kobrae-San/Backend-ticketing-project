@@ -38,9 +38,9 @@
 
     // Récupération des données fournies dans le formulaire en POST
     if ($method == "POST"){
-        $last_name = filter_input(INPUT_POST, "last-name");
-        $first_name = filter_input(INPUT_POST, "first-name");
-        $private_key = filter_input(INPUT_POST, "private-key");
+        $last_name = filter_input(INPUT_POST, "last-name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $first_name = filter_input(INPUT_POST, "first-name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $private_key = filter_input(INPUT_POST, "private-key", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Vérification de l'existence de ces données dans la bdd
         // Récupération des autres données à afficher
@@ -56,11 +56,10 @@
             AND first_name = :first_name
             ');
 
-            $check_ticket_request -> execute([
-                ":private_key" => $private_key,
-                ":last_name" => $last_name,
-                ":first_name" => $first_name,
-            ]);
+            $check_ticket_request->bindParam(':private_key', $private_key, PDO::PARAM_STR);
+            $check_ticket_request->bindParam(':last_name', $last_name, PDO::PARAM_STR);
+            $check_ticket_request->bindParam(':first_name', $first_name, PDO::PARAM_STR);
+            $check_ticket_request -> execute();
 
             $ticket_info = $check_ticket_request -> fetch(PDO::FETCH_ASSOC);
 

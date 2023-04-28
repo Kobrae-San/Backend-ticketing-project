@@ -8,8 +8,8 @@ require '../../vendor/autoload.php';
 require '../../inc/pdo.php';
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
-$username = filter_input(INPUT_POST, 'username');
-$password = filter_input(INPUT_POST, 'password');
+$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if(isset($_SESSION['send'])){
     $json = $_SESSION['data'];
     $data = json_decode($json, true);
