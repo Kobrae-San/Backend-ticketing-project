@@ -8,6 +8,9 @@ session_start();
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
+<<<<<<< HEAD
+
+=======
 
    
     
