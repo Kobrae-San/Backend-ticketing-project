@@ -31,7 +31,7 @@ if($method == "POST"){
 
     $json = json_encode($data);
 
-    $response = $client->post('http://localhost/php/Backend-ticketing-project/authentification/login.php', [
+    $response = $client->post('http://localhost:8888/Backend-ticketing-project/authentification/login.php', [
         'body' => $json
     ]);
     $data = json_decode($response->getBody(), true);
@@ -69,7 +69,7 @@ if($method == "POST"){
                <?php }
                 ?>
                 <input class="submit" type="submit" value="Connexion" name="submit">
-                <p>Pas encore inscrit? <a href="../../authentification/register.php">S'inscrire ici</a></p>
+                <p>Pas encore inscrit? <a href="./register.php">S'inscrire ici</a></p>
             </form>
            
     </div>
