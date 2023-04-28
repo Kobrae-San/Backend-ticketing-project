@@ -7,16 +7,6 @@ $erreur = false;
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
-if(isset($_SESSION['send'])){
-    $json = $_SESSION['data'];
-    $data = json_decode($json, true);
-    if($data['statut'] == 'Succès'){
-        $token= $_SESSION['token']  ;
-        header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
-    }elseif($data['statut'] == 'Erreur'){
-        $erreur = true;
-    } 
-}
 
 if($method == "POST"){
 
@@ -26,10 +16,20 @@ if($method == "POST"){
     );
 
     $json = json_encode($data);
-    $_SESSION['data'] = $json;
-    header('Location: ../../authentification/login.php');
-    exit();
-}
+
+    $response = $client->post('http://localhost/Backend-ticketing-project/authentification/login.php', [
+        'body' => $json
+    ]);
+    $data = json_decode($response->getBody(), true);
+    $_SESSION['username'] = $username;
+    if ($data['statut'] == 'SuccÃ¨s'){
+        $_SESSION['token'] = $data['message'];
+        header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
+        exit();
+    }elseif ($data['statut'] == 'Erreur'){
+        $erreur = true;
+   }
+ }
 
 ?><!DOCTYPE html>
 <html lang="fr">

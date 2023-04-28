@@ -11,10 +11,9 @@
                 "login" => $username,
                 "password" => $password
             );
-            $erreur = 'je suis passé ici';
             $json_data = json_encode($data);
             // Attention, c'est une URL, pas un chemin
-            $ch = curl_init('http://localhost/Back-End/backend-project/authentification/register.php');
+            $ch = curl_init('http://localhost/Backend-ticketing-project/authentification/register.php');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -27,7 +26,7 @@
             if ($result['statut'] == 'Succès') {
                 header('Location: ./login.php');
                 exit();
-            } else if ($result['statut'] == 'Erreur' && $result['message'] == 'Utilisateur déjà existant.') {
+            } else if ($result['statut'] == 'Erreur' && $result['message'] == 'Utilisateur déja existant.') {
                 $erreur = $result['message'];
             }
         } else {

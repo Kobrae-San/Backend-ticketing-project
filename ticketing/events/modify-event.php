@@ -35,12 +35,13 @@
         $new_event_date = filter_input(INPUT_POST,'new_event_date');
         
         $verify_existing_event_request = $ticket_pdo->prepare("
-        SELECT event_name FROM events 
-        WHERE event_name = :event_name;
-    ");
+            SELECT event_name FROM events 
+            WHERE event_name = :event_name;
+        ");
+        // $verify_existing_event_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
         $verify_existing_event_request->execute([
-            ":event_name" => $event_name
-    ]);
+            ':event_name' => $event_name
+        ]);
     $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
     if ($verify_existing_event_request){
         $event_modify_request = $ticket_pdo -> prepare(

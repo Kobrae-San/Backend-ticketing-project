@@ -35,10 +35,8 @@
             $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
             if ($tickets_validate) {
                 http_response_code(200);
-                header("HTTP/1.1 200 OK");
             } else {
                 http_response_code(404);
-                header("HTTP/1.1 404 Not Found");
             }
         } else {
             header("HTTP/1.1 404 Not Found");

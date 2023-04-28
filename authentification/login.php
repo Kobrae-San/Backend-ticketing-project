@@ -1,49 +1,47 @@
 <?php
-session_start();
-$json = $_SESSION['data'];
-require '../inc/pdo.php';
-require '../inc/functions.php';
-$data = json_decode($json, true);
-$_SESSION['send'] = true;
+    session_start();
+    require '../inc/pdo.php';
+    require '../inc/functions.php';
 
-$username = $data['username'];
-$password = $data['password'];
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
 
-$requete = $auth_pdo->prepare("
-    SELECT * FROM users WHERE login = :login
-    ");
-    $requete->execute([
-        ":login" => $username
-    ]);
-    $result = $requete->fetch(PDO::FETCH_ASSOC);
-    if(password_verify($password, $result["password"])){
-        $token = token();
-        $_SESSION['username'] = $username;
-        $_SESSION['token'] = $token;
-        $requete_token = $auth_pdo->prepare("
-        UPDATE token SET token = :token WHERE token.user_id = (SELECT id FROM users WHERE login = :login);
+    $username = $data["username"];
+    $password = $data["password"];
+
+    $requete = $auth_pdo->prepare("
+        SELECT * FROM users WHERE login = :login
         ");
-        $requete_token->execute([
-            ":token" => $token,
+        $requete->execute([
             ":login" => $username
         ]);
-        $data = array(
-            'statut' => "Succès",
-            'message' => $token
-        );
-        $json = json_encode($data);
-        $_SESSION['data'] = $json;
-        header("HTTP/1.1 200 OK");
-    }elseif (!password_verify($password, $result['password'])){
-        $data = array(
-            'statut' => "Erreur",
-            'message' => $token
-        );
-        $json = json_encode($data);
-        $_SESSION['data'] = $json;
-        
-    }
-
-
-    header('Location: ../ticketing/connection/login.php');
-    exit(); //Permet de couper php
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            if(password_verify($password, $result["password"])){
+                $token = token();
+                $_SESSION['username'] = $username;
+                $_SESSION['token'] = $token;
+                $requete_token = $auth_pdo->prepare("
+                UPDATE token SET token = :token WHERE token.user_id = (SELECT id FROM users WHERE login = :login);
+                ");
+                $requete_token->execute([
+                    ":token" => $token,
+                    ":login" => $username
+                ]);
+                $data = array(
+                    'statut' => "SuccÃ¨s",
+                    'message' => $token
+                );
+                $json = json_encode($data);
+                echo $json;
+                exit();
+            }
+        }else{
+            $data = array(
+                'statut' => "Erreur",
+                'message' => 'Identifiants incorrects'
+            );
+            $json = json_encode($data);
+            echo $json;
+            exit();
+        }

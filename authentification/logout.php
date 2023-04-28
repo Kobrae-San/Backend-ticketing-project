@@ -24,7 +24,3 @@ session_destroy();
 header('Location: ../ticketing/connection/login.php');
 // C'est fini !
 
-
-
-
-
