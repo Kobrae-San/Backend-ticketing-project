@@ -7,7 +7,7 @@
         header('Location: ../dashboard.php');
         exit();
     }
-    $username = $_GET['username'];
+    $username = $_SESSION['username'];
     $verify_token_request = $auth_pdo->prepare("
         SELECT login, token FROM users
         INNER JOIN token ON users.id = token.user_id
@@ -20,7 +20,7 @@
 
     $verify_token =  $verify_token_request->fetch(PDO::FETCH_ASSOC);
     if ($verify_token) {
-        if ($_GET['your_token'] != $verify_token['token'] || $verify_token['token'] == null) {
+        if ($_SESSION['token'] != $verify_token['token'] || $verify_token['token'] == null) {
             header('Location: ../dashboard.php');
             exit();
         }
@@ -71,13 +71,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer un évènement</title>
+    <title>Supprimer un un évènement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
     <form method = "POST">
-        <h1>Supprimer un évènement</h1>    
+        <h1>Modifier l'évènement</h1>    
         <label for="event-name">Nom de l'événement: </label>
         <input type="text" id="event-name" placeholder="Nom de l'évènement" name="event-name" required>
 
