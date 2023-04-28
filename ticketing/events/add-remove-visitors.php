@@ -20,7 +20,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
     exit();
 }
 
-$add = $_GET['add'];
+$add = $_SESSION['add'];
 
 $nom = filter_input(INPUT_POST, 'last_name');
 $prenom = filter_input(INPUT_POST, 'first_name');

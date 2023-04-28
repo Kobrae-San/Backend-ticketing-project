@@ -93,36 +93,37 @@
         </body>
         </html><?php
         }
-    } else {
-        ?><!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Valider un billet</title>
-            <link rel="stylesheet" href="../style.css">
-        </head>
-        <body>
-            <div>
-                <?php if ($erreur != null): ?>
-                    <p><?= $erreur ?></p>
-                <?php endif; ?>
-                <form method="GET">
-                    <label for="last-name">Nom: </label>
-                    <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" >
-                    <br>
-                    <label for="first-name">Prenom: </label>
-                    <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" >
-                    <br>
-                    <label for="ticket-public-code">Code public du billet: </label>
-                    <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
-                     >
-                    <br>
-                    <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">
-                </form>
-            </div>
-        </body>
-        </html><?php
     }
-?>
+?><!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valider un billet</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div>
+        <?php if ($erreur != null): ?>
+            <p><?= $erreur ?></p>
+        <?php endif; ?>
+        <form method="GET">
+            <h1>Valider un billet</h1>
+            <label for="last-name">Nom: </label>
+            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
+            <br>
+            <label for="first-name">Prenom: </label>
+            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" required>
+            <br>
+            <label for="ticket-public-code">Code public du billet: </label>
+            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
+             required>
+            <br>
+            <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">
+            <a href=".././dashboard.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>"><li>Retour au menu principal</li></a>
+        </form>
+    </div>
+</body>
+</html>
