@@ -20,13 +20,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
     exit();
 }
 
-$add = $_SESSION['add'];
+$add = $_GET['add'];
 
-$nom = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$prenom = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$event_name = filter_input(INPUT_POST,'event_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$event_place = filter_input(INPUT_POST,'event_place', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$event_date = filter_input(INPUT_POST,'event_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$nom = filter_input(INPUT_POST, 'last_name');
+$prenom = filter_input(INPUT_POST, 'first_name');
+$event_name = filter_input(INPUT_POST,'event_name');
+$event_place = filter_input(INPUT_POST,'event_place');
+$event_date = filter_input(INPUT_POST,'event_date');
 
 $requete = $ticket_pdo->prepare("SELECT id FROM events WHERE event_name = :name AND event_place = :place AND event_date = :date");
 $requete->execute([":name" => $event_name, ":place" => $event_place, ":date" => $event_date]);

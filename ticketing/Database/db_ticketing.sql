@@ -6,6 +6,7 @@ CREATE TABLE `events` (
   `event_name` varchar(120) NOT NULL,
   `event_place` varchar(255) NOT NULL,
   `event_date` varchar(18) NOT NULL,
+  
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -32,5 +33,3 @@ CREATE TABLE `visitors` (
   ADD FOREIGN KEY (visitor_id) REFERENCES visitors(id);
 
 ALTER TABLE `events` ADD COLUMN `event_description` TEXT;
-
-ALTER TABLE `tickets` ADD COLUMN `current_date` DATE;

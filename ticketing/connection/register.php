@@ -4,8 +4,8 @@
     $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
     $erreur = null;
     if($method == 'POST') {
-        $username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $username = trim(filter_input(INPUT_POST, 'username'));
+        $password = trim(filter_input(INPUT_POST, 'password'));
         if ($username && $password) {
             $data = array(
                 "login" => $username,

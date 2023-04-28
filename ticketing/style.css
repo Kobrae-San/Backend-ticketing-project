@@ -58,8 +58,8 @@ input:user-invalid:focus {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100px;
-  color: aliceblue;
+  height: 50px;
+  color: rgb(0, 75, 141);
   padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -71,7 +71,7 @@ input:user-invalid:focus {
   transform: scale(0.998);
 }
 .event:hover::before {
-  content: attr(data-tooltype);
+  content:attr(data-tooltype);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -81,6 +81,7 @@ input:user-invalid:focus {
   font-weight: 100;
   transition: all 0.2s ease-in-out;
 }
+
 ul{
   display: flex;
   flex-direction: column;
@@ -115,7 +116,6 @@ a {
 
   font-size: 16px;
   margin: 4px 2px;
-
 
   transition: 0.2s;
   cursor: pointer;
@@ -169,36 +169,6 @@ a {
 
   cursor: pointer;
 }
-.boutton::after{
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform: translate(0%, 100%);
-  transition: all 0.4s;
-  bottom: 0;
-
-}
-
-.boutton:hover::after{
-  color: #000000;
-  background:  #000000;
-  border: 0.5px solid black;
-  border: 0.5px solid black;
-  width: 100%;
-  height: 100%;
-  display: flex;
-
-  animation: anim 0.4s ease-in-out;
-  border-radius: 5px;
-  text-decoration: none;
-
-  font-size: 16px;
-  margin: 4px 2px;
-
-
-  cursor: pointer;
-}
 a:hover {
   background-color: #a9dba0;
   color: rgb(0, 0, 0);
@@ -207,4 +177,10 @@ a:hover {
 }
 span {
   font-weight: 50;
+}
+
+.active {
+  background-color: var(--lightgreen);
+  color: black;
+  transform: scale(0.998);
 }

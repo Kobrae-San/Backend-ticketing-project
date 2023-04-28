@@ -1,23 +1,19 @@
 <?php
 
 session_start();
-use GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
-
-require '../../vendor/autoload.php';
 require '../../inc/pdo.php';
+$erreur = false;
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST, 'password');
 
 if($method == "POST"){
-    $client = new \GuzzleHttp\Client();
 
-    $data = [
+    $data = array(
         'username' => $username,
         'password' => $password
-    ];
+    );
 
     $json = json_encode($data);
 
@@ -52,9 +48,9 @@ if($method == "POST"){
 <body>
             <form method='POST'>
                <h2>Espace Administrateur - Connexion</h2>
-                <input type='text' id='username' placeholder="Nom de l'utilisateur" name='username' required>
-                <input type='password' id='passsword' placeholder="Mot de passe" name='password' required>
-                <?php if (isset($erreur)) { ?>
+                <input type='text' id='username' placeholder="Nom de l'utilisateur" name='username'>
+                <input type='password' id='passsword' placeholder="Mot de passe" name='password'>
+                <?php if ($erreur == true) { ?>
                 <p>Identifiants incorrects !</p>
                <?php }
                 ?>
@@ -63,6 +59,6 @@ if($method == "POST"){
             </form>
            
     </div>
-</script>
+   
 </body>
 </html>
