@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require '../../inc/pdo.php';
+    
     if (!isset($_SESSION["token"])) {
         header('Location: ../dashboard.php');
         exit();
