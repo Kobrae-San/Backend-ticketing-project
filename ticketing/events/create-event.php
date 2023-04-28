@@ -60,7 +60,9 @@
                 ":event_date" => $event_date,
                 ":event_description" => $event_description
             ]);
-        } else {
+        } 
+        
+        else {
             echo 'Cette évènement éxiste déjà';
         }
     }
@@ -85,7 +87,7 @@
         <br>
 
         <label for="event-place">Lieux de l'évènement: </label>
-        <input type="text" id="event-place" name="event-place" placeholder="Date de l'évènement" required>
+        <input type="text" id="event-place" name="event-place" placeholder="Lieu de l'évènement" required>
 
         <br>
 

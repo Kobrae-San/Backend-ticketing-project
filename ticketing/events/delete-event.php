@@ -77,7 +77,7 @@
 <body>
 
     <form method = "POST">
-        <h1>Modifier l'évènement</h1>    
+        <h1>Supprimer l'évènement</h1>    
         <label for="event-name">Nom de l'événement: </label>
         <input type="text" id="event-name" placeholder="Nom de l'évènement" name="event-name" required>
 
