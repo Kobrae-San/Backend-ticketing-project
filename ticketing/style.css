@@ -83,6 +83,36 @@ input:user-invalid:focus {
   font-weight: 100;
   transition: all 0.2s ease-in-out;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+
+thead {
+  background-color: #333;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+
 ul{
   display: flex;
   flex-direction: column;

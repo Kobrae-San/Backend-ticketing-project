@@ -44,17 +44,30 @@ session_start();
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="liste_event">
+        
     
-        <?php 
-        foreach($events as $event){
-            echo "
-            <a id='event_id'>ID:  <span>{$event['id']}</span></a><div class='event' data-tooltype=Description:{$event['event_description']}>
-           
-            <a id='event_name'>Nom:  <span>{$event['event_name']}</span></a>
-            <a>lieu:  <span>{$event['event_place']}</span></a>
-            </div>";
-        }
-        ?>
+     
+        
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>event_name</th>
+                    <th>event_place</th>
+                    <th>event_description</th>
+                    <th>event_id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($events as $event): ?>
+                <tr>
+                    <td><?= $event['event_name'] ?></td>
+                    <td><?= $event['event_place'] ?></td>
+                    <td><?= $event['event_description'] ?></td>
+                    <td><?= $event['id'] ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
 
        <script>
        
