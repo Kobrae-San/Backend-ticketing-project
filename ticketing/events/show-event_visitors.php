@@ -28,26 +28,7 @@ session_start();
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
     //requete pour recuperer le nom de levenement cliquer
-   if(isset($_GET["id"])){
-    $requete2 = $ticket_pdo->prepare("
-    SELECT * FROM events
-    WHERE id = :id
-    ");
-    $requete2->execute([
-        ":id" => $_GET["id"]
-    ]);
-    $event = $requete2->fetch(PDO::FETCH_ASSOC);
-    //requete pour recuperer les inscrits a levenement cliquer
-    $requete3 = $ticket_pdo->prepare("
-    SELECT * FROM users
-    INNER JOIN tickets
-    ON users.id = tickets.user_id
-    WHERE event_id = :id
-    ");
-    $requete3->execute([
-        ":id" => $_GET["id"]
-    ]);
-    $users = $requete3->fetchAll(PDO::FETCH_ASSOC);}
+  
     
 ?>
 
@@ -98,7 +79,33 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #ddd;
 }
+.boutton {
+  color: #ffffff;
+  background: #91c788 ;
 
+  width: 60%;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  padding: 15px 32px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+  text-decoration: none;
+
+  font-size: 16px;
+  margin: 4px 2px;
+
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.boutton:hover {
+  background-color: #a9dba0;
+  color: rgb(0, 0, 0);
+  border: solid 1px #34d87e;
+  transform: scale(1.05);
+}
 
 
     </style>
@@ -116,7 +123,7 @@ tbody tr:hover {
                     <th>event_name</th>
                     <th>event_place</th>
                     <th>event_description</th>
-                    <th>event_id</th>
+                    <th>Participants</th>
                 </tr>
             </thead>
             <tbody>
@@ -127,11 +134,16 @@ tbody tr:hover {
                 
                     <td><?= substr($event['event_description'], 0, 50)."..." ?></td>
                     
-                    <td><?= $event['id'] ?></td>
-                    <td><a href="show-event_visitors.php?id=<?= $event['id'] ?>">Voir les inscrits</a></td>
+                    <td><a class="boutton" href="visiteurs.php?id=<?= $event['id']."........." ?>">voir les Participants</a></td>
+                    
+
                 </tr>
                 <?php endforeach; ?>
+
+
             </tbody>
+        </table>
+        
 
        <script>
        
