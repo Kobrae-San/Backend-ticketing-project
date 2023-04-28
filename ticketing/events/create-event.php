@@ -71,20 +71,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crée un évènement</title>
+    <title>Créer un évènement</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     
 
     <form method="POST">
-    <h1>Créer un événement</h1>
-        <label for="event-name">Nom de l'événement: </label>
+    <h1>Créer un évènement</h1>
+        <label for="event-name">Nom de l'évènement: </label>
         <input type="text" id="event-name" name="event-name" placeholder="Nom de l'évènement" required>
 
         <br>
 
-        <label for="event-place">Lieux de l'évènement: </label>
+        <label for="event-place">Lieu de l'évènement: </label>
         <input type="text" id="event-place" name="event-place" placeholder="Date de l'évènement" required>
 
         <br>

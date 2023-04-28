@@ -33,7 +33,7 @@ $requete->execute([":name" => $event_name, ":place" => $event_place, ":date" => 
 $check_event = $requete->fetch(PDO::FETCH_ASSOC);
 
 if (!$check_event && $method == 'POST') {
-    echo "L'événement que vous souhaitez rentrer n'existe pas !";
+    echo "L'évènement que vous souhaitez rentrer n'existe pas !";
 } elseif ($check_event && $method == 'POST') {
     $check_event = $check_event["id"];
     $requete = $ticket_pdo->prepare("SELECT * FROM visitors WHERE event_id = :id AND last_name = :last_name AND first_name = :first_name");
@@ -61,7 +61,7 @@ if (!$check_event && $method == 'POST') {
             $requete->execute([":last_name" => $nom, ":first_name" => $prenom, ":id" => $check_event]);
             echo "Visiteur supprimé";
         } else {
-            echo "L'utilisateur n'est pas inscrit à cette évenement";
+            echo "L'utilisateur n'est pas inscrit à cet évènement";
         }
     }
 }
@@ -83,7 +83,7 @@ if (!$check_event && $method == 'POST') {
     <body>
        
         <form method = "POST">
-          <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
+          <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un évènement</h2>
 
             <label>Nom: </label>
             <input type="text" placeholder="nom" name="last_name">

@@ -36,7 +36,7 @@ session_start();
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Visualiser les événements et leurs inscrits</title>
+    <title>Visualiser les évènements et leurs inscrits</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="liste_event">

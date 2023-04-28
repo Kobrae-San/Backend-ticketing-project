@@ -35,7 +35,7 @@
             $response = array('statut' => 'Succès', 'message' => "Ajout d'utilisateur réussi.");
             echo json_encode($response);
         } else {
-            $response = array('statut' => 'Erreur', 'message' => "Utilisateur déja existant.");
+            $response = array('statut' => 'Erreur', 'message' => "Utilisateur déjà existant.");
             echo json_encode($response);
         }
     } else {

@@ -13,7 +13,7 @@
     $title = "Afficher un billet";
     $website_part = "Billetterie";
     if ($method == "POST") {
-        $title = "Imprimez un billet";
+        $title = "Imprimer un billet";
     }
 
 ?>

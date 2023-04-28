@@ -69,13 +69,13 @@
         <?php endif; ?>
         <form method="GET">
             <label for="last-name">Nom: </label>
-            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" >
+            <input type="text" id="last-name" name="last-name"  placeholder="Indiquez votre nom de famille" >
             <br>
-            <label for="first-name">Prenom: </label>
-            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" >
+            <label for="first-name">Prénom: </label>
+            <input type="text" id="first-name" name="first-name"  placeholder="Indiquez votre prénom" >
             <br>
             <label for="ticket-public-code">Code public du billet: </label>
-            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
+            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Renseignez le code public du billet"
              >
             <br>
             <input class="submit" type="submit" value="Valider le billet" id="submit" name="submit">

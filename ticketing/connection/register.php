@@ -27,7 +27,7 @@
             if ($result['statut'] == 'Succès') {
                 header('Location: ./login.php');
                 exit();
-            } else if ($result['statut'] == 'Erreur' && $result['message'] == 'Utilisateur déja existant.') {
+            } else if ($result['statut'] == 'Erreur' && $result['message'] == 'Utilisateur déjà existant.') {
                 $erreur = $result['message'];
             }
         } else {
@@ -55,7 +55,7 @@
 
         <input type='password' id='passsword' placeholder="mots de passe" name='password'>
         <input class="submit" type="submit" value="S'inscrire">
-        <p>Déjà inscrit?<a href="./login.php">Connectez-vous ici</a></p>
+        <p>Vous êtes déjà inscrit ?<a href="./login.php">Connectez-vous ici</a></p>
     </form>
     
 </body>
