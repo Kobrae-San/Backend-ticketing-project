@@ -31,18 +31,16 @@
     $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 
     if ($method == 'POST') {
-        $event_name = filter_input(INPUT_POST,'event_name');
-        $new_event_place = filter_input(INPUT_POST,'new_event_place');
-        $new_event_date = filter_input(INPUT_POST,'new_event_date');
-        $new_event_name = filter_input(INPUT_POST,'new_event_name');
+        $event_name = filter_input(INPUT_POST,'event_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $new_event_place = filter_input(INPUT_POST,'new_event_place', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $new_event_date = filter_input(INPUT_POST,'new_event_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
         $verify_existing_event_request = $ticket_pdo->prepare("
-        SELECT event_name FROM events 
-        WHERE event_name = :event_name;
-    ");
-        $verify_existing_event_request->execute([
-            ":event_name" => $event_name
-    ]);
+            SELECT event_name FROM events 
+            WHERE event_name = :event_name;
+        ");
+        $verify_existing_event_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
+        $verify_existing_event_request->execute();
     $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
     if ($verify_existing_event_request){
         $event_modify_request = $ticket_pdo -> prepare(
@@ -52,12 +50,10 @@
              event_date = :new_event_date 
              WHERE event_name = :event_name;"
         );
-        $event_modify_request -> execute([
-            ":event_name" => $event_name,
-            ":new_event_place" => $new_event_place,
-            ":new_event_date" => $new_event_date,
-            "new_event_name" => $new_event_name
-        ]);
+        $event_modify_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
+        $event_modify_request->bindParam(':new_event_place', $new_event_name, PDO::PARAM_STR);
+        $event_modify_request->bindParam(':new_event_date', $new_event_date, PDO::PARAM_STR);
+        $event_modify_request -> execute();
     }else{
         echo 'Cette évènement existe pas';
     }
