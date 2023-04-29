@@ -51,11 +51,11 @@ session_start();
     //delete
     if(isset($_GET["delete"])){
         $requete4 = $ticket_pdo->prepare("
-        DELETE FROM visitors WHERE id = :id and last_name=:name
+        DELETE FROM visitors WHERE id = :id 
         ");
         $requete4->execute([
-            ":id" => $_GET["delete"],
-            ":name" => $_GET["name"]
+            ":id" => $_GET["delete"]
+           
         ]);
         header("Location: visiteurs.php?id=".$_GET["id"]);
     }
