@@ -69,31 +69,8 @@ session_start();
     <title>Visualiser les événements et leurs inscrits</title>
     
     <style>
-        body {
-            background-color: white;
-            font-family: sans-serif;
-        }
-        table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 0 auto;
-        background-color: #fff;
-        }
-        thead {
-    
-    background-color: #91c788;
-    color: #fff;
 
-}
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-.boutton {
+.delete {
   color: #ffffff;
   background: red ;
 
@@ -111,7 +88,7 @@ tr:nth-child(even) {
   cursor: pointer;
 }
 
-.boutton:hover {
+.delete:hover {
   
   background-color: red;
 
@@ -138,7 +115,7 @@ tr:nth-child(even) {
                 <tr>
                     <td><?= $user["last_name"] ?></td>
                     <td><?= $user["first_name"] ?></td>
-                    <td><a href="visiteurs.php?id=<?= $event["id"] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='boutton'>-</a></td>
+                    <td><a href="visiteurs.php?id=<?= $event["id"] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='delete'>-</a></td>
                 </tr>
                
             <?php endforeach; ?>

@@ -82,7 +82,7 @@ session_start();
                     <td><?= $event['event_place'] ?></td>
                 
                     <td><?= substr($event['event_description'], 0, 50)."..." ?></td>
-                    <td><a class="boutton" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>">Supprimer</a></td>
+                    <td><a class="delete" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>">Supprimer</a></td>
                     <td><a class="boutton" href="visiteurs.php?id=<?= $event['id']."........." ?>">voir les Participants</a></td>
                     
 
