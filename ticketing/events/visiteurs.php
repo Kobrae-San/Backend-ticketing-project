@@ -99,36 +99,7 @@ require '../../inc/functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../style.css">
     
-    <style>
 
-.delete {
-  color: #ffffff;
-  background: red ;
-
-  width: 10px;
-  overflow: hidden;
-  display: flex;
-
-  padding: 5px 5px;
-  text-align: center;
-  justify-content: center;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  transition: 0.1s;
-  cursor: pointer;
-}
-
-.delete:hover {
-  
-  background-color: red;
-
-
-  transform: scale(1.005);
-}
-
-
-    </style>
 </head>
 <body>
     <h1> inscrits</h1>
