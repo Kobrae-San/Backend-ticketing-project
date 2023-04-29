@@ -54,45 +54,8 @@ session_start();
 <head>
     <meta charset="utf-8">
     <title>Visualiser les événements et leurs inscrits</title>
-    
-    <style>
-        body {
-            background-color: white;
-            font-family: sans-serif;
-        }
-        table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-}
-
-thead {
-  background-color: #91c788;
-  color: #fff;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-}
-
-th {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-  background-color: #ddd;
-}
-
-
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/2f1c507e66.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style.css">
 </head>
 
