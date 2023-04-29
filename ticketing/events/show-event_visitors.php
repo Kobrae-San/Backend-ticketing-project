@@ -111,7 +111,7 @@ require '../../inc/functions.php';
                     <td><?= $event['event_place'] ?></td>
                 
                     <td><?= substr($event['event_description'], 0, 50)."..." ?></td>
-                    <td><a class="delete" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Supprimer</a></td>
+                    <td><a class="delete" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">-</a></td>
                     <td><a class="boutton" href="visiteurs.php?id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">voir les Participants</a></td>
                     
 

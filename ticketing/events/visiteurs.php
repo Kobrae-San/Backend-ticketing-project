@@ -28,7 +28,6 @@
       header('Location: ../dashboard.php');
       exit();
   }
-
 $auth_engine = "mysql";
 // Hôte : localhost
 $host = "localhost";
@@ -86,9 +85,8 @@ require '../../inc/functions.php';
             ":id" => $_GET["delete"]
            
         ]);
-        header("Location: visiteurs.php?id=".$_GET["id"]);
-    }
-
+        header("Location: visiteurs.php?id=".$_GET["id"]."&your_token=".$_SESSION["token"]."&username=".$_SESSION['username'])
+    ;}
 
 ?>
 <!DOCTYPE html>
@@ -101,9 +99,10 @@ require '../../inc/functions.php';
     
 
 </head>
-<body>
-    <h1> inscrits</h1>
+<body class="liste_event">
+    <h1>Participants</h1>
     <table>
+   
         <thead>
             <tr>
                 <th>Nom</th>
@@ -117,7 +116,7 @@ require '../../inc/functions.php';
                 <tr>
                     <td><?= $user["last_name"] ?></td>
                     <td><?= $user["first_name"] ?></td>
-                    <td><a href="visiteurs.php?id=<?= $event["id"] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='delete'>-</a></td>
+                    <td><a href="visiteurs.php?id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='delete'>-</a></td>
                 </tr>
                
             <?php endforeach; ?>
