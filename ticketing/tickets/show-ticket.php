@@ -16,7 +16,7 @@
     $logout_path = "../connection/logout.php";
     $event_management_path = "../events/create-modify-delete-events.php";
     $visitor_management_path = "../events/add-remove-visitors.php";
-    $events_path = "../events/show-event&visitors.php";
+    $events_path = "../events/show-event-visitors.php";
 
     // Récupération de la méthode
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");

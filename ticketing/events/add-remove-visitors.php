@@ -13,7 +13,7 @@ $login_path = "../connection/login.php";
 $logout_path = "../connection/logout.php";
 $event_management_path = "./create-modify-delete-events.php";
 $visitor_management_path = "./add-remove-visitors.php";
-$events_path = "./show-event&visitors.php"; 
+$events_path = "./show-event-visitors.php"; 
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 

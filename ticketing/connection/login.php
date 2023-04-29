@@ -38,7 +38,7 @@ if($method == "POST"){
     ]);
     $data = json_decode($response->getBody(), true);
     $_SESSION['username'] = $username;
-    if ($data['statut'] == 'SuccÃ¨s'){
+    if ($data['statut'] == 'Succès'){
         $_SESSION['token'] = $data['message'];
         header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
         exit();
@@ -56,7 +56,7 @@ if($method == "POST"){
                 <input type='text' id='username' placeholder="Nom d'utilisateur" name='username' required>
                 <input type='password' id='passsword' placeholder="Mot de passe" name='password' required>
                 <?php if (isset($erreur)) { ?>
-                <p>Nom d'utilisateur ou mot de passe incrorrect. Veuillez réessayez.</p>
+                <p><?= $data['message'] ?></p>
                <?php }
                 ?>
                 <input class="submit" type="submit" value="Connexion" name="submit">
