@@ -1,4 +1,33 @@
 <?php
+  session_start();
+
+  require '../../inc/pdo.php';
+
+  if(!isset($_SESSION["token"])){
+      header('Location: ../dashboard.php');
+      exit();
+  }
+  $username = $_GET['username'];
+  $verify_token_request = $auth_pdo->prepare("
+      SELECT login, token FROM users
+      INNER JOIN token ON users.id = token.user_id
+      WHERE login = :login
+  ");
+  
+  $verify_token_request->execute([
+      ":login" => $username
+  ]);
+
+  $verify_token =  $verify_token_request->fetch(PDO::FETCH_ASSOC);
+  if ($verify_token) {
+      if ($_GET['your_token'] != $verify_token['token'] || $verify_token['token'] == null) {
+          header('Location: ../dashboard.php');
+          exit();
+      }
+  } else {
+      header('Location: ../dashboard.php');
+      exit();
+  }
 
 $auth_engine = "mysql";
 // Hôte : localhost
@@ -20,7 +49,7 @@ $auth_pdo = new PDO($auth_dsn, $user, $password_bdd);
 $ticket_dsn = "$auth_engine:host=$host:$auth_port;dbname=$ticket_bdd";
 $ticket_pdo = new PDO($ticket_dsn, $user, $password_bdd);
 require '../../inc/functions.php';
-session_start();
+
 
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
@@ -67,6 +96,8 @@ session_start();
 <head>
     <meta charset="utf-8">
     <title>Visualiser les événements et leurs inscrits</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../style.css">
     
     <style>
 

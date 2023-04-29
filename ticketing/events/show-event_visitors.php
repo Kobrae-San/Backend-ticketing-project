@@ -1,4 +1,33 @@
 <?php
+  session_start();
+
+  require '../../inc/pdo.php';
+
+  if(!isset($_SESSION["token"])){
+      header('Location: ../dashboard.php');
+      exit();
+  }
+  $username = $_GET['username'];
+  $verify_token_request = $auth_pdo->prepare("
+      SELECT login, token FROM users
+      INNER JOIN token ON users.id = token.user_id
+      WHERE login = :login
+  ");
+  
+  $verify_token_request->execute([
+      ":login" => $username
+  ]);
+
+  $verify_token =  $verify_token_request->fetch(PDO::FETCH_ASSOC);
+  if ($verify_token) {
+      if ($_GET['your_token'] != $verify_token['token'] || $verify_token['token'] == null) {
+          header('Location: ../dashboard.php');
+          exit();
+      }
+  } else {
+      header('Location: ../dashboard.php');
+      exit();
+  }
 // Type de moteur de BDD : mysql
 $auth_engine = "mysql";
 // Hôte : localhost
@@ -20,7 +49,7 @@ $auth_pdo = new PDO($auth_dsn, $user, $password_bdd);
 $ticket_dsn = "$auth_engine:host=$host:$auth_port;dbname=$ticket_bdd";
 $ticket_pdo = new PDO($ticket_dsn, $user, $password_bdd);
 require '../../inc/functions.php';
-session_start();
+
 
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
@@ -82,8 +111,8 @@ session_start();
                     <td><?= $event['event_place'] ?></td>
                 
                     <td><?= substr($event['event_description'], 0, 50)."..." ?></td>
-                    <td><a class="delete" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>">Supprimer</a></td>
-                    <td><a class="boutton" href="visiteurs.php?id=<?= $event['id']."........." ?>">voir les Participants</a></td>
+                    <td><a class="delete" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Supprimer</a></td>
+                    <td><a class="boutton" href="visiteurs.php?id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">voir les Participants</a></td>
                     
 
                 </tr>

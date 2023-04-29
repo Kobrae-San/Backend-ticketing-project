@@ -31,33 +31,29 @@ form {
 
 
 
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
+border-collapse: collapse;
+width: 100%;
+margin: 0 auto;
+background-color: #fff;
 }
-
 thead {
-  background-color: #333;
-  color: #fff;
-}
 
+background-color: #91c788;
+color: #fff;
+
+}
 th, td {
-  padding: 12px;
-  text-align: left;
+text-align: left;
+padding: 8px;
 }
 
-th {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-  background-color: #ddd;
+tr:nth-child(even) {
+background-color: #f2f2f2;
 }
 
 
