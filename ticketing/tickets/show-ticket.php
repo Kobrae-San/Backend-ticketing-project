@@ -3,21 +3,23 @@
     require '../../inc/functions.php';
     require '../../inc/pdo.php';
     
-    // Création des chemins vers les autres pages
-    // $show_tickets_path = "./show-tickets.php";
-    // $submit_path = "./submit-ticket.php";
-    // $login_path = "../../authentification/login.php";
-    // $logout_path = "../../authentification/logout.php";
-    // $creation_path = "../events/create-modify-delete-events.php";
-    // $visitor_path = "../events/add-remove-visitors.php";
-    // $show_visitor_path = "../events/show-event&visitors.php";
+    // Variables des titres de la page
+    $title = "Afficher un billet";
+    $website_part = "Billetterie";
+
+    //Création des chemins vers les autres pages
+    $style_ticketing_path = "../styles/ticketing.css";
+    $show_ticket_path = "./show-ticket.php";
+    $submit_ticket_path = "./submit-ticket.php";
+    $register_path = "../connection/register.php";
+    $login_path = "../connection/login.php";
+    $logout_path = "../connection/logout.php";
+    $event_management_path = "../events/create-modify-delete-events.php";
+    $visitor_management_path = "../events/add-remove-visitors.php";
+    $events_path = "../events/show-event&visitors.php";
 
     // Récupération de la méthode
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
-
-    // Variables des titres de la page
-    $title = "Afficher billet";
-    $website_part = "Billetterie";
     
     // Initialisation des variables erreur à " " et ticket à false (billet n'apparaît pas sur la page)
     $erreur = "";
@@ -64,25 +66,14 @@
 
             // Affichage de l'erreur si les données fournies sont invalides
             } else {
-                $erreur = "Billet indisponible. Veuillez vérifier les informations fournies puis réessayer";
+                $erreur = "Billet indisponible. Veuillez vérifier les informations fournies puis réessayer.";
             }
         }
     }
+
 ?>
+<?php include '../../inc/tpl/header_ticketing.php'; ?>
 
-<?php include '../../inc/tpl/header.php'; ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-
-<body>
     <div>
         <!-- Affichage de l'erreur s'il y en a une -->
         <?php if ($erreur != null): ?>
@@ -91,17 +82,17 @@
         
         <!-- Affichage du formulaire si aucun billet valide n'est affiché -->
         <?php if($ticket != true): ?>
-            <h2>Afficher un billet</h2>
+            <h2><?= $title ?></h2>
             <form method="POST">
                 <label for="last-name">Nom : </label>
                 <input type="text" id="last-name" name="last-name" placeholder="Indiquez le nom de famille" required>
-                <br>
+
                 <label for="first-name">Prénom : </label>
                 <input type="text" id="first-name" name="first-name" placeholder="Indiquez le prénom" required>
-                <br>
+
                 <label for="private-ticket-id">Identifiant privé du billet :</label>
                 <input type="text" id="private-ticket-id" name="private-key" placeholder="Chaîne de 6 à 10 caractères alphanumériques" required>
-                <br>
+
                 <input class="submit" type="submit" value="Afficher" id="submit" name="submit">
             </form>
         

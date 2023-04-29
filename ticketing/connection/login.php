@@ -1,11 +1,23 @@
 <?php
-
 session_start();
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
 require '../../vendor/autoload.php';
 require '../../inc/pdo.php';
+
+$title = "Connexion";
+$website_part = "Authentification";
+
+$style_login_path = "../styles/login_register.css";
+$style_ticketing_path = "../styles/ticketing.css";
+$show_ticket_path = "../tickets/show-ticket.php";
+$submit_ticket_path = "../tickets/submit-ticket.php";
+$login_path = "./login.php";
+$logout_path = "./logout.php";
+$event_management_path = "../events/create-modify-delete-events.php";
+$visitor_management_path = "../events/add-remove-visitors.php";
+$events_path = "../events/show-event_visitors.php";
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 $username = filter_input(INPUT_POST, 'username');
@@ -21,7 +33,7 @@ if($method == "POST"){
 
     $json = json_encode($data);
 
-    $response = $client->post('http://localhost/php/Backend-ticketing-project/authentification/login.php', [
+    $response = $client->post('http://localhost/Backend-ticketing-project/authentification/login.php', [
         'body' => $json
     ]);
     $data = json_decode($response->getBody(), true);
@@ -35,31 +47,20 @@ if($method == "POST"){
    }
  }
 
-?><!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+?>
 
-    <title>Document</title>
-    <link href="../ticketing/styles/login.css" rel="stylesheet"></link>
+<?php include '../../inc/tpl/header_authentification.php'; ?>
 
-    <title>EasyTickets</title>
-    <link href="../../authentification/styles/style.css" rel="stylesheet"></link>
-
-</head>
-<body>
             <form method='POST'>
-               <h2>Espace Administrateur - Connexion</h2>
-                <input type='text' id='username' placeholder="Nom de l'utilisateur" name='username' required>
+               <h2>Espace Administrateur - <?= $title ?></h2>
+                <input type='text' id='username' placeholder="Nom d'utilisateur" name='username' required>
                 <input type='password' id='passsword' placeholder="Mot de passe" name='password' required>
                 <?php if (isset($erreur)) { ?>
-                <p>Identifiants incorrects !</p>
+                <p>Nom d'utilisateur ou mot de passe incrorrect. Veuillez réessayez.</p>
                <?php }
                 ?>
                 <input class="submit" type="submit" value="Connexion" name="submit">
-                <p>Pas encore inscrit? <a href="../../authentification/register.php">S'inscrire ici</a></p>
+                <p>Pas encore inscrit? <a href="./register.php">S'inscrire</a></p>
             </form>
            
     </div>

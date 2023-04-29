@@ -2,9 +2,14 @@
 require '../../inc/functions.php';
 require '../../inc/pdo.php';
 session_start();
+
+$title = "Gestion des évènements";
+$website_part = "Billetterie";
+
 if (isset($_GET["your_token"])){
     $hashed = $_GET["your_token"];
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,19 +17,19 @@ if (isset($_GET["your_token"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer - Modifier - Supprimer un évènement</title>
-    <link rel="stylesheet" href="../style.css">
+    <title><?= $title ?> - <?= $website_part ?></title>
+    <link rel="stylesheet" href="../styles/ticketing.css">
 </head>
 <body>
     <header>
-    <h1>Menu évènement</h1>
+    <h1><?= $title ?></h1>
     <br>
         <nav>
             <ul>
-                <a href="create-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
-                <a href="modify-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
-                <a href="delete-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
-                <a href=".././dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Retour au menu principal</li></a>
+                <a href="./create-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
+                <a href="./modify-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
+                <a href="./delete-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
+                <a href="../dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
             </ul>
         </nav>
     </header>

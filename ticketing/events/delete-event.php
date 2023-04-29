@@ -1,7 +1,9 @@
 <?php 
     session_start();
-
     require '../../inc/pdo.php';
+
+    $title = "Suppression d'un évènement";
+    $website_part = "Billetterie";
 
     if(!isset($_SESSION["token"])){
         header('Location: ../dashboard.php');
@@ -48,7 +50,10 @@
             ":event_place" => $event_place,
             ":event_date" => $event_date
     ]);
-        if ($verify_existing_event_request){
+
+    $verify_existing_event = $verify_existing_event_request ->fetch(PDO::FETCH_ASSOC);
+
+        if ($verify_existing_event){
             $event_remove_request = $ticket_pdo -> prepare(
                 "   DELETE from events 
                     WHERE event_name= :event_name AND
@@ -61,7 +66,7 @@
                 ":event_date" => $event_date
             ]);
         }else{
-            echo 'Cette évènement existe pas';
+            $erreur = true;
         }
     }
 ?>
@@ -71,32 +76,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer évènement</title>
-    <link rel="stylesheet" href="../style.css">
+    <title><?= $title ?> - <?= $website_part ?></title>
+    <link rel="stylesheet" href="../styles/ticketing.css">
 </head>
 <body>
-
     <form method = "POST">
-        <h1>Modifier l'évènement</h1>    
-        <label for="event-name">Nom de l'événement: </label>
+        <h1><?= $title ?></h1>    
+        <label for="event-name">Nom de l'événement : </label>
         <input type="text" id="event-name" placeholder="Nom de l'évènement" name="event-name" required>
 
-        <br>
-
-        <label for="event-place">Lieux de l'évènement: </label>
+        <label for="event-place">Lieu de l'évènement : </label>
         <input type="text" id="event-place" placeholder="Lieu de l'évènement" name="event-place" required>
 
-        <br>
-
-        <label for="event-date">Date de l'évènement: </label>
+        <label for="event-date">Date de l'évènement : </label>
         <input type="date" id="event-date"  name="event-date" required>
 
-        <br>
+        <?php if(isset($erreur)){ ?>
+            <p>Cet évènement n'existe pas !</p>
+        <?php } ?>
+        <input class="submit" type="submit" value="Supprimer">
 
-        <input class="submit" type="submit" value="Supprimer un évenement">
-        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour au menu modification</a>
+        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour à la gestion des évènements</a>
     </form>
-   
 </body>
 </html>
-
