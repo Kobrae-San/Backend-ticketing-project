@@ -3,6 +3,8 @@ session_start();
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
+// require '../../vendor/autoload.php';
+require '../../inc/pdo.php';
 require '../../vendor/autoload.php';
 require '../../inc/pdo.php';
 
@@ -33,7 +35,7 @@ if($method == "POST"){
 
     $json = json_encode($data);
 
-    $response = $client->post('http://localhost/Backend-ticketing-project/authentification/login.php', [
+    $response = $client->post('http://localhost:8888/Backend-ticketing-project/authentification/login.php', [
         'body' => $json
     ]);
     $data = json_decode($response->getBody(), true);

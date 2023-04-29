@@ -74,7 +74,7 @@ if (!$check_event && $method == 'POST') {
 <?php include '../../inc/tpl/header_ticketing.php'; ?>
        
         <form method = "POST">
-          <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
+          <h2>Système <?php echo ($add) ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
 
             <label>Nom : </label>
             <input type="text" placeholder="Indiquez le nom de famille" name="last_name">
