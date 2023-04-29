@@ -28,8 +28,18 @@ session_start();
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
     //requete pour recuperer le nom de levenement cliquer
-  
-    
+   if(isset($_GET["delete_id"])){
+    $requete4 = $ticket_pdo->prepare("
+    DELETE FROM events WHERE id = :id 
+    ");
+    $requete4->execute([
+        ":id" => $_GET["delete_id"]
+       
+    ]);
+
+   };
+
+
 ?>
 
    
@@ -79,37 +89,11 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #ddd;
 }
-.boutton {
-  color: #ffffff;
-  background: #91c788 ;
 
-  width: 60%;
-  overflow: hidden;
-  display: flex;
-
-  padding: 15px 32px;
-  text-align: center;
-  justify-content: center;
-  border-radius: 5px;
-  text-decoration: none;
-
-  font-size: 16px;
-  margin: 4px 2px;
-
-  transition: 0.1s;
-  cursor: pointer;
-}
-
-.boutton:hover {
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
-  background-color: #a9dba0;
-  color: rgb(0, 0, 0);
-  border: solid 1px #34d87e;
-  transform: scale(1.05);
-}
 
 
     </style>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body class="liste_event">
@@ -124,6 +108,7 @@ tbody tr:hover {
                     <th>event_name</th>
                     <th>event_place</th>
                     <th>event_description</th>
+                    <th>Supprimer</th>
                     <th>Participants</th>
                 </tr>
             </thead>
@@ -134,7 +119,7 @@ tbody tr:hover {
                     <td><?= $event['event_place'] ?></td>
                 
                     <td><?= substr($event['event_description'], 0, 50)."..." ?></td>
-                    
+                    <td><a class="boutton" href="show-event_visitors.php?delete_id=<?= $event['id'] ?>">Supprimer</a></td>
                     <td><a class="boutton" href="visiteurs.php?id=<?= $event['id']."........." ?>">voir les Participants</a></td>
                     
 

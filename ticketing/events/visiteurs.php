@@ -129,7 +129,7 @@ tr:nth-child(even) {
             <tr>
                 <th>Nom</th>
                 <th>Prénom</th>
-                <th>delete</th>
+                <th>Supprimer</th>
           
             </tr>
         </thead>
