@@ -116,7 +116,7 @@ tbody tr:hover {
         
     
      
-        
+        <h1>Visualiser les événements et leurs inscrits</h1>
         
         <table>
             <thead>

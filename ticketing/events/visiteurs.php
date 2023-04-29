@@ -45,6 +45,20 @@ session_start();
         ":id" => $_GET["id"]
     ]);
     $users = $requete3->fetchAll(PDO::FETCH_ASSOC);}
+    else{
+        $users = [];
+    }
+    //delete
+    if(isset($_GET["delete"])){
+        $requete4 = $ticket_pdo->prepare("
+        DELETE FROM visitors WHERE event_id = :id and last_name=:name
+        ");
+        $requete4->execute([
+            ":id" => $_GET["id"],
+            ":name" => $_GET["name"]
+        ]);
+        header("Location: visiteurs.php?id=".$_GET["id"]);
+    }
 
 
 ?>
@@ -60,12 +74,13 @@ session_start();
             font-family: sans-serif;
         }
         table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
         }
         thead {
+    
     background-color: #91c788;
     color: #fff;
 
@@ -74,9 +89,37 @@ th, td {
   text-align: left;
   padding: 8px;
 }
+
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+.boutton {
+  color: #ffffff;
+  background: red ;
+
+  width: 10px;
+  overflow: hidden;
+  display: flex;
+
+  padding: 5px 5px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.boutton:hover {
+  
+  background-color: red;
+
+
+  transform: scale(1.005);
+}
+
+
     </style>
 </head>
 <body>
@@ -86,6 +129,7 @@ tr:nth-child(even) {
             <tr>
                 <th>Nom</th>
                 <th>Prénom</th>
+                <th>delete</th>
           
             </tr>
         </thead>
@@ -94,8 +138,9 @@ tr:nth-child(even) {
                 <tr>
                     <td><?= $user["last_name"] ?></td>
                     <td><?= $user["first_name"] ?></td>
-                
+                    <td><a href="visiteurs.php?id=<?= $event["id"] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='boutton'>-</a></td>
                 </tr>
+               
             <?php endforeach; ?>
         </tbody>
     </table>
