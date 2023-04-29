@@ -6,6 +6,13 @@ session_start();
 $title = "Les évènements";
 $website_part = "Billetterie";
 
+$my_token = $_GET['your_token'];
+$check = token_check($my_token, $auth_pdo);
+if(!$check){
+    header("Location: ../dashboard.php");
+    exit();
+}
+
     //Requête pour récupérer le nom de l'évènement cliqué
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
@@ -97,6 +104,7 @@ tbody tr:hover {
                 <tr>
                     <th>Nom</th>
                     <th>Lieu</th>
+                    <th>Date</th>
                     <th>Description</th>
                     <th>Visiteurs</th>
                 </tr>
@@ -106,10 +114,10 @@ tbody tr:hover {
                 <tr>
                     <td><?= $event['event_name'] ?></td>
                     <td><?= $event['event_place'] ?></td>
-                
+                    <td><?= $event['event_date'] ?></td>
                     <td><?= substr($event['event_description'], 0, 50) ?></td>
                     
-                    <td><a class="boutton" href="visitors-list.php?id=<?= $event['id']."........." ?>">Voir les visiteurs</a></td>
+                    <td><a class="boutton" href="visitors-list.php?id=<?= $event['id']."........." ?>&username=<?=$_GET['username']?>&your_token=<?=$_GET['your_token']?>">Voir les visiteurs</a></td>
                 </tr>
                 <?php endforeach; ?>
                 <!-- bouton retour -->
@@ -123,6 +131,7 @@ tbody tr:hover {
         const event = document.querySelectorAll('.event');
 
     </script>
+    <a href="../dashboard.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
 
 </body>
 </html>

@@ -3,6 +3,7 @@ session_start();
 require '../../inc/pdo.php';
 require '../../inc/functions.php';
 
+
 $title = "Gestion des visiteurs";
 $website_part = "Billetterie";
 
@@ -17,12 +18,16 @@ $events_path = "./show-event-visitors.php";
 
 $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
-    header('Location: ../dashboard.php');
+$my_token = $_GET['your_token'];
+$check = token_check($my_token, $auth_pdo);
+if(!$check){
+    header("Location: ../dashboard.php");
     exit();
 }
 
+
 $add = $_GET['add'];
+
 
 $nom = filter_input(INPUT_POST, 'last_name');
 $prenom = filter_input(INPUT_POST, 'first_name');
@@ -73,26 +78,21 @@ if (!$check_event && $method == 'POST') {
 ?>
 <?php include '../../inc/tpl/header_ticketing.php'; ?>
        
-        <form method = "POST">
-          <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
+<form method = "POST">
+          <h2>Système <?php echo ($add != 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
 
             <label>Nom : </label>
             <input type="text" placeholder="Indiquez le nom de famille" name="last_name">
-            <br>
             <label>Prénom : </label>
             <input type="text" placeholder="Indiquez le prénom" name="first_name">
             <label>Nom de l'évènement : </label>
-            <br>
             <input type="text" placeholder="Indiquez le nom de l'évènement" name="event_name">
             <label>Lieu de l'évènement :</label>
-            <br>
             <input type="text" placeholder="Indiquez le lieu de l'évènement" name="event_place">
             <label>Date de l'évènement :</label>
-            <br>
             <input type="date" name="event_date">
-
             <input  class="submit" type="submit" value="Valider">
-            <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
+            <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add != 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
     </body>
         </form>
        

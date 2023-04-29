@@ -5,11 +5,12 @@ session_start();
 
 $title = "Gestion des évènements";
 $website_part = "Billetterie";
-
-if (isset($_GET["your_token"])){
-    $hashed = $_GET["your_token"];
+$my_token = $_GET['your_token'];
+$check = token_check($my_token, $auth_pdo);
+if(!$check){
+    header("Location: ../dashboard.php");
+    exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +27,10 @@ if (isset($_GET["your_token"])){
     <br>
         <nav>
             <ul>
-                <a href="./create-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
-                <a href="./modify-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
-                <a href="./delete-event.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
-                <a href="../dashboard.php?your_token=<?= $hashed ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
+                <a href="./create-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
+                <a href="./modify-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
+                <a href="./delete-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
+                <a href="../dashboard.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
             </ul>
         </nav>
     </header>

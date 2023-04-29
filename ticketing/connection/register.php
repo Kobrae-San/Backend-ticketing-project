@@ -1,8 +1,7 @@
 <?php
-    //ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
     session_start();
-
-    $title = "Inscription";
+    $title = "Connexion";
     $website_part = "Authentification";
 
     $style_login_path = "../styles/login_register.css";
@@ -15,12 +14,12 @@
     $visitor_management_path = "../events/add-remove-visitors.php";
     $events_path = "../events/show-event_visitors.php";
 
+
     $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
     $erreur = null;
-
     if($method == 'POST') {
-        $username = trim(filter_input(INPUT_POST, 'username'));
-        $password = trim(filter_input(INPUT_POST, 'password'));
+        $username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($username && $password) {
             $data = array(
                 "login" => $username,
@@ -50,21 +49,18 @@
     }
 
 ?>
-
 <?php include '../../inc/tpl/header_authentification.php'; ?>
-
-    <?php if ($erreur != null): ?>
-        <p><?= $erreur ?></p>
-    <?php endif; ?>
-
     <form method='POST'>
-        <h1>Espace Administrateur - <?= $title ?></h1>
+        <h1>Espace Administrateur - Inscription</h1>
        
-        <input type='text' id='username' placeholder="Nom d'utilisateur" name='username'>
+        <input type='text' id='username' placeholder="username" name='username'>
 
-        <input type='password' id='passsword' placeholder="Mot de passe" name='password'>
-        <input class="submit" type="submit" value="Inscription">
-        <p>Déjà inscrit?<a href="./login.php">Se connecter</a></p>
+        <input type='password' id='passsword' placeholder="mot de passe" name='password'>
+        <input class="submit" type="submit" value="S'inscrire">
+        <?php if ($erreur != null): ?>
+        <p><?= $erreur ?></p>
+        <?php endif; ?>
+        <p>Déjà inscrit?<a href="./login.php">Connectez-vous ici</a></p>
     </form>
     
 </body>

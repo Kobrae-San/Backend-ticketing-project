@@ -22,12 +22,12 @@
 
     $submit = filter_input(INPUT_GET, "submit");
 
-    if (isset($_GET["your_token"])&&isset($_GET["username"])){
+    if (isset($_GET["your_token"]) && isset($_GET["username"])){
         $hashed = $_GET["your_token"];
         $username = $_GET["username"];
     }
 
-    if ($method == "GET" && $submit == "Valider le billet") {
+    if ($method == "GET" && $submit == "Valider") {
         $last_name = trim(filter_input(INPUT_GET, 'last-name'));
         $first_name = trim(filter_input(INPUT_GET, 'first-name'));
         $public_code = trim(filter_input(INPUT_GET, 'ticket-public-code'));
@@ -52,11 +52,13 @@
             $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
             if ($tickets_validate) {
                 http_response_code(200);
+                $success = true;
             } else {
                 http_response_code(404);
+                $failed = true;
             }
-        } else {
-            $erreur = "Veuillez remplir tous les champs.";
+        } elseif (!$last_name && !$first_name && !$public_code){
+            $erreur = true;
         }
     }
 ?><!DOCTYPE html>
@@ -69,10 +71,10 @@
     <title>Valider un billet</title>
     <link rel="stylesheet" href="../styles/ticketing.css">
 </head>
-<?php if ((isset($_GET['last-name']) && isset($_GET['first-name']) && isset($_GET['ticket-public-code'])) && ($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && $tickets_validate)): ?>
+<?php if (isset($success)): ?>
     <body style="background-color: green;">
     </body>
-<?php elseif ((isset($_GET['last-name']) && isset($_GET['first-name']) && isset($_GET['ticket-public-code'])) && ($last_name && $first_name && $public_code) && ($submit == "Valider le billet" && !$tickets_validate)): ?>
+<?php elseif (isset($failed)): ?>
     <body style="background-color: red;">
     </body>
 <?php else: ?>
@@ -97,21 +99,17 @@
         </nav>
     </header>
     <div>
-        <?php if ($erreur != null): ?>
-            <p><?= $erreur ?></p>
-        <?php endif; ?>
         <h2><?= $title ?></h2>
         <form method="GET">
             <label for="last-name">Nom: </label>
-            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" >
-            <br>
+            <input type="text" id="last-name" name="last-name"  placeholder="Indiquer votre nom de famille" required>
             <label for="first-name">Prenom: </label>
-            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" >
-            <br>
+            <input type="text" id="first-name" name="first-name"  placeholder="Indiquer votre prénom" required>
             <label for="ticket-public-code">Code public du billet: </label>
-            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public"
-             >
-            <br>
+            <input type="text" id="ticket-public-code" name="ticket-public-code" placeholder="Indiquer le code public" required>
+            <?php if (isset($erreur)): ?>
+            <p> Veuillez remplir tous les champs</p>
+            <?php endif; ?>
             <input class="submit" type="submit" value="Valider" id="submit" name="submit">
         </form>
     </div>

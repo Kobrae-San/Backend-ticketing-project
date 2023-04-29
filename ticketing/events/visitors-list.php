@@ -4,6 +4,15 @@ require '../../inc/pdo.php';
 require '../../inc/functions.php';
 session_start();
 
+
+$my_token = $_GET['your_token'];
+$check = token_check($my_token, $auth_pdo);
+if(!$check){
+    header("Location: ../dashboard.php");
+    exit();
+}
+
+
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
     ");
@@ -81,5 +90,6 @@ tr:nth-child(even) {
             <?php endforeach; ?>
         </tbody>
     </table>
+    <a href="./show-event-visitors.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
 </body>
 </html>

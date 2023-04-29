@@ -14,9 +14,9 @@
                     <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
                         <a href="<?= $show_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
                         <a href="<?= $submit_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
-                        <a href="<?= $events_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Les évènements</li></a>
                         <a href="<?= $event_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Gestion des évènements</li></a>
                         <a href="<?= $visitor_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>&add=false"><li>Gestion des visiteurs</li></a>
+                        <a href="<?= $events_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Les évènements</li></a>
                         <a href="<?= $logout_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Déconnexion</li></a>
                     <?php else: ?>
                         <a href="<?= $show_ticket_path ?>"><li>Afficher un billet</li></a>

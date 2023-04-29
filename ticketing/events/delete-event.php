@@ -1,14 +1,18 @@
 <?php 
     session_start();
     require '../../inc/pdo.php';
+    require '../../inc/functions.php';
 
     $title = "Suppression d'un évènement";
     $website_part = "Billetterie";
 
-    if(!isset($_SESSION["token"])){
-        header('Location: ../dashboard.php');
+    $my_token = $_GET['your_token'];
+    $check = token_check($my_token, $auth_pdo);
+    if(!$check){
+        header("Location: ../dashboard.php");
         exit();
     }
+
     $username = $_GET['username'];
     $verify_token_request = $auth_pdo->prepare("
         SELECT login, token FROM users
@@ -65,6 +69,7 @@
                 ":event_place" => $event_place,
                 ":event_date" => $event_date
             ]);
+            $delete = true;
         }else{
             $erreur = true;
         }
@@ -93,6 +98,8 @@
 
         <?php if(isset($erreur)){ ?>
             <p>Cet évènement n'existe pas !</p>
+        <?php }elseif(isset($delete)) { ?>
+            <p>L'évènement a bien été supprimé</p>
         <?php } ?>
         <input class="submit" type="submit" value="Supprimer">
 

@@ -15,9 +15,13 @@ $event_management_path = "./events/create-modify-delete-events.php";
 $visitor_management_path = "./events/add-remove-visitors.php";
 $events_path = "./events/show-event-visitors.php"; 
 
-if (isset($_GET["your_token"])){
-    $hashed = $_GET["your_token"];
+$my_token = $_GET['your_token'];
+$check = token_check($my_token, $auth_pdo);
+if(!$check){
+    header("Location: ../dashboard.php");
+    exit();
 }
+
 ?>
 
 <?php include '../inc/tpl/header_ticketing.php'; ?>

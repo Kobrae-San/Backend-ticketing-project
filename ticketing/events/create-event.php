@@ -1,12 +1,16 @@
 <?php
     session_start();
     require '../../inc/pdo.php';
+    require '../../inc/functions.php';
+
 
     $title = "Créer un évènement";
     $website_part = "Billetterie";
     
-    if(!isset($_SESSION["token"])){
-        header('Location: ../dashboard.php');
+    $my_token = $_GET['your_token'];
+    $check = token_check($my_token, $auth_pdo);
+    if(!$check){
+        header("Location: ../dashboard.php");
         exit();
     }
 
@@ -63,8 +67,9 @@
                 ":event_date" => $event_date,
                 ":event_description" => $event_description
             ]);
+            $create = true;
         } else {
-            echo 'Cet évènement éxiste déjà';
+            $existing = true;
         }
     }
     
@@ -90,7 +95,11 @@
         <label for="event-description">Description de l'évènement : </label>
         <textarea name="event-description" id="event-description" placeholder="Description brève de l'évènement..." cols="30" rows="5" required></textarea>
         <input class="submit" type="submit" value="Créer">
-
+        <?php if(isset($create)) { ?>
+            <p>L'évènement a bien été créé</p>
+        <?php }elseif(isset($existing)) { ?> 
+            <p>L'évènement existe déjà</p>
+        <?php } ?>
         <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour à la gestion des évènements</a>
     </form>
 </body>
