@@ -88,18 +88,7 @@ ul{
  
   gap: 16px;
 }
-.liste_event {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: scroll;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100vh;
 
-  gap: 10px;
-  background-color: #fcf8e8;
-}
 a {
   color: #ffffff;
   background:  #3d9c68;
