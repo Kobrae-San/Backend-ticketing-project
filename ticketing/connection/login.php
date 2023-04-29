@@ -38,7 +38,7 @@ if($method == "POST"){
     ]);
     $data = json_decode($response->getBody(), true);
     $_SESSION['username'] = $username;
-    if ($data['statut'] == 'Succès'){
+    if ($data['statut'] == 'SuccÃ¨s'){
         $_SESSION['token'] = $data['message'];
         header("Location: ../dashboard.php?your_token={$_SESSION['token']}&username={$_SESSION['username']}");
         exit();

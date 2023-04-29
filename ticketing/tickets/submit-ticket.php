@@ -19,6 +19,7 @@
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
     $erreur = "";
 
+
     $submit = filter_input(INPUT_GET, "submit");
 
     if (isset($_GET["your_token"])&&isset($_GET["username"])){
@@ -38,6 +39,11 @@
                 AND last_name = :last_name
                 AND first_name = :first_name
             ');
+            $check_ticket_request->execute([
+                ":public_code" => $public_code,
+                ":last_name" => $last_name,
+                ":first_name" => $first_name
+            ]);
             $check_ticket_request->execute([
                 ":public_code" => $public_code,
                 ":last_name" => $last_name,

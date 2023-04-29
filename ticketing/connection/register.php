@@ -26,7 +26,6 @@
                 "login" => $username,
                 "password" => $password
             );
-            $erreur = 'je suis passé ici';
             $json_data = json_encode($data);
             // Attention, c'est une URL, pas un chemin
             $ch = curl_init('http://localhost/Backend-ticketing-project/authentification/register.php');

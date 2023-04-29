@@ -29,7 +29,7 @@
                     ":login" => $username
                 ]);
                 $data = array(
-                    'statut' => "Succès",
+                    'statut' => "SuccÃ¨s",
                     'message' => $token
                 );
                 $json = json_encode($data);
