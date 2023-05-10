@@ -17,8 +17,6 @@
     $events_path = "../events/show-event-visitors.php";
 
     $method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
-    $erreur = "";
-
 
     $submit = filter_input(INPUT_GET, "submit");
 
@@ -44,11 +42,7 @@
                 ":last_name" => $last_name,
                 ":first_name" => $first_name
             ]);
-            $check_ticket_request->execute([
-                ":public_code" => $public_code,
-                ":last_name" => $last_name,
-                ":first_name" => $first_name
-            ]);
+
             $tickets_validate = $check_ticket_request->fetch(PDO::FETCH_ASSOC);
             if ($tickets_validate) {
                 http_response_code(200);
@@ -83,17 +77,17 @@
         <nav>
             <ul>
                 <?php if (isset($_GET["your_token"]) && token_check($_GET["your_token"], $auth_pdo)): ?>
-                    <a href="<?= $show_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
-                    <a href="<?= $submit_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
-                    <a href="<?= $events_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Les évènements</li></a>
-                    <a href="<?= $event_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Gestion des évènements</li></a>
-                    <a href="<?= $visitor_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>&add=false"><li>Gestion des visiteurs</li></a>
-                    <a href="<?= $logout_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Déconnexion</li></a>
+                    <a class="boutton" href="<?= $show_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Afficher un billet</li></a>
+                    <a class="boutton" href="<?= $submit_ticket_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Valider un billet</li></a>
+                    <a class="boutton" href="<?= $events_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>   "><li>Les évènements</li></a>
+                    <a class="boutton" href="<?= $event_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Gestion des évènements</li></a>
+                    <a class="boutton" href="<?= $visitor_management_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>&add=false"><li>Gestion des visiteurs</li></a>
+                    <a class="boutton" href="<?= $logout_path ?>?your_token=<?= $_GET['your_token'] ?>&username=<?= $_GET['username'] ?>"><li>Déconnexion</li></a>
                 <?php else: ?>
-                    <a href="<?= $show_ticket_path ?>"><li>Afficher un billet</li></a>
-                    <a href="<?= $submit_ticket_path ?>"><li>Valider un billet</li></a>
-                    <a href="<?= $login_path ?>"><li>Connexion</li></a>
-                    <a href="<?= $register_path ?>"><li>Inscription</li></a>
+                    <a class="boutton" href="<?= $show_ticket_path ?>"><li>Afficher un billet</li></a>
+                    <a class="boutton" href="<?= $submit_ticket_path ?>"><li>Valider un billet</li></a>
+                    <a class="boutton" href="<?= $login_path ?>"><li>Connexion</li></a>
+                    <a class="boutton" href="<?= $register_path ?>"><li>Inscription</li></a>
                 <?php endif; ?>
             </ul>
         </nav>

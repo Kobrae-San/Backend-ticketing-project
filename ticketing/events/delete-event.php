@@ -103,7 +103,7 @@
         <?php } ?>
         <input class="submit" type="submit" value="Supprimer">
 
-        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour à la gestion des évènements</a>
+        <a class="boutton" href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour à la gestion des évènements</a>
     </form>
 </body>
 </html>

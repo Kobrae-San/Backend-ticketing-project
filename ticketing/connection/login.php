@@ -33,7 +33,7 @@ if($method == "POST"){
 
     $json = json_encode($data);
 
-    $response = $client->post('http://localhost/Backend-ticketing-project/authentification/login.php', [
+    $response = $client->post('http://localhost/Project-ticketing-final/authentification/login.php', [
         'body' => $json
     ]);
     $data = json_decode($response->getBody(), true);

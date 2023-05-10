@@ -27,10 +27,10 @@ if(!$check){
     <br>
         <nav>
             <ul>
-                <a href="./create-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
-                <a href="./modify-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
-                <a href="./delete-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
-                <a href="../dashboard.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
+                <a class="boutton" href="./create-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Créer un évènement</li></a>
+                <a class="boutton" href="./modify-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Modifier évènement</li></a>
+                <a class="boutton" href="./delete-event.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Supprimer un évènement</li></a>
+                <a class="boutton" href="../dashboard.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
             </ul>
         </nav>
     </header>

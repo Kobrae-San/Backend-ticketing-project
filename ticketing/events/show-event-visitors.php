@@ -13,12 +13,44 @@ if(!$check){
     exit();
 }
 
-    //Requête pour récupérer le nom de l'évènement cliqué
+  
+
+
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
+    
+    //requete pour recuperer le nom de levenement cliquer
+    if(isset($_GET["delete_id"])){
+
+      $requete4 = $ticket_pdo->prepare("
+      DELETE FROM tickets WHERE tickets.event_id = :id 
+      ");
+      $requete4->execute([
+          ":id" => $_GET["delete_id"]
+      ]);
+
+
+      $requete4 = $ticket_pdo->prepare("
+      DELETE FROM visitors WHERE visitors.event_id = :id 
+      ");
+      $requete4->execute([
+          ":id" => $_GET["delete_id"]
+      ]);
+
+
+    $requete4 = $ticket_pdo->prepare("
+    DELETE FROM events WHERE events.id = :id 
+    ");
+    $requete4->execute([
+        ":id" => $_GET["delete_id"]
+    ]);
+
+    header ('Location: ./show-event-visitors.php?your_token='. $_GET["your_token"] ."&username=" . $_GET["username"]);
+
+   };
 ?>
 
 <!DOCTYPE html>
@@ -26,79 +58,15 @@ if(!$check){
 <head>
     <meta charset="utf-8">
     <title><?= $title ?> - <?= $website_part ?></title>
+    <script src="https://kit.fontawesome.com/2f1c507e66.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../styles/ticketing.css">
     
-    <style>
-        body {
-            background-color: white;
-            font-family: sans-serif;
-        }
-        table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-}
-
-thead {
-  background-color: #91c788;
-  color: #fff;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-}
-
-th {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-  background-color: #ddd;
-}
-.boutton {
-  color: #ffffff;
-  background: #91c788 ;
-
-  width: 60%;
-  overflow: hidden;
-  display: flex;
-
-  padding: 15px 32px;
-  text-align: center;
-  justify-content: center;
-  border-radius: 5px;
-  text-decoration: none;
-
-  font-size: 16px;
-  margin: 4px 2px;
-
-  transition: 0.1s;
-  cursor: pointer;
-}
-
-.boutton:hover {
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
-  background-color: #a9dba0;
-  color: rgb(0, 0, 0);
-  border: solid 1px #34d87e;
-  transform: scale(1.05);
-}
-
-    </style>
 </head>
 
 <body class="liste_event">
         
-    
-     
-        
-        
+        <h1>Les événements</h1>
+
         <table>
             <thead>
                 <tr>
@@ -106,6 +74,7 @@ tbody tr:hover {
                     <th>Lieu</th>
                     <th>Date</th>
                     <th>Description</th>
+                    <th>Supprimer</th>
                     <th>Visiteurs</th>
                 </tr>
             </thead>
@@ -117,10 +86,11 @@ tbody tr:hover {
                     <td><?= $event['event_date'] ?></td>
                     <td><?= substr($event['event_description'], 0, 50) ?></td>
                     
-                    <td><a class="boutton" href="visitors-list.php?id=<?= $event['id']."........." ?>&username=<?=$_GET['username']?>&your_token=<?=$_GET['your_token']?>">Voir les visiteurs</a></td>
+                    <td><a class="delete" href="show-event-visitors.php?delete_id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">-</a></td>
+                    <td><a class="boutton" href="visitors-list.php?id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Voir les visiteurs</a></td>
+                    
                 </tr>
                 <?php endforeach; ?>
-                <!-- bouton retour -->
 
             </tbody>
         </table>

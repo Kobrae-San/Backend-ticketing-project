@@ -88,19 +88,8 @@ ul{
  
   gap: 16px;
 }
-.liste_event {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: scroll;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100vh;
 
-  gap: 10px;
-  background-color: #fcf8e8;
-}
-a {
+.btn {
   color: #ffffff;
   background:  #3d9c68;
   border: 0.5px solid black;
@@ -119,7 +108,8 @@ a {
 
   transition: 0.2s;
   cursor: pointer;
-}
+} 
+
 .submit {
   background-color:#3d9c68;
   text-align: center;
@@ -169,11 +159,11 @@ a {
 
   cursor: pointer;
 }
-a:hover {
+.btn:hover {
   background-color: #a9dba0;
   color: rgb(0, 0, 0);
   border: solid 1px #34d87e;
-  transform: scale(1.1);
+  transform: scale(1.1); */
 }
 span {
   font-weight: 50;

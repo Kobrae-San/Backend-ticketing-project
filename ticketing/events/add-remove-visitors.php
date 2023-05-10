@@ -79,7 +79,7 @@ if (!$check_event && $method == 'POST') {
 <?php include '../../inc/tpl/header_ticketing.php'; ?>
        
 <form method = "POST">
-          <h2>Système <?php echo ($add != 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
+          <h2>Système <?php echo ($add == 'true') ? "d'ajout" : "de suppression";?> de visiteurs à un événement</h2>
 
             <label>Nom : </label>
             <input type="text" placeholder="Indiquez le nom de famille" name="last_name">
@@ -92,7 +92,7 @@ if (!$check_event && $method == 'POST') {
             <label>Date de l'évènement :</label>
             <input type="date" name="event_date">
             <input  class="submit" type="submit" value="Valider">
-            <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add != 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
+            <a class="i"  href="add-remove-visitors.php?your_token=<?= $_GET['your_token']?>&username=<?= $_GET['username']?>&add=<?= ($add == 'true') ? "false" : "true" ?>">Vous souhaitez <?= ($add == 'true') ? "supprimer" : "ajouter";?> un visiteur ?</a>
     </body>
         </form>
        

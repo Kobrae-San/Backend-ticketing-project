@@ -4,7 +4,6 @@ require '../../inc/pdo.php';
 require '../../inc/functions.php';
 session_start();
 
-
 $my_token = $_GET['your_token'];
 $check = token_check($my_token, $auth_pdo);
 if(!$check){
@@ -12,12 +11,12 @@ if(!$check){
     exit();
 }
 
-
     $requete = $ticket_pdo->prepare("
     SELECT * FROM events 
     ");
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
+
     //requete pour recuperer le nom de levenement cliquer
  if(isset($_GET["id"])){
     $requete2 = $ticket_pdo->prepare("
@@ -37,46 +36,48 @@ if(!$check){
     ]);
     $users = $requete3->fetchAll(PDO::FETCH_ASSOC);}
 
+    //delete
+    if(isset($_GET["delete"])){
+
+        $name = $_GET['name'];
+        $requete4 = $ticket_pdo->prepare("
+        DELETE FROM tickets WHERE tickets.event_id = :event_id AND visitor_id = :visitor_id
+        ");
+        $requete4->execute([
+            ":visitor_id" => $_GET["delete"],
+            ":event_id" => $_GET["id"]
+        ]);
+
+        $requete4 = $ticket_pdo->prepare("
+        DELETE FROM visitors WHERE id = :id
+        ");
+        $requete4->execute([
+            ":id" => $_GET["delete"]
+        ]);
+        header("Location: visitors-list.php?id=".$_GET["id"]."&your_token=".$_SESSION["token"]."&username=".$_SESSION['username'])
+    ;}
+
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Liste des visiteurs - Billetterie</title>
+    <title>Visualiser les événements et leurs inscrits</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles/ticketing.css">
     
-    <style>
-        body {
-            background-color: white;
-            font-family: sans-serif;
-        }
-        table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-        }
-        thead {
-    background-color: #91c788;
-    color: #fff;
 
-}
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-    </style>
 </head>
-<body>
-    <h1>Liste des visiteurs</h1>
+<body class="liste_event">
+    <h1>Participants</h1>
     <table>
+   
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Prénom</th>
+                <th>Supprimer</th>
           
             </tr>
         </thead>
@@ -85,11 +86,13 @@ tr:nth-child(even) {
                 <tr>
                     <td><?= $user["last_name"] ?></td>
                     <td><?= $user["first_name"] ?></td>
-                
+                    <td><a href="visitors-list.php?id=<?= $event['id'] ?>&your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>&delete=<?= $user["id"] ?>&name=<?= $user["last_name"]?>"class='delete'>-</a></td>
                 </tr>
+               
             <?php endforeach; ?>
         </tbody>
     </table>
     <a href="./show-event-visitors.php?your_token=<?= $my_token ?>&username=<?= $_GET['username'] ?>"><li>Retour</li></a>
+
 </body>
 </html>

@@ -27,7 +27,7 @@
             );
             $json_data = json_encode($data);
             // Attention, c'est une URL, pas un chemin
-            $ch = curl_init('http://localhost/Backend-ticketing-project/authentification/register.php');
+            $ch = curl_init('http://localhost/Project-ticketing-final/authentification/register.php');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -51,16 +51,16 @@
 ?>
 <?php include '../../inc/tpl/header_authentification.php'; ?>
     <form method='POST'>
-        <h1>Espace Administrateur - Inscription</h1>
+        <h2>Espace Administrateur - Inscription</h2>
        
-        <input type='text' id='username' placeholder="username" name='username'>
+        <input type='text' id='username' placeholder="Nom d'utilisateur" name='username'>
 
-        <input type='password' id='passsword' placeholder="mot de passe" name='password'>
+        <input type='password' id='passsword' placeholder="Mot de passe" name='password'>
         <input class="submit" type="submit" value="S'inscrire">
         <?php if ($erreur != null): ?>
         <p><?= $erreur ?></p>
         <?php endif; ?>
-        <p>Déjà inscrit?<a href="./login.php">Connectez-vous ici</a></p>
+        <p>Déjà inscrit? <a href="./login.php">Se connecter</a></p>
     </form>
     
 </body>
