@@ -49,7 +49,6 @@
             SELECT event_name FROM events 
             WHERE event_name = :event_name;
         ");
-        // $verify_existing_event_request->bindParam(':event_name', $event_name, PDO::PARAM_STR);
         $verify_existing_event_request->execute([
             ':event_name' => $event_name
         ]);

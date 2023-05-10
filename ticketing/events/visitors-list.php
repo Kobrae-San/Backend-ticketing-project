@@ -17,7 +17,7 @@ if(!$check){
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    //requete pour recuperer le nom de levenement cliquer
+    //requête pour récupérer le nom de l'évènement cliqué
  if(isset($_GET["id"])){
     $requete2 = $ticket_pdo->prepare("
     SELECT * FROM events
@@ -27,7 +27,7 @@ if(!$check){
         ":id" => $_GET["id"]
     ]);
     $event = $requete2->fetch(PDO::FETCH_ASSOC);
-    //requete pour recuperer les inscrits a levenement cliquer
+    //requête pour récupérer les inscrits a l'évenement cliqué
     $requete3 = $ticket_pdo->prepare("
     select * from visitors where event_id=:id
     ");
@@ -36,7 +36,6 @@ if(!$check){
     ]);
     $users = $requete3->fetchAll(PDO::FETCH_ASSOC);}
 
-    //delete
     if(isset($_GET["delete"])){
 
         $name = $_GET['name'];

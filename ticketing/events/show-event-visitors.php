@@ -22,7 +22,6 @@ if(!$check){
     $requete->execute();
     $events = $requete->fetchAll(PDO::FETCH_ASSOC);
     
-    //requete pour recuperer le nom de levenement cliquer
     if(isset($_GET["delete_id"])){
 
       $requete4 = $ticket_pdo->prepare("
@@ -97,7 +96,6 @@ if(!$check){
         
 
        <script>
-     //afficher les visiteurs 
         const event = document.querySelectorAll('.event');
 
     </script>
