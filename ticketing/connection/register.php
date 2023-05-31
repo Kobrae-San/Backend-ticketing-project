@@ -1,20 +1,32 @@
 <?php
-//ini_set('display_errors', 1);
     session_start();
+    $title = "Connexion";
+    $website_part = "Authentification";
+
+    $style_login_path = "../styles/login_register.css";
+    $style_ticketing_path = "../styles/ticketing.css";
+    $show_ticket_path = "../tickets/show-ticket.php";
+    $submit_ticket_path = "../tickets/submit-ticket.php";
+    $login_path = "./login.php";
+    $logout_path = "./logout.php";
+    $event_management_path = "../events/create-modify-delete-events.php";
+    $visitor_management_path = "../events/add-remove-visitors.php";
+    $events_path = "../events/show-event_visitors.php";
+
+
     $method = filter_input(INPUT_SERVER,'REQUEST_METHOD');
     $erreur = null;
     if($method == 'POST') {
-        $username = trim(filter_input(INPUT_POST, 'username'));
-        $password = trim(filter_input(INPUT_POST, 'password'));
+        $username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($username && $password) {
             $data = array(
                 "login" => $username,
                 "password" => $password
             );
-            $erreur = 'je suis passé ici';
             $json_data = json_encode($data);
             // Attention, c'est une URL, pas un chemin
-            $ch = curl_init('http://localhost/Back-End/backend-project/authentification/register.php');
+            $ch = curl_init('http://localhost/Project-ticketing-final/authentification/register.php');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -35,27 +47,19 @@
         }
     }
 
-?><!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Administrateur - Inscription</title>
-    <link rel="stylesheet" href="../../authentification/styles/style.css">
-</head>
-<body>
-    <?php if ($erreur != null): ?>
-        <p><?= $erreur ?></p>
-    <?php endif; ?>
+?>
+<?php include '../../inc/tpl/header_authentification.php'; ?>
     <form method='POST'>
-        <h1>Espace Administrateur - Inscription</h1>
+        <h2>Espace Administrateur - Inscription</h2>
        
-        <input type='text' id='username' placeholder="username" name='username'>
+        <input type='text' id='username' placeholder="Nom d'utilisateur" name='username'>
 
-        <input type='password' id='passsword' placeholder="mots de passe" name='password'>
+        <input type='password' id='passsword' placeholder="Mot de passe" name='password'>
         <input class="submit" type="submit" value="S'inscrire">
-        <p>Déjà inscrit?<a href="./login.php">Connectez-vous ici</a></p>
+        <?php if ($erreur != null): ?>
+        <p><?= $erreur ?></p>
+        <?php endif; ?>
+        <p>Déjà inscrit? <a href="./login.php">Se connecter</a></p>
     </form>
     
 </body>

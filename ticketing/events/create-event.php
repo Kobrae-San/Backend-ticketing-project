@@ -1,9 +1,16 @@
 <?php
     session_start();
     require '../../inc/pdo.php';
+    require '../../inc/functions.php';
+
+
+    $title = "Créer un évènement";
+    $website_part = "Billetterie";
     
-    if(!isset($_SESSION["token"])){
-        header('Location: ../dashboard.php');
+    $my_token = $_GET['your_token'];
+    $check = token_check($my_token, $auth_pdo);
+    if(!$check){
+        header("Location: ../dashboard.php");
         exit();
     }
 
@@ -60,46 +67,40 @@
                 ":event_date" => $event_date,
                 ":event_description" => $event_description
             ]);
+            $create = true;
         } else {
-            echo 'Cette évènement éxiste déjà';
+            $existing = true;
         }
     }
     
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crée un évènement</title>
-    <link rel="stylesheet" href="../style.css">
+    <title><?= $title ?> - <?= $website_part ?></title>
+    <link rel="stylesheet" href="../styles/ticketing.css">
 </head>
 <body>
-    
-
     <form method="POST">
-    <h1>Créer un événement</h1>
-        <label for="event-name">Nom de l'événement: </label>
-        <input type="text" id="event-name" name="event-name" placeholder="Nom de l'évènement" required>
-
-        <br>
-
-        <label for="event-place">Lieux de l'évènement: </label>
-        <input type="text" id="event-place" name="event-place" placeholder="Date de l'évènement" required>
-
-        <br>
-
-        <label for="event-date">Date de l'évènement: </label>
+    <h1><?= $title ?></h1>
+        <label for="event-name">Nom de l'événement : </label>
+        <input type="text" id="event-name" name="event-name" placeholder="Indiquez le nom de l'évènement" required>
+        <label for="event-place">Lieu de l'évènement : </label>
+        <input type="text" id="event-place" name="event-place" placeholder="Indiquez le lieu de l'évènement" required>
+        <label for="event-date">Date de l'évènement : </label>
         <input type="date" id="event-date" name="event-date"  required >
-
-        <br>
-
-        <label for="event-description">Description de l'évènement: </label>
-        <textarea name="event-description" id="event-description" cols="30" rows="5" required></textarea>
-        <br>
-        <input class="submit" type="submit" value="Créer un évenement">
-        <a href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour au menu modification</a>
+        <label for="event-description">Description de l'évènement : </label>
+        <textarea name="event-description" id="event-description" placeholder="Description brève de l'évènement..." cols="30" rows="5" required></textarea>
+        <input class="submit" type="submit" value="Créer">
+        <?php if(isset($create)) { ?>
+            <p>L'évènement a bien été créé</p>
+        <?php }elseif(isset($existing)) { ?> 
+            <p>L'évènement existe déjà</p>
+        <?php } ?>
+        <a class="boutton" href="create-modify-delete-events.php?your_token=<?= $_SESSION["token"] ?>&username=<?= $_SESSION['username'] ?>">Retour à la gestion des évènements</a>
     </form>
-   
 </body>
 </html>

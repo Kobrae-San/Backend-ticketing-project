@@ -22,15 +22,17 @@
             $requete = $auth_pdo->prepare("
             INSERT INTO users (login, password) VALUES (:login, :password)
             ");
+            
             $requete->execute([
-                ":login" => $username,
-                ":password" => password_hash($password, PASSWORD_DEFAULT),
+                ':login' => $username,
+                ':password' => password_hash($password, PASSWORD_DEFAULT)
             ]);
             $requete_token = $auth_pdo->prepare("
             INSERT INTO token (token, user_id) VALUES (:token, LAST_INSERT_ID())
             ");
+            
             $requete_token->execute([
-                ":token" => "",
+                ':token' => ""
             ]);
             $response = array('statut' => 'Succès', 'message' => "Ajout d'utilisateur réussi.");
             echo json_encode($response);

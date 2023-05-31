@@ -35,11 +35,19 @@
                 $json = json_encode($data);
                 echo $json;
                 exit();
+            }else{
+                $data = array(
+                    'statut' => "Erreur",
+                    'message' => 'Mot de passe incorrect'
+                );
+                $json = json_encode($data);
+                echo $json;
+                exit();
             }
         }else{
             $data = array(
                 'statut' => "Erreur",
-                'message' => 'Identifiants incorrects'
+                'message' => "L'utilisateur n'existe pas."
             );
             $json = json_encode($data);
             echo $json;
